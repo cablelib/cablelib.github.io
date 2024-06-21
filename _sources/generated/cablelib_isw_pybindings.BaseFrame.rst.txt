@@ -1,0 +1,31 @@
+cablelib\_isw\_pybindings.BaseFrame
+===================================
+
+.. currentmodule:: cablelib_isw_pybindings
+
+.. autoclass:: BaseFrame
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaseFrame.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BaseFrame.pivot_points
+   
+   

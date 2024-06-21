@@ -1,0 +1,195 @@
+Creating Robots
+===============
+
+In general the procedure of creating Cable-Driven Parallel Robots (CDPR) is outlined as
+
+1. Defining points of the base frame and platform
+2. Instantiating all necessary objects (BaseFrame, Platform, Cable, Winche, Pulley)
+3. Connecting each cable to the base frame and platform
+4. Creating the CableDrivenParallelRobot object
+
+If the installation in :doc:`/usage` was succesfull then you will be
+able to import the module with
+
+.. code-block:: python
+
+    import cablelib_isw_pybindings as cablelib_isw
+    
+Points are given through their positional vectors which are represented by 
+numpy arrays, therefore 
+
+.. code-block:: python
+
+    import numpy as np
+    
+is necessary.
+
+The creation of CableDrivenParallelRobots objects is illustrated using the
+geometry of the IPAnema1 developed by Fraunhofer IPA.
+
+First the points of the base frame and platform are defined in
+a list of numpy arrays.
+
+.. code-block:: python
+
+    base_frame_pivot_points = [
+        np.array([-2, 1.5, 2]),
+        np.array([2, 1.5, 2]),
+        np.array([2, -1.5, 2]),
+        np.array([-2, -1.5, 2]),
+        np.array([-2, 1.5, 0]),
+        np.array([2, 1.5, 0]),
+        np.array([2, -1.5, 0]),
+        np.array([-2, -1.5, 0])
+    ]
+    
+    platform_pivot_points = [
+        np.array([-0.06, 0.06, 0]),
+        np.array([0.06, 0.06, 0]),
+        np.array([0.06, -0.06, 0]),
+        np.array([-0.06, -0.06, 0]),
+    ]
+    
+with this information all necessary components of a CDPR can be instantiated.
+
+.. code-block:: python
+
+    base_frame = cablelib_isw.BaseFrame(base_frame_pivot_points)
+    platform = cablelib_isw.Platform(platform_pivot_points)
+
+    cable1 = cablelib_isw.Cable(1.0, 10.0)
+    cable2 = cablelib_isw.Cable(1.0, 10.0)
+    cable3 = cablelib_isw.Cable(1.0, 10.0)
+    cable4 = cablelib_isw.Cable(1.0, 10.0)
+    cable5 = cablelib_isw.Cable(1.0, 10.0)
+    cable6 = cablelib_isw.Cable(1.0, 10.0)
+    cable7 = cablelib_isw.Cable(1.0, 10.0)
+    cable8 = cablelib_isw.Cable(1.0, 10.0)
+
+    cables = [
+        cable1, cable2, cable3, cable4, cable5, cable6, cable7, cable8
+    ]
+
+    winches = [
+        cablelib_isw.Winch([cable1]),
+        cablelib_isw.Winch([cable2]),
+        cablelib_isw.Winch([cable3]),
+        cablelib_isw.Winch([cable4]),
+        cablelib_isw.Winch([cable5]),
+        cablelib_isw.Winch([cable6]),
+        cablelib_isw.Winch([cable7]),
+        cablelib_isw.Winch([cable8])
+    ]
+    
+Cables are constructed with their minimum and maximum allowed force.
+Winches are supplied with a list of cables which are wound by that winch.
+
+The next step will be to connect each cable to a point on the base frame and
+on the platform respectively
+
+.. code-block:: python
+
+    i = 0
+    for cable in cables:
+        cable.base_frame_attachment_point = base_frame_pivot_points[i]
+        cable.platform_attachment_point = platform_pivot_points[i % 4]
+        i += 1
+
+Now the CableDrivenParallelRobot object can be instantiated
+
+.. code-block:: python
+
+    ipa_nema_1 = cablelib_isw.CableDrivenParallelRobot(
+        "IPAnema1",
+        base_frame,
+        platform,
+        winches,
+        cables,
+        []
+    )
+    
+And putting it all together results in
+
+.. code-block:: python
+    :linenos:
+   
+    import cablelib_isw_pybindings as cablelib_isw
+    import numpy as np
+
+    if __name__ == "__main__":
+        base_frame_pivot_points = [
+            np.array([-2, 1.5, 2]),
+            np.array([2, 1.5, 2]),
+            np.array([2, -1.5, 2]),
+            np.array([-2, -1.5, 2]),
+            np.array([-2, 1.5, 0]),
+            np.array([2, 1.5, 0]),
+            np.array([2, -1.5, 0]),
+            np.array([-2, -1.5, 0])
+        ]
+
+        platform_pivot_points = [
+            np.array([-0.06, 0.06, 0]),
+            np.array([0.06, 0.06, 0]),
+            np.array([0.06, -0.06, 0]),
+            np.array([-0.06, -0.06, 0]),
+        ]
+
+        base_frame = cablelib_isw.BaseFrame(base_frame_pivot_points)
+        platform = cablelib_isw.Platform(platform_pivot_points)
+
+        cable1 = cablelib_isw.Cable(1.0, 10.0)
+        cable2 = cablelib_isw.Cable(1.0, 10.0)
+        cable3 = cablelib_isw.Cable(1.0, 10.0)
+        cable4 = cablelib_isw.Cable(1.0, 10.0)
+        cable5 = cablelib_isw.Cable(1.0, 10.0)
+        cable6 = cablelib_isw.Cable(1.0, 10.0)
+        cable7 = cablelib_isw.Cable(1.0, 10.0)
+        cable8 = cablelib_isw.Cable(1.0, 10.0)
+
+        cables = [
+            cable1, cable2, cable3, cable4, cable5, cable6, cable7, cable8
+        ]
+
+        winches = [
+            cablelib_isw.Winch([cable1]),
+            cablelib_isw.Winch([cable2]),
+            cablelib_isw.Winch([cable3]),
+            cablelib_isw.Winch([cable4]),
+            cablelib_isw.Winch([cable5]),
+            cablelib_isw.Winch([cable6]),
+            cablelib_isw.Winch([cable7]),
+            cablelib_isw.Winch([cable8])
+        ]
+
+        i = 0
+        for cable in cables:
+            cable.base_frame_attachment_point = base_frame_pivot_points[i]
+            cable.platform_attachment_point = platform_pivot_points[i % 4]
+            i += 1
+
+        ipa_nema_1 = cablelib_isw.CableDrivenParallelRobot(
+            "IPAnema1",
+            base_frame,
+            platform,
+            winches,
+            cables,
+            []
+        )
+        
+Saving and Loading
+-------------------
+
+CDPRs can be saved in xml format.
+For example, the created robot in the previous example
+can be saved by calling
+
+.. code-block:: python
+    
+    ipa_nema_1.save_xml("ipa_nema_1.xml")
+
+and loaded with
+
+.. code-block:: python
+    
+    robot = cablelib_isw.CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")

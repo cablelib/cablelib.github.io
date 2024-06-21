@@ -1,0 +1,31 @@
+cablelib\_isw\_pybindings.Platform
+==================================
+
+.. currentmodule:: cablelib_isw_pybindings
+
+.. autoclass:: Platform
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Platform.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Platform.pivot_points
+   
+   

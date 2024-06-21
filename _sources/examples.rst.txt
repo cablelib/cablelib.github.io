@@ -1,0 +1,7 @@
+Examples
+========
+
+These examples will help you get started with cablelib_isw.
+
+.. toctree::
+    examples/creating_robots

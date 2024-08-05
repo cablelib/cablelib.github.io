@@ -1,0 +1,33 @@
+cablelib\_isw\_pybindings.analysis.ForceDistribution
+====================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis
+
+.. autoclass:: ForceDistribution
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ForceDistribution.__init__
+      ~ForceDistribution.calculate
+      ~ForceDistribution.isFeasible
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ForceDistribution.strategy
+   
+   

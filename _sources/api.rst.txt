@@ -6,4 +6,7 @@ API
     :template: module.rst
     :recursive:
 
-    cablelib_isw_pybindings
+    cablelib_isw_pybindings.analysis
+    cablelib_isw_pybindings.analysis.force_distribution_strategy
+    cablelib_isw_pybindings.robot
+    cablelib_isw_pybindings.types

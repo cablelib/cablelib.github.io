@@ -1,0 +1,61 @@
+Calculating the structure matrix
+================================
+
+Calculating the structure matrix is as simple as
+constructing a :doc:`StructureMatrix <../generated/cablelib_isw_pybindings.types.StructureMatrix>`
+object.
+
+The following example prerequisites the created
+IPAnema1 in the section :doc:`./creating_robots`.
+
+The necessary components need to be imported:
+
+.. code-block:: python
+
+   from cablelib_isw_pybindings.types import StructureMatrix, Pose
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+
+Load the IPAnema1 with
+
+.. code-block:: python
+
+   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+and instantiate a :doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>`
+object. In this case a pose at the origin [0, 0, 0] and the 3d identity matrix
+as rotation matrix is created.
+
+.. code-block:: python
+
+   pose = Pose([0, 0, 0], [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+
+The structure matrix can now be constructed.
+
+.. code-block:: python
+
+   structureMatrix = StructureMatrix(robot, pose)
+
+Example:
+
+.. code-block:: python
+   :linenos:
+
+   from cablelib_isw_pybindings.types import StructureMatrix, Pose
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+
+   if __name__ == "__main__":
+       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+       pose = Pose([0, 0, 0], [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+       structureMatrix = StructureMatrix(robot, pose)
+       print(structureMatrix)
+
+Output:
+
+.. code-block::
+
+    -0.618537    0.618537    0.618537   -0.618537    -0.80297     0.80297     0.80297    -0.80297
+     0.459121    0.459121   -0.459121   -0.459121    0.596019    0.596019   -0.596019   -0.596019
+     0.637667    0.637667    0.637667    0.637667           0           0           0           0
+      0.03826     0.03826    -0.03826    -0.03826           0           0           0           0
+      0.03826    -0.03826    -0.03826     0.03826           0           0           0           0
+   0.00956501 -0.00956501  0.00956501 -0.00956501   0.0124171  -0.0124171   0.0124171  -0.0124171

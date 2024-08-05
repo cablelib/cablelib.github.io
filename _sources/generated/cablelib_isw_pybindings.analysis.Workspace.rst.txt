@@ -1,0 +1,36 @@
+cablelib\_isw\_pybindings.analysis.Workspace
+============================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis
+
+.. autoclass:: Workspace
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Workspace.__init__
+      ~Workspace.calculate_force_feasible
+      ~Workspace.save_stl
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Workspace.center_of_gravity
+      ~Workspace.sphere_approx_depth
+      ~Workspace.surface_area
+      ~Workspace.volume
+   
+   

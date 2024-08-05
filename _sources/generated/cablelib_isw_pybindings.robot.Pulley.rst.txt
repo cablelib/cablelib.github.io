@@ -1,0 +1,32 @@
+cablelib\_isw\_pybindings.robot.Pulley
+======================================
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: Pulley
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Pulley.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Pulley.id
+      ~Pulley.radius
+   
+   

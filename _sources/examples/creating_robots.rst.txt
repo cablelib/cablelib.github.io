@@ -9,20 +9,11 @@ In general the procedure of creating Cable-Driven Parallel Robots (CDPR) is outl
 4. Creating the CableDrivenParallelRobot object
 
 If the installation in :doc:`/usage` was succesfull then you will be
-able to import the module with
+able to import the necessary components of the module with
 
 .. code-block:: python
 
-    import cablelib_isw_pybindings as cablelib_isw
-    
-Points are given through their positional vectors which are represented by 
-numpy arrays, therefore 
-
-.. code-block:: python
-
-    import numpy as np
-    
-is necessary.
+    from cablelib_isw_pybindings.robot import BaseFrame, Cable, Platform, Winch, CableDrivenParallelRobot, Pulley
 
 The creation of CableDrivenParallelRobots objects is illustrated using the
 geometry of the IPAnema1 developed by Fraunhofer IPA.
@@ -33,52 +24,52 @@ a list of numpy arrays.
 .. code-block:: python
 
     base_frame_pivot_points = [
-        np.array([-2, 1.5, 2]),
-        np.array([2, 1.5, 2]),
-        np.array([2, -1.5, 2]),
-        np.array([-2, -1.5, 2]),
-        np.array([-2, 1.5, 0]),
-        np.array([2, 1.5, 0]),
-        np.array([2, -1.5, 0]),
-        np.array([-2, -1.5, 0])
+        [-2, 1.5, 2],
+        [2, 1.5, 2],
+        [2, -1.5, 2],
+        [-2, -1.5, 2],
+        [-2, 1.5, 0],
+        [2, 1.5, 0],
+        [2, -1.5, 0],
+        [-2, -1.5, 0]
     ]
-    
+
     platform_pivot_points = [
-        np.array([-0.06, 0.06, 0]),
-        np.array([0.06, 0.06, 0]),
-        np.array([0.06, -0.06, 0]),
-        np.array([-0.06, -0.06, 0]),
+        [-0.06, 0.06, 0],
+        [0.06, 0.06, 0],
+        [0.06, -0.06, 0],
+        [-0.06, -0.06, 0],
     ]
     
 with this information all necessary components of a CDPR can be instantiated.
 
 .. code-block:: python
 
-    base_frame = cablelib_isw.BaseFrame(base_frame_pivot_points)
-    platform = cablelib_isw.Platform(platform_pivot_points)
+    base_frame = BaseFrame(base_frame_pivot_points)
+    platform = Platform(platform_pivot_points)
 
-    cable1 = cablelib_isw.Cable(1.0, 10.0)
-    cable2 = cablelib_isw.Cable(1.0, 10.0)
-    cable3 = cablelib_isw.Cable(1.0, 10.0)
-    cable4 = cablelib_isw.Cable(1.0, 10.0)
-    cable5 = cablelib_isw.Cable(1.0, 10.0)
-    cable6 = cablelib_isw.Cable(1.0, 10.0)
-    cable7 = cablelib_isw.Cable(1.0, 10.0)
-    cable8 = cablelib_isw.Cable(1.0, 10.0)
+    cable1 = Cable(1.0, 10.0)
+    cable2 = Cable(1.0, 10.0)
+    cable3 = Cable(1.0, 10.0)
+    cable4 = Cable(1.0, 10.0)
+    cable5 = Cable(1.0, 10.0)
+    cable6 = Cable(1.0, 10.0)
+    cable7 = Cable(1.0, 10.0)
+    cable8 = Cable(1.0, 10.0)
 
     cables = [
         cable1, cable2, cable3, cable4, cable5, cable6, cable7, cable8
     ]
 
     winches = [
-        cablelib_isw.Winch([cable1]),
-        cablelib_isw.Winch([cable2]),
-        cablelib_isw.Winch([cable3]),
-        cablelib_isw.Winch([cable4]),
-        cablelib_isw.Winch([cable5]),
-        cablelib_isw.Winch([cable6]),
-        cablelib_isw.Winch([cable7]),
-        cablelib_isw.Winch([cable8])
+        Winch([cable1]),
+        Winch([cable2]),
+        Winch([cable3]),
+        Winch([cable4]),
+        Winch([cable5]),
+        Winch([cable6]),
+        Winch([cable7]),
+        Winch([cable8])
     ]
     
 Cables are constructed with their minimum and maximum allowed force.
@@ -99,7 +90,7 @@ Now the CableDrivenParallelRobot object can be instantiated
 
 .. code-block:: python
 
-    ipa_nema_1 = cablelib_isw.CableDrivenParallelRobot(
+    ipa_nema_1 = CableDrivenParallelRobot(
         "IPAnema1",
         base_frame,
         platform,
@@ -112,54 +103,53 @@ And putting it all together results in
 
 .. code-block:: python
     :linenos:
-   
-    import cablelib_isw_pybindings as cablelib_isw
-    import numpy as np
+
+    from cablelib_isw_pybindings.robot import BaseFrame, Cable, Platform, Winch, CableDrivenParallelRobot, Pulley
 
     if __name__ == "__main__":
         base_frame_pivot_points = [
-            np.array([-2, 1.5, 2]),
-            np.array([2, 1.5, 2]),
-            np.array([2, -1.5, 2]),
-            np.array([-2, -1.5, 2]),
-            np.array([-2, 1.5, 0]),
-            np.array([2, 1.5, 0]),
-            np.array([2, -1.5, 0]),
-            np.array([-2, -1.5, 0])
+            [-2, 1.5, 2],
+            [2, 1.5, 2],
+            [2, -1.5, 2],
+            [-2, -1.5, 2],
+            [-2, 1.5, 0],
+            [2, 1.5, 0],
+            [2, -1.5, 0],
+            [-2, -1.5, 0]
         ]
 
         platform_pivot_points = [
-            np.array([-0.06, 0.06, 0]),
-            np.array([0.06, 0.06, 0]),
-            np.array([0.06, -0.06, 0]),
-            np.array([-0.06, -0.06, 0]),
+            [-0.06, 0.06, 0],
+            [0.06, 0.06, 0],
+            [0.06, -0.06, 0],
+            [-0.06, -0.06, 0],
         ]
 
-        base_frame = cablelib_isw.BaseFrame(base_frame_pivot_points)
-        platform = cablelib_isw.Platform(platform_pivot_points)
+        base_frame = BaseFrame(base_frame_pivot_points)
+        platform = Platform(platform_pivot_points)
 
-        cable1 = cablelib_isw.Cable(1.0, 10.0)
-        cable2 = cablelib_isw.Cable(1.0, 10.0)
-        cable3 = cablelib_isw.Cable(1.0, 10.0)
-        cable4 = cablelib_isw.Cable(1.0, 10.0)
-        cable5 = cablelib_isw.Cable(1.0, 10.0)
-        cable6 = cablelib_isw.Cable(1.0, 10.0)
-        cable7 = cablelib_isw.Cable(1.0, 10.0)
-        cable8 = cablelib_isw.Cable(1.0, 10.0)
+        cable1 = Cable(1.0, 10.0)
+        cable2 = Cable(1.0, 10.0)
+        cable3 = Cable(1.0, 10.0)
+        cable4 = Cable(1.0, 10.0)
+        cable5 = Cable(1.0, 10.0)
+        cable6 = Cable(1.0, 10.0)
+        cable7 = Cable(1.0, 10.0)
+        cable8 = Cable(1.0, 10.0)
 
         cables = [
             cable1, cable2, cable3, cable4, cable5, cable6, cable7, cable8
         ]
 
         winches = [
-            cablelib_isw.Winch([cable1]),
-            cablelib_isw.Winch([cable2]),
-            cablelib_isw.Winch([cable3]),
-            cablelib_isw.Winch([cable4]),
-            cablelib_isw.Winch([cable5]),
-            cablelib_isw.Winch([cable6]),
-            cablelib_isw.Winch([cable7]),
-            cablelib_isw.Winch([cable8])
+            Winch([cable1]),
+            Winch([cable2]),
+            Winch([cable3]),
+            Winch([cable4]),
+            Winch([cable5]),
+            Winch([cable6]),
+            Winch([cable7]),
+            Winch([cable8])
         ]
 
         i = 0
@@ -168,7 +158,7 @@ And putting it all together results in
             cable.platform_attachment_point = platform_pivot_points[i % 4]
             i += 1
 
-        ipa_nema_1 = cablelib_isw.CableDrivenParallelRobot(
+        ipa_nema_1 = CableDrivenParallelRobot(
             "IPAnema1",
             base_frame,
             platform,
@@ -176,6 +166,10 @@ And putting it all together results in
             cables,
             []
         )
+
+        ipa_nema_1.save_xml("ipa_nema_1.xml")
+        robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
         
 Saving and Loading
 -------------------

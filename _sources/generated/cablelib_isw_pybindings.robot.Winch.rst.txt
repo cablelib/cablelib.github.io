@@ -1,0 +1,31 @@
+cablelib\_isw\_pybindings.robot.Winch
+=====================================
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: Winch
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Winch.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Winch.cables
+   
+   

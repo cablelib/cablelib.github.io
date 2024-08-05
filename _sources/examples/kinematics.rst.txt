@@ -1,0 +1,72 @@
+Inverse and Forward Kinematics
+==============================
+
+This example prerequisites a saved xml of the IPAnema1
+as described in :doc:`./creating_robots`.
+
+The necessary components for the calculation of the
+forward and inverse kinematics are
+
+.. code-block:: python
+
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+   from cablelib_isw_pybindings.analysis import ForwardKinematics, InverseKinematics
+   from cablelib_isw_pybindings.types import Pose
+
+The :doc:`InverseKinematics <../generated/cablelib_isw_pybindings.analysis.InverseKinematics>`
+and :doc:`ForwardKinematics <../generated/cablelib_isw_pybindings.analysis.ForwardKinematics>`
+class need to be constructed with a :doc:`CableDrivenParallelRobot <../generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot>`
+object
+
+.. code-block:: python
+
+    robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+    invk = InverseKinematics(robot)
+    forwk = ForwardKinematics(robot)
+
+Both classes have a calculate method. The inverse kinematics function takes
+a :doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>` object as input
+and returns a list of the cable lengths while the opposite is true for the
+forward kinematics (input: cable lengths, output: pose).
+
+.. code-block:: python
+
+   cable_lengths = invk.calculate(Pose())
+   pose = forwk.calculate(cable_lengths)
+
+Example:
+
+.. code-block:: python
+   :linenos:
+
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+   from cablelib_isw_pybindings.analysis import ForwardKinematics, InverseKinematics
+   from cablelib_isw_pybindings.types import Pose
+
+   if __name__ == "__main__":
+       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+       invk = InverseKinematics(robot)
+       forwk = ForwardKinematics(robot)
+
+       cable_lengths = invk.calculate(Pose())
+       pose = forwk.calculate(cable_lengths)
+
+       print("Inverse Kinematics: " + cable_lengths.__str__())
+
+       print("Forward Kinematics:")
+       print("    Position: " + pose.position.__str__())
+       print("    Orientation: " + pose.orientation.__str__())
+
+Output:
+
+.. code-block::
+
+   Inverse Kinematics: [3.13643109 3.13643109 3.13643109 3.13643109 2.4160298  2.4160298
+    2.4160298  2.4160298 ]
+   Forward Kinematics:
+       Position: [-4.38361766e-09  1.03867960e-08  4.03607971e-09]
+       Orientation: [[ 1.00000000e+00 -1.94910912e-07 -1.22534527e-07]
+    [ 1.94910917e-07  1.00000000e+00  4.54200850e-08]
+    [ 1.22534518e-07 -4.54201089e-08  1.00000000e+00]]

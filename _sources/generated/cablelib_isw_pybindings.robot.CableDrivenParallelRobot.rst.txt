@@ -1,0 +1,38 @@
+cablelib\_isw\_pybindings.robot.CableDrivenParallelRobot
+========================================================
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: CableDrivenParallelRobot
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CableDrivenParallelRobot.__init__
+      ~CableDrivenParallelRobot.load_xml
+      ~CableDrivenParallelRobot.save_xml
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CableDrivenParallelRobot.base_frame
+      ~CableDrivenParallelRobot.cables
+      ~CableDrivenParallelRobot.name
+      ~CableDrivenParallelRobot.platform
+      ~CableDrivenParallelRobot.pulleys
+      ~CableDrivenParallelRobot.winches
+   
+   

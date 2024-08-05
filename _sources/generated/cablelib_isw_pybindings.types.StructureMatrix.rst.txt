@@ -1,0 +1,32 @@
+cablelib\_isw\_pybindings.types.StructureMatrix
+===============================================
+
+.. currentmodule:: cablelib_isw_pybindings.types
+
+.. autoclass:: StructureMatrix
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StructureMatrix.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StructureMatrix.cdpr
+      ~StructureMatrix.pose
+   
+   

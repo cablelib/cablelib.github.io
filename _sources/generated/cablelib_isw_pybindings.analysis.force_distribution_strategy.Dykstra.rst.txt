@@ -1,0 +1,25 @@
+cablelib\_isw\_pybindings.analysis.force\_distribution\_strategy.Dykstra
+========================================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.force_distribution_strategy
+
+.. autoclass:: Dykstra
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Dykstra.__init__
+   
+   
+
+   
+   
+   

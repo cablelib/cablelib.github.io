@@ -1,0 +1,76 @@
+Calculating the workspace
+=========================
+
+This example prerequisites a saved xml of the IPAnema1
+as described in :doc:`./creating_robots`.
+
+.. code-block:: python
+
+   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+First the :doc:`Workspace <../generated/cablelib_isw_pybindings.analysis.Workspace>`
+class needs to be instantiated
+
+.. code-block:: python
+
+   ws = Workspace(robot)
+
+The workspace in its initial state will be a unit sphere which has
+been approximated from a unit octahedron.
+The depth of the sphere approximation can be changed on construction which
+is set to 3 on default.
+If a sphere approximation depth of 4 is to be desired, the workspace will have
+to be instantiated with
+
+.. code-block:: python
+
+   ws = Workspace(robot, 4)
+
+To calculate the force feasible workspace
+
+.. code-block:: python
+
+   ws.calculate_force_feasible(2, 1e-10, [0.0, 0.0, 1.0])
+
+will have to be called.
+The first parameter is the maximum search range for the force feasible workspace.
+This will depend upon the CDPR to be analyzed.
+The second parameter is the epsilon for the break condition of the line search.
+A value of 1e-10 should be sufficient for the most cases.
+The third and last parameter is a three dimensional vector of the center of the
+workspace.
+In general, the center of the machine frame is a good initial guess.
+
+After calling the method above, the state of the workspace reflects the
+force feasible workspace.
+This state can be exported to an stl file and viewed with an
+appropriate external program.
+
+.. code-block:: python
+
+   ws.save_stl("workspace.stl")
+
+Example:
+
+.. code-block:: python
+   :linenos:
+
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+   from cablelib_isw_pybindings.analysis import Workspace
+
+   if __name__ == '__main__':
+       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+       ws = Workspace(robot)
+       ws.calculate_force_feasible(5, 1e-10, [0.0, 0.0, 1.0])
+       ws.save_stl("workspace.stl")
+       print("Volume: " + ws.volume.__str__())
+       print("Surface Area: " + ws.surface_area.__str__())
+       print("Center of Gravity: " + ws.center_of_gravity.__str__())
+
+Output:
+
+.. code-block::
+
+   Volume: 5.731410459246426
+   Surface Area: 17.78933715584402
+   Center of Gravity: [-2.32412388e-16  8.31584613e-17  1.00000000e+00]

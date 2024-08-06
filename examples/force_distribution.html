@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Force distribution &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+  <title>Calculating the force distribution &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API" href="../api.html" />
-    <link rel="prev" title="Calculating the structure matrix" href="calculating_structure_matrix.html" /> 
+    <link rel="next" title="Calculating the workspace" href="workspace.html" />
+    <link rel="prev" title="Inverse and Forward Kinematics" href="kinematics.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,7 +50,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="creating_robots.html">Creating Robots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calculating_structure_matrix.html">Calculating the structure matrix</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Force distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculating the force distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -71,7 +73,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
-      <li class="breadcrumb-item active">Force distribution</li>
+      <li class="breadcrumb-item active">Calculating the force distribution</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/force_distribution.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -81,25 +83,64 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="force-distribution">
-<h1>Force distribution<a class="headerlink" href="#force-distribution" title="Link to this heading"></a></h1>
+  <section id="calculating-the-force-distribution">
+<h1>Calculating the force distribution<a class="headerlink" href="#calculating-the-force-distribution" title="Link to this heading"></a></h1>
 <p>This example prerequisites a saved xml of the IPAnema1
 as described in <a class="reference internal" href="creating_robots.html"><span class="doc">Creating Robots</span></a>.</p>
-<p>The necessary components for the calculation of the
-forward and inverse kinematics are</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
-<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">ForwardKinematics</span><span class="p">,</span> <span class="n">InverseKinematics</span>
-<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">Pose</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.InverseKinematics.html"><span class="doc">InverseKinematics</span></a>
-and <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.ForwardKinematics.html"><span class="doc">ForwardKinematics</span></a>
-class need to be constructed with a <a class="reference internal" href="../generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html"><span class="doc">CableDrivenParallelRobot</span></a>
-object</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
-
-<span class="n">invk</span> <span class="o">=</span> <span class="n">InverseKinematics</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
-<span class="n">forwk</span> <span class="o">=</span> <span class="n">ForwardKinematics</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+<p>The Class <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.ForceDistribution.html"><span class="doc">ForceDistribution</span></a>
+offers a calculate method for the calculation of the force distribution of a
+CDPR.</p>
+<p>First, instantiate the class with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the calculation you need to supply a
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.Pose.html"><span class="doc">Pose</span></a> and a
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.Wrench.html"><span class="doc">Wrench</span></a> and
+execute</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The default method of calculation is the Closed Form method.
+This can be changed on construction, for example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd_dykstra</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">Dykstra</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will use the Dykstra method to calculate the force distribution.
+Another way is to set the strategy attribute of the ForceDistribution class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">Dykstra</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Refer to <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.html"><span class="doc">ForceDistributionStrategy</span></a>
+to see which strategies are available.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">ForceDistribution</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.force_distribution_strategy</span> <span class="kn">import</span> <span class="n">Dykstra</span><span class="p">,</span> <span class="n">ClosedForm</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Wrench</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos"> 7</span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated using Closed Form:&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">()))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="n">fd</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">Dykstra</span><span class="p">()</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated using Dykstra:&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Calculated</span> <span class="n">using</span> <span class="n">Closed</span> <span class="n">Form</span><span class="p">:</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span>
+  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span><span class="p">]</span>
+<span class="n">Calculated</span> <span class="n">using</span> <span class="n">Dykstra</span><span class="p">:</span>
+<span class="p">[</span><span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span>
+ <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -108,8 +149,8 @@ object</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="calculating_structure_matrix.html" class="btn btn-neutral float-left" title="Calculating the structure matrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="kinematics.html" class="btn btn-neutral float-left" title="Inverse and Forward Kinematics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="workspace.html" class="btn btn-neutral float-right" title="Calculating the workspace" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

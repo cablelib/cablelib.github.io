@@ -1,26 +1,77 @@
-Force distribution
-==================
+Calculating the force distribution
+===================================
 
 This example prerequisites a saved xml of the IPAnema1
 as described in :doc:`./creating_robots`.
 
-The necessary components for the calculation of the
-forward and inverse kinematics are
+.. code-block:: python
+
+   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+The Class :doc:`ForceDistribution <../generated/cablelib_isw_pybindings.analysis.ForceDistribution>`
+offers a calculate method for the calculation of the force distribution of a
+CDPR.
+
+First, instantiate the class with
 
 .. code-block:: python
+
+   fd = ForceDistribution(robot)
+
+For the calculation you need to supply a
+:doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>` and a
+:doc:`Wrench <../generated/cablelib_isw_pybindings.types.Wrench>` and
+execute
+
+.. code-block:: python
+
+   fd.calculate(Pose(), Wrench())
+
+The default method of calculation is the Closed Form method.
+This can be changed on construction, for example
+
+.. code-block:: python
+
+   fd_dykstra = ForceDistribution(robot, Dykstra)
+
+will use the Dykstra method to calculate the force distribution.
+Another way is to set the strategy attribute of the ForceDistribution class.
+
+.. code-block:: python
+
+   fd.strategy = Dykstra()
+
+Refer to :doc:`ForceDistributionStrategy <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy>`
+to see which strategies are available.
+
+Example:
+
+.. code-block:: python
+   :linenos:
 
    from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
-   from cablelib_isw_pybindings.analysis import ForwardKinematics, InverseKinematics
-   from cablelib_isw_pybindings.types import Pose
+   from cablelib_isw_pybindings.analysis import ForceDistribution
+   from cablelib_isw_pybindings.analysis.force_distribution_strategy import Dykstra, ClosedForm
+   from cablelib_isw_pybindings.types import Pose, Wrench
 
-The :doc:`InverseKinematics <../generated/cablelib_isw_pybindings.analysis.InverseKinematics>`
-and :doc:`ForwardKinematics <../generated/cablelib_isw_pybindings.analysis.ForwardKinematics>`
-class need to be constructed with a :doc:`CableDrivenParallelRobot <../generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot>`
-object
+   if __name__ == '__main__':
+       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+       fd = ForceDistribution(robot)
+       print("Calculated using Closed Form:")
+       print(fd.calculate(Pose(), Wrench()))
+
+       fd.strategy = Dykstra()
+       print("Calculated using Dykstra:")
+       print(fd.calculate(Pose(), Wrench()))
+
+Output:
 
 .. code-block:: python
 
-    robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
-
-    invk = InverseKinematics(robot)
-    forwk = ForwardKinematics(robot)
+   Calculated using Closed Form:
+   [-8.8817842e-16 -8.8817842e-16 -8.8817842e-16 -8.8817842e-16
+     5.5000000e+00  5.5000000e+00  5.5000000e+00  5.5000000e+00]
+   Calculated using Dykstra:
+   [2.22044605e-16 2.22044605e-16 2.22044605e-16 2.22044605e-16
+    5.50000000e+00 5.50000000e+00 5.50000000e+00 5.50000000e+00]

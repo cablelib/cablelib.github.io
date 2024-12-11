@@ -1,0 +1,32 @@
+﻿cablelib\_isw\_pybindings.analysis.workspace.criteria
+=====================================================
+
+.. automodule:: cablelib_isw_pybindings.analysis.workspace.criteria
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree: 
+      :template: class.rst 
+   
+      Criteria
+      ForceFeasible
+   
+   
+
+   
+   
+   
+
+
+

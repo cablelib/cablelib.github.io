@@ -50,7 +50,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.BaseFrame.html">cablelib_isw_pybindings.robot.BaseFrame</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.robot.Cable</a><ul>
@@ -58,6 +61,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.LegacyRobotConverter.html">cablelib_isw_pybindings.robot.LegacyRobotConverter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Platform.html">cablelib_isw_pybindings.robot.Platform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Pulley.html">cablelib_isw_pybindings.robot.Pulley</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Winch.html">cablelib_isw_pybindings.robot.Winch</a></li>
@@ -103,13 +107,18 @@
 <p>Class which models a cable of the CDPR.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cablelib_isw_pybindings.robot.Cable.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.robot.Cable" title="cablelib_isw_pybindings.robot.Cable"><span class="pre">cablelib_isw_pybindings.robot.Cable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.robot.Cable.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.robot.Cable" title="cablelib_isw_pybindings.robot.Cable"><span class="pre">cablelib_isw_pybindings.robot.Cable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">110000000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.00011309733553</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.robot.Cable.__init__" title="Link to this definition"></a></dt>
 <dd><p>Constructor for a cable.</p>
+<p>If no technical parameters of the cable are supplied,
+it is assumed that the cable is a steel cable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>min_force</strong> (<em>float</em>) – Minimum force of the cable</p></li>
-<li><p><strong>max_force</strong> (<em>float</em>) – Maximum force of the cable</p></li>
+<li><p><strong>min_force</strong> (<em>float</em>) – Minimum force of the cable [N]</p></li>
+<li><p><strong>max_force</strong> (<em>float</em>) – Maximum force of the cable [N]</p></li>
+<li><p><strong>young_modulus</strong> – Young modulus of the cable [Pa]. Default is 100 GPa.</p></li>
+<li><p><strong>cross_section</strong> – Cross section of the cable [m^2]. Default is 0.00011309733553 m^2.</p></li>
+<li><p><strong>constant_length</strong> – The constant length of the cable [m]. Default is 0.</p></li>
 </ul>
 </dd>
 </dl>
@@ -118,7 +127,7 @@
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.robot.Cable.__init__" title="cablelib_isw_pybindings.robot.Cable.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, min_force, max_force)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.robot.Cable.__init__" title="cablelib_isw_pybindings.robot.Cable.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, min_force, max_force[, ...])</p></td>
 <td><p>Constructor for a cable.</p></td>
 </tr>
 </tbody>
@@ -129,6 +138,12 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">base_frame_attachment_point</span></code></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">constant_length</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_section</span></code></p></td>
+<td><p></p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_force</span></code></p></td>
 <td><p></p></td>
 </tr>
@@ -136,6 +151,12 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">platform_attachment_point</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulley</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">young_modulus</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>

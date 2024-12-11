@@ -27,8 +27,12 @@ cablelib\_isw\_pybindings.robot.Cable
    .. autosummary::
    
       ~Cable.base_frame_attachment_point
+      ~Cable.constant_length
+      ~Cable.cross_section
       ~Cable.max_force
       ~Cable.min_force
       ~Cable.platform_attachment_point
+      ~Cable.pulley
+      ~Cable.young_modulus
    
    

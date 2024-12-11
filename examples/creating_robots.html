@@ -55,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="calculating_structure_matrix.html">Calculating the structure matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="force_distribution.html">Calculating the force distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -102,7 +103,7 @@ able to import the necessary components of the module with</p>
 <p>The creation of CableDrivenParallelRobots objects is illustrated using the
 geometry of the IPAnema1 developed by Fraunhofer IPA.</p>
 <p>First the points of the base frame and platform are defined in
-a list of numpy arrays.</p>
+a list of a list of three floats.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">base_frame_pivot_points</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
     <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -152,13 +153,30 @@ a list of numpy arrays.</p>
 </pre></div>
 </div>
 <p>Cables are constructed with their minimum and maximum allowed force.
-Winches are supplied with a list of cables which are wound by that winch.</p>
+Winches are supplied with a list of cables which are wound by that winch.
+Pulleys are constructed with a 3d rotation matrix and a radius.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pulley</span> <span class="o">=</span> <span class="n">Pulley</span><span class="p">(</span>
+     <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+     <span class="mf">0.05</span>
+ <span class="p">)</span>
+</pre></div>
+</div>
 <p>The next step will be to connect each cable to a point on the base frame and
-on the platform respectively</p>
+on the platform respectively.
+Each cable is supplied a pulley. In this case, the pulley is
+always the same, it can therefore be reused.</p>
+<p>More complicated designs may require a different pulley for various cables, making
+a shortcut in the attachment of base frame points, platform
+points and pulleys impossible as is illustrated in the code
+example below. Such cases will have to define these points
+for each cable manually, without the use of loops.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">cable</span> <span class="ow">in</span> <span class="n">cables</span><span class="p">:</span>
     <span class="n">cable</span><span class="o">.</span><span class="n">base_frame_attachment_point</span> <span class="o">=</span> <span class="n">base_frame_pivot_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">cable</span><span class="o">.</span><span class="n">platform_attachment_point</span> <span class="o">=</span> <span class="n">platform_pivot_points</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">cable</span><span class="o">.</span><span class="n">pulley</span> <span class="o">=</span> <span class="n">pulley</span>
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -168,77 +186,86 @@ on the platform respectively</p>
     <span class="n">base_frame</span><span class="p">,</span>
     <span class="n">platform</span><span class="p">,</span>
     <span class="n">winches</span><span class="p">,</span>
-    <span class="n">cables</span><span class="p">,</span>
-    <span class="p">[]</span>
+    <span class="n">cables</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>And putting it all together results in</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">BaseFrame</span><span class="p">,</span> <span class="n">Cable</span><span class="p">,</span> <span class="n">Platform</span><span class="p">,</span> <span class="n">Winch</span><span class="p">,</span> <span class="n">CableDrivenParallelRobot</span><span class="p">,</span> <span class="n">Pulley</span>
-<span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<span class="linenos"> 4</span>    <span class="n">base_frame_pivot_points</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos"> 5</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="linenos"> 6</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="linenos"> 7</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="linenos"> 8</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="linenos"> 9</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">10</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">11</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">12</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="linenos">13</span>    <span class="p">]</span>
-<span class="linenos">14</span>
-<span class="linenos">15</span>    <span class="n">platform_pivot_points</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">16</span>        <span class="p">[</span><span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">17</span>        <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">18</span>        <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">19</span>        <span class="p">[</span><span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="linenos">20</span>    <span class="p">]</span>
-<span class="linenos">21</span>
-<span class="linenos">22</span>    <span class="n">base_frame</span> <span class="o">=</span> <span class="n">BaseFrame</span><span class="p">(</span><span class="n">base_frame_pivot_points</span><span class="p">)</span>
-<span class="linenos">23</span>    <span class="n">platform</span> <span class="o">=</span> <span class="n">Platform</span><span class="p">(</span><span class="n">platform_pivot_points</span><span class="p">)</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span>    <span class="n">cable1</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">26</span>    <span class="n">cable2</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">27</span>    <span class="n">cable3</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">28</span>    <span class="n">cable4</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">29</span>    <span class="n">cable5</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">30</span>    <span class="n">cable6</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">31</span>    <span class="n">cable7</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">32</span>    <span class="n">cable8</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span>    <span class="n">cables</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">35</span>        <span class="n">cable1</span><span class="p">,</span> <span class="n">cable2</span><span class="p">,</span> <span class="n">cable3</span><span class="p">,</span> <span class="n">cable4</span><span class="p">,</span> <span class="n">cable5</span><span class="p">,</span> <span class="n">cable6</span><span class="p">,</span> <span class="n">cable7</span><span class="p">,</span> <span class="n">cable8</span>
-<span class="linenos">36</span>    <span class="p">]</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span>    <span class="n">winches</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">39</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable1</span><span class="p">]),</span>
-<span class="linenos">40</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable2</span><span class="p">]),</span>
-<span class="linenos">41</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable3</span><span class="p">]),</span>
-<span class="linenos">42</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable4</span><span class="p">]),</span>
-<span class="linenos">43</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable5</span><span class="p">]),</span>
-<span class="linenos">44</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable6</span><span class="p">]),</span>
-<span class="linenos">45</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable7</span><span class="p">]),</span>
-<span class="linenos">46</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable8</span><span class="p">])</span>
-<span class="linenos">47</span>    <span class="p">]</span>
-<span class="linenos">48</span>
-<span class="linenos">49</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">50</span>    <span class="k">for</span> <span class="n">cable</span> <span class="ow">in</span> <span class="n">cables</span><span class="p">:</span>
-<span class="linenos">51</span>        <span class="n">cable</span><span class="o">.</span><span class="n">base_frame_attachment_point</span> <span class="o">=</span> <span class="n">base_frame_pivot_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">52</span>        <span class="n">cable</span><span class="o">.</span><span class="n">platform_attachment_point</span> <span class="o">=</span> <span class="n">platform_pivot_points</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span>
-<span class="linenos">53</span>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">54</span>
-<span class="linenos">55</span>    <span class="n">ipa_nema_1</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="p">(</span>
-<span class="linenos">56</span>        <span class="s2">&quot;IPAnema1&quot;</span><span class="p">,</span>
-<span class="linenos">57</span>        <span class="n">base_frame</span><span class="p">,</span>
-<span class="linenos">58</span>        <span class="n">platform</span><span class="p">,</span>
-<span class="linenos">59</span>        <span class="n">winches</span><span class="p">,</span>
-<span class="linenos">60</span>        <span class="n">cables</span><span class="p">,</span>
-<span class="linenos">61</span>        <span class="p">[]</span>
-<span class="linenos">62</span>    <span class="p">)</span>
-<span class="linenos">63</span>
-<span class="linenos">64</span>    <span class="n">ipa_nema_1</span><span class="o">.</span><span class="n">save_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
-<span class="linenos">65</span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">BaseFrame</span><span class="p">,</span> <span class="n">Cable</span><span class="p">,</span> <span class="n">Platform</span><span class="p">,</span> <span class="n">Winch</span><span class="p">,</span> \
+<span class="linenos"> 2</span>    <span class="n">CableDrivenParallelRobot</span><span class="p">,</span> <span class="n">Pulley</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="c1"># Step 1: Define points of the base frame and platform.</span>
+<span class="linenos"> 6</span>    <span class="n">base_frame_pivot_points</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 7</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 8</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 9</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="linenos">10</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="linenos">11</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">12</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">13</span>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">14</span>        <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="linenos">15</span>    <span class="p">]</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="n">platform_pivot_points</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">18</span>        <span class="p">[</span><span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">19</span>        <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">20</span>        <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">21</span>        <span class="p">[</span><span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">22</span>    <span class="p">]</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="c1"># Step 2: Instantiate all necessary objects.</span>
+<span class="linenos">25</span>    <span class="n">base_frame</span> <span class="o">=</span> <span class="n">BaseFrame</span><span class="p">(</span><span class="n">base_frame_pivot_points</span><span class="p">)</span>
+<span class="linenos">26</span>    <span class="n">platform</span> <span class="o">=</span> <span class="n">Platform</span><span class="p">(</span><span class="n">platform_pivot_points</span><span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="n">cable1</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">29</span>    <span class="n">cable2</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">30</span>    <span class="n">cable3</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">31</span>    <span class="n">cable4</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="n">cable5</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="n">cable6</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">34</span>    <span class="n">cable7</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">cable8</span> <span class="o">=</span> <span class="n">Cable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="n">cables</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">38</span>        <span class="n">cable1</span><span class="p">,</span> <span class="n">cable2</span><span class="p">,</span> <span class="n">cable3</span><span class="p">,</span> <span class="n">cable4</span><span class="p">,</span> <span class="n">cable5</span><span class="p">,</span> <span class="n">cable6</span><span class="p">,</span> <span class="n">cable7</span><span class="p">,</span> <span class="n">cable8</span>
+<span class="linenos">39</span>    <span class="p">]</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>    <span class="n">winches</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">42</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable1</span><span class="p">]),</span>
+<span class="linenos">43</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable2</span><span class="p">]),</span>
+<span class="linenos">44</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable3</span><span class="p">]),</span>
+<span class="linenos">45</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable4</span><span class="p">]),</span>
+<span class="linenos">46</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable5</span><span class="p">]),</span>
+<span class="linenos">47</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable6</span><span class="p">]),</span>
+<span class="linenos">48</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable7</span><span class="p">]),</span>
+<span class="linenos">49</span>        <span class="n">Winch</span><span class="p">([</span><span class="n">cable8</span><span class="p">])</span>
+<span class="linenos">50</span>    <span class="p">]</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span>    <span class="n">pulley</span> <span class="o">=</span> <span class="n">Pulley</span><span class="p">(</span>
+<span class="linenos">53</span>        <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">54</span>         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">55</span>         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+<span class="linenos">56</span>        <span class="mf">0.05</span>
+<span class="linenos">57</span>    <span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>    <span class="c1"># Step 3: Connect each cable to a point on the base frame and</span>
+<span class="linenos">60</span>    <span class="c1"># a point on the platform.</span>
+<span class="linenos">61</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">62</span>    <span class="k">for</span> <span class="n">cable</span> <span class="ow">in</span> <span class="n">cables</span><span class="p">:</span>
+<span class="linenos">63</span>        <span class="n">cable</span><span class="o">.</span><span class="n">base_frame_attachment_point</span> <span class="o">=</span> <span class="n">base_frame_pivot_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">64</span>        <span class="n">cable</span><span class="o">.</span><span class="n">platform_attachment_point</span> <span class="o">=</span> <span class="n">platform_pivot_points</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span>
+<span class="linenos">65</span>        <span class="n">cable</span><span class="o">.</span><span class="n">pulley</span> <span class="o">=</span> <span class="n">pulley</span>
+<span class="linenos">66</span>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span>    <span class="c1"># Step 4: Instantiate the CableDrivenParallelRobot object.</span>
+<span class="linenos">69</span>    <span class="n">ipa_nema_1</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="p">(</span>
+<span class="linenos">70</span>        <span class="s2">&quot;IPAnema1&quot;</span><span class="p">,</span>
+<span class="linenos">71</span>        <span class="n">base_frame</span><span class="p">,</span>
+<span class="linenos">72</span>        <span class="n">platform</span><span class="p">,</span>
+<span class="linenos">73</span>        <span class="n">winches</span><span class="p">,</span>
+<span class="linenos">74</span>        <span class="n">cables</span>
+<span class="linenos">75</span>    <span class="p">)</span>
 </pre></div>
 </div>
 <section id="saving-and-loading">

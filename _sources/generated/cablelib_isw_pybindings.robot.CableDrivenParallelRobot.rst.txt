@@ -32,7 +32,6 @@ cablelib\_isw\_pybindings.robot.CableDrivenParallelRobot
       ~CableDrivenParallelRobot.cables
       ~CableDrivenParallelRobot.name
       ~CableDrivenParallelRobot.platform
-      ~CableDrivenParallelRobot.pulleys
       ~CableDrivenParallelRobot.winches
    
    

@@ -18,7 +18,7 @@ cablelib\_isw\_pybindings.analysis.ForceDistribution
    
       ~ForceDistribution.__init__
       ~ForceDistribution.calculate
-      ~ForceDistribution.isFeasible
+      ~ForceDistribution.is_feasible
    
    
 
@@ -28,6 +28,7 @@ cablelib\_isw\_pybindings.analysis.ForceDistribution
 
    .. autosummary::
    
-      ~ForceDistribution.strategy
+      ~ForceDistribution.force_distribution_strategy
+      ~ForceDistribution.kinematic_strategy
    
    

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cablelib_isw_pybindings.analysis.Workspace &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+  <title>cablelib_isw_pybindings.analysis.workspace &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" />
-    <link rel="prev" title="cablelib_isw_pybindings.analysis.InverseKinematics" href="cablelib_isw_pybindings.analysis.InverseKinematics.html" /> 
+    <link rel="next" title="cablelib_isw_pybindings.analysis.workspace.LineSearch" href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html" />
+    <link rel="prev" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,17 +49,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForceDistribution.html">cablelib_isw_pybindings.analysis.ForceDistribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForwardKinematics.html">cablelib_isw_pybindings.analysis.ForwardKinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.InverseKinematics.html">cablelib_isw_pybindings.analysis.InverseKinematics</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.Workspace</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html">cablelib_isw_pybindings.analysis.workspace.LineSearch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.Vertice.html">cablelib_isw_pybindings.analysis.workspace.Vertice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceHull</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.types.html">cablelib_isw_pybindings.types</a></li>
 </ul>
@@ -81,10 +83,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API</a></li>
-          <li class="breadcrumb-item"><a href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
-      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.Workspace</li>
+      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.workspace</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.Workspace.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.workspace.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,101 +93,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cablelib-isw-pybindings-analysis-workspace">
-<h1>cablelib_isw_pybindings.analysis.Workspace<a class="headerlink" href="#cablelib-isw-pybindings-analysis-workspace" title="Link to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.Workspace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.</span></span><span class="sig-name descname"><span class="pre">Workspace</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.Workspace" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<p>Class for the workspace of CDPRs.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.Workspace.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace" title="cablelib_isw_pybindings.analysis.Workspace"><span class="pre">cablelib_isw_pybindings.analysis.Workspace</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cdpr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sphere_approx_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.Workspace.__init__" title="Link to this definition"></a></dt>
-<dd><p>Constructs a workspace object.</p>
-<p>On construction of a workspace object a
-unit sphere is approximated as preparation
-for the line search algorithm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cdpr</strong> (<a class="reference internal" href="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></code></a>) – The CDPR for which the workspace is to be analyzed</p></li>
-<li><p><strong>sphere_approx_depth</strong> (<em>int</em>) – The depth to which the unit sphere is approximated, defaults to 3</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if the sphere approximation depth is negative.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Methods</p>
+  <section id="module-cablelib_isw_pybindings.analysis.workspace">
+<span id="cablelib-isw-pybindings-analysis-workspace"></span><h1>cablelib_isw_pybindings.analysis.workspace<a class="headerlink" href="#module-cablelib_isw_pybindings.analysis.workspace" title="Link to this heading"></a></h1>
+<p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace.__init__" title="cablelib_isw_pybindings.analysis.Workspace.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, cdpr[, sphere_approx_depth])</p></td>
-<td><p>Constructs a workspace object.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html#cablelib_isw_pybindings.analysis.workspace.LineSearch" title="cablelib_isw_pybindings.analysis.workspace.LineSearch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LineSearch</span></code></a></p></td>
+<td><p>Class for the line search algorithm.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace.calculate_force_feasible" title="cablelib_isw_pybindings.analysis.Workspace.calculate_force_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_force_feasible</span></code></a>(self, ...)</p></td>
-<td><p>Calculates the force feasible workspace for a constant rotation (no rotation).</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.Vertice.html#cablelib_isw_pybindings.analysis.workspace.Vertice" title="cablelib_isw_pybindings.analysis.workspace.Vertice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vertice</span></code></a></p></td>
+<td><p>Class for vertices in a discrete workspace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace.save_stl" title="cablelib_isw_pybindings.analysis.Workspace.save_stl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_stl</span></code></a>(self, filepath)</p></td>
-<td><p>Saves the current state of the workspace to an .stl file.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WorkspaceGrid</span></code></a></p></td>
+<td><p>Class for workspaces which use discretization methods to analyze it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WorkspaceGridRandom</span></code></a></p></td>
+<td><p>Class for a discrete workspace with a randomly distributed grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WorkspaceGridRegular</span></code></a></p></td>
+<td><p>Class for a discrete workspace with a regular grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceHull" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WorkspaceHull</span></code></a></p></td>
+<td><p>Class for the Workspace of CDPRs.</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Attributes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">center_of_gravity</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sphere_approx_depth</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">surface_area</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">volume</span></code></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py method">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.Workspace.calculate_force_feasible">
-<span class="sig-name descname"><span class="pre">calculate_force_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace" title="cablelib_isw_pybindings.analysis.Workspace"><span class="pre">cablelib_isw_pybindings.analysis.Workspace</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.Workspace.calculate_force_feasible" title="Link to this definition"></a></dt>
-<dd><p>Calculates the force feasible workspace for a constant rotation (no rotation).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>max_search_range</strong> (<em>float</em>) – The max search range/radius for the line search.</p></li>
-<li><p><strong>epsilon</strong> (<em>float</em>) – The epsilon for the break condition of the line search.</p></li>
-<li><p><strong>center</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray[numpy.float64[3,</span> <span class="pre">1]]</span></code>) – The estimated center of the workspace.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.Workspace.save_stl">
-<span class="sig-name descname"><span class="pre">save_stl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.Workspace" title="cablelib_isw_pybindings.analysis.Workspace"><span class="pre">cablelib_isw_pybindings.analysis.Workspace</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.Workspace.save_stl" title="Link to this definition"></a></dt>
-<dd><p>Saves the current state of the workspace to an .stl file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – The filepath of the .stl file to save.
-The file ending ‘.stl’ is not to be forgotten.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cablelib_isw_pybindings.analysis.InverseKinematics.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.InverseKinematics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.workspace.LineSearch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

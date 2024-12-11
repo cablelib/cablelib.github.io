@@ -4,73 +4,110 @@ Calculating the workspace
 This example prerequisites a saved xml of the IPAnema1
 as described in :doc:`./creating_robots`.
 
-.. code-block:: python
-
-   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
-
-First the :doc:`Workspace <../generated/cablelib_isw_pybindings.analysis.Workspace>`
-class needs to be instantiated
+The necessary components for the force distribution are
 
 .. code-block:: python
 
-   ws = Workspace(robot)
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard
+   from cablelib_isw_pybindings.analysis.workspace import WorkspaceHull, \
+       WorkspaceGridRegular
+   from cablelib_isw_pybindings.analysis.workspace.criteria import ForceFeasible
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
 
-The workspace in its initial state will be a unit sphere which has
-been approximated from a unit octahedron.
-The depth of the sphere approximation can be changed on construction which
-is set to 3 on default.
-If a sphere approximation depth of 4 is to be desired, the workspace will have
-to be instantiated with
+Workspace hull
+--------------
 
-.. code-block:: python
-
-   ws = Workspace(robot, 4)
-
-To calculate the force feasible workspace
+First, instantiate an object of a subclass of :doc:`Criteria <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.Criteria>`
+This example uses the :doc:`ForceFeasible <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible>` criteria.
 
 .. code-block:: python
 
-   ws.calculate_force_feasible(2, 1e-10, [0.0, 0.0, 1.0])
+   criteria = ForceFeasible(robot, KinematicStrategyStandard())
 
-will have to be called.
-The first parameter is the maximum search range for the force feasible workspace.
-This will depend upon the CDPR to be analyzed.
-The second parameter is the epsilon for the break condition of the line search.
-A value of 1e-10 should be sufficient for the most cases.
-The third and last parameter is a three dimensional vector of the center of the
-workspace.
-In general, the center of the machine frame is a good initial guess.
+In the case of the ForceFeasible criteria, the kinematic strategy
+can be configured so that pulley kinematics may be applied.
 
-After calling the method above, the state of the workspace reflects the
-force feasible workspace.
-This state can be exported to an stl file and viewed with an
-appropriate external program.
+Then, create a :doc:`WorkspaceHull <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull>`
+object.
+
+.. code-block:: python
+
+   ws = WorkspaceHull(3)
+
+The WorkspaceHull object can be created with a custom sphere approximation
+depth. A depth of 3 is a good approximation of a unit sphere already.
+
+Calculate the workspace hull with
+
+.. code-block:: python
+
+   ws.calculate(2, 1e-10, [0, 0, 1], criteria)
+
+The parameters supplied are the maximum search range of the
+line search algorithm, the epsilon break condition, the
+center of the workspace (usually the center of the base frame / machine frame)
+and the criteria object.
+
+The workspace can then be exported as an .stl file.
 
 .. code-block:: python
 
    ws.save_stl("workspace.stl")
 
-Example:
+The workspace hull has the properties surface_area, volume and
+center_of_gravity.
+
+Example for the workspace hull calculation:
 
 .. code-block:: python
    :linenos:
 
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard
+   from cablelib_isw_pybindings.analysis.workspace import WorkspaceHull, \
+       WorkspaceGridRegular
+   from cablelib_isw_pybindings.analysis.workspace.criteria import ForceFeasible
    from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
-   from cablelib_isw_pybindings.analysis import Workspace
 
-   if __name__ == '__main__':
-       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
-       ws = Workspace(robot)
-       ws.calculate_force_feasible(5, 1e-10, [0.0, 0.0, 1.0])
-       ws.save_stl("workspace.stl")
-       print("Volume: " + ws.volume.__str__())
-       print("Surface Area: " + ws.surface_area.__str__())
-       print("Center of Gravity: " + ws.center_of_gravity.__str__())
+   robot = CableDrivenParallelRobot.load_xml(
+     test_resource_path + "ipa_nema_1.xml")
 
-Output:
+   # In the case of the ForceFeasible criteria, the kinematic
+   # strategy can be customized so that pulley or standard kinematics
+   # may be considered.
+   criteria = ForceFeasible(robot, KinematicStrategyStandard())
 
-.. code-block::
+   # The WorkspaceHull object can be created with a custom sphere approximation
+   # depth. A depth of 3 is a good approximation of a unit sphere already.
+   ws = WorkspaceHull(3)
 
-   Volume: 5.731410459246426
-   Surface Area: 17.78933715584402
-   Center of Gravity: [-2.32412388e-16  8.31584613e-17  1.00000000e+00]
+   ws.calculate(2, 1e-10, [0, 0, 1], criteria)
+
+   # Workspaces can be exported as .stl file
+   ws.save_stl(test_resource_path + "workspace.stl")
+
+Discrete workspace
+------------------
+
+The workspace can also be analyzed as a discrete workspace through
+subclasses of :doc:`WorkspaceGrid <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid>`
+(e.g. :doc:`WorkspaceGridRegular <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular>` or
+:doc:`WorkspaceGridRandom <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom>`)
+
+For example, construct a WorkspaceGridRegular object with
+
+.. code-block:: python
+
+   discrete_ws = WorkspaceGridRegular([-0.5, -0.5, 0],
+                                       [0.5, 0.5, 1], 1, 1, 1)
+
+where the first and second parameters are the lower front vertice and upper back vertice of
+the cuboid to be discretized. The last three
+parameters are the step sizes in x, y and z direction.
+
+Calculate the discrete workspace by calling
+
+.. code-block:: python
+
+   discrete_ws.calculate(criteria)
+
+using a criteria object as described in the previous section.

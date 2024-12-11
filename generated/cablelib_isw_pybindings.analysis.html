@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.analysis.ForceDistribution" href="cablelib_isw_pybindings.analysis.ForceDistribution.html" />
+    <link rel="next" title="cablelib_isw_pybindings.analysis.ElasticityModel" href="cablelib_isw_pybindings.analysis.ElasticityModel.html" />
     <link rel="prev" title="API" href="../api.html" /> 
 </head>
 
@@ -50,13 +50,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModel.html">cablelib_isw_pybindings.analysis.ElasticityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModelElastic.html">cablelib_isw_pybindings.analysis.ElasticityModelElastic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModelStandard.html">cablelib_isw_pybindings.analysis.ElasticityModelStandard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForceDistribution.html">cablelib_isw_pybindings.analysis.ForceDistribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForwardKinematics.html">cablelib_isw_pybindings.analysis.ForwardKinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.InverseKinematics.html">cablelib_isw_pybindings.analysis.InverseKinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.Workspace.html">cablelib_isw_pybindings.analysis.Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategy.html">cablelib_isw_pybindings.analysis.KinematicStrategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategyPulley.html">cablelib_isw_pybindings.analysis.KinematicStrategyPulley</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategyStandard.html">cablelib_isw_pybindings.analysis.KinematicStrategyStandard</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.types.html">cablelib_isw_pybindings.types</a></li>
 </ul>
@@ -94,17 +100,26 @@
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForceDistribution.html#cablelib_isw_pybindings.analysis.ForceDistribution" title="cablelib_isw_pybindings.analysis.ForceDistribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ForceDistribution</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModel.html#cablelib_isw_pybindings.analysis.ElasticityModel" title="cablelib_isw_pybindings.analysis.ElasticityModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElasticityModel</span></code></a></p></td>
+<td><p>Interface for the creation of different elasticity models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModelElastic.html#cablelib_isw_pybindings.analysis.ElasticityModelElastic" title="cablelib_isw_pybindings.analysis.ElasticityModelElastic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElasticityModelElastic</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ElasticityModelStandard.html#cablelib_isw_pybindings.analysis.ElasticityModelStandard" title="cablelib_isw_pybindings.analysis.ElasticityModelStandard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElasticityModelStandard</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForceDistribution.html#cablelib_isw_pybindings.analysis.ForceDistribution" title="cablelib_isw_pybindings.analysis.ForceDistribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ForceDistribution</span></code></a></p></td>
 <td><p>Class for the calculation of force distributions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.ForwardKinematics.html#cablelib_isw_pybindings.analysis.ForwardKinematics" title="cablelib_isw_pybindings.analysis.ForwardKinematics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ForwardKinematics</span></code></a></p></td>
-<td><p>Class for the analysis of the forward kinematics of a CDPR.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategy.html#cablelib_isw_pybindings.analysis.KinematicStrategy" title="cablelib_isw_pybindings.analysis.KinematicStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinematicStrategy</span></code></a></p></td>
+<td><p>Interface for strategies which implement methods to account for the changing geometries when different models of a CDPR are used.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.InverseKinematics.html#cablelib_isw_pybindings.analysis.InverseKinematics" title="cablelib_isw_pybindings.analysis.InverseKinematics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InverseKinematics</span></code></a></p></td>
-<td><p>Class for the analysis of the inverse kinematics of a CDPR.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategyPulley.html#cablelib_isw_pybindings.analysis.KinematicStrategyPulley" title="cablelib_isw_pybindings.analysis.KinematicStrategyPulley"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinematicStrategyPulley</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.Workspace.html#cablelib_isw_pybindings.analysis.Workspace" title="cablelib_isw_pybindings.analysis.Workspace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Workspace</span></code></a></p></td>
-<td><p>Class for the workspace of CDPRs.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategyStandard.html#cablelib_isw_pybindings.analysis.KinematicStrategyStandard" title="cablelib_isw_pybindings.analysis.KinematicStrategyStandard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinematicStrategyStandard</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -115,7 +130,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.analysis.ForceDistribution.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.ForceDistribution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.analysis.ElasticityModel.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.ElasticityModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

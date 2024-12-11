@@ -50,7 +50,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.types.html">cablelib_isw_pybindings.types</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html">cablelib_isw_pybindings.types.Pose</a></li>
@@ -104,9 +107,15 @@ The structure matrix is an m x n matrix where m is the
 number of cables and n is the degrees of freedom.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cablelib_isw_pybindings.types.StructureMatrix.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.types.StructureMatrix" title="cablelib_isw_pybindings.types.StructureMatrix"><span class="pre">cablelib_isw_pybindings.types.StructureMatrix</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cdpr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">cablelib_isw_pybindings.types.Pose()</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.types.StructureMatrix.__init__" title="Link to this definition"></a></dt>
-<dd><p>Constructor for a structure matrix.</p>
-<p>The structure matrix is calculated on construction.</p>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.types.StructureMatrix.__init__" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: cablelib_isw_pybindings.types.StructureMatrix, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, pose: cablelib_isw_pybindings.types.Pose = cablelib_isw_pybindings.types.Pose()) -&gt; None</p></li>
+</ol>
+<p>Constructor for a structure matrix.</p>
+<p>The structure matrix is calculated on construction. This
+constructor initializes the StructureMatrix object with the standard
+kinematic strategy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -115,13 +124,27 @@ number of cables and n is the degrees of freedom.</p>
 </ul>
 </dd>
 </dl>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: cablelib_isw_pybindings.types.StructureMatrix, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, pose: cablelib_isw_pybindings.types.Pose, strategy: cablelib::KinematicStrategy) -&gt; None</p></li>
+</ol>
+<p>Constructor for a structure matrix.</p>
+<p>The structure matrix is calculated on construction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cdpr</strong> (<a class="reference internal" href="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></code></a>) – The CDPR for which the structure matrix is to be created</p></li>
+<li><p><strong>pose</strong> (<a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.types.Pose</span></code></a>) – The pose for which the structure matrix is to be created</p></li>
+<li><p><strong>strategy</strong> (<a class="reference internal" href="cablelib_isw_pybindings.analysis.KinematicStrategy.html#cablelib_isw_pybindings.analysis.KinematicStrategy" title="cablelib_isw_pybindings.analysis.KinematicStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.analysis.KinematicStrategy</span></code></a>) – The strategy utilized for the calculation of the structure matrix</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.StructureMatrix.__init__" title="cablelib_isw_pybindings.types.StructureMatrix.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, cdpr[, pose])</p></td>
-<td><p>Constructor for a structure matrix.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.StructureMatrix.__init__" title="cablelib_isw_pybindings.types.StructureMatrix.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Overloaded function.</p></td>
 </tr>
 </tbody>
 </table>

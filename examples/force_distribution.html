@@ -87,60 +87,58 @@
 <h1>Calculating the force distribution<a class="headerlink" href="#calculating-the-force-distribution" title="Link to this heading"></a></h1>
 <p>This example prerequisites a saved xml of the IPAnema1
 as described in <a class="reference internal" href="creating_robots.html"><span class="doc">Creating Robots</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<p>The necessary components for the force distribution are</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">ForceDistribution</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">KinematicStrategyStandard</span><span class="p">,</span> \
+    <span class="n">KinematicStrategyPulley</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.force_distribution_strategy</span> <span class="kn">import</span> \
+    <span class="n">ClosedForm</span><span class="p">,</span> <span class="n">Dykstra</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Wrench</span>
 </pre></div>
 </div>
-<p>The Class <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.ForceDistribution.html"><span class="doc">ForceDistribution</span></a>
-offers a calculate method for the calculation of the force distribution of a
-CDPR.</p>
-<p>First, instantiate the class with</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+<p>Create a force distribution object with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">force_distribution_strategy</span><span class="o">=</span><span class="n">ClosedForm</span><span class="p">(),</span>
+                    <span class="n">kinematic_strategy</span><span class="o">=</span><span class="n">KinematicStrategyStandard</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>For the calculation you need to supply a
-<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.Pose.html"><span class="doc">Pose</span></a> and a
-<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.Wrench.html"><span class="doc">Wrench</span></a> and
-execute</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">())</span>
+<p>The force distribution can be configured with the utilized algorithm
+and whether or not pulleys are considered.
+The default is the closed form force distribution strategy with the
+standard kinematic model.</p>
+<p>Calling the calculate method with a pose and a wrench will
+return a force distribution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">closed_form_result</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">wrench</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The default method of calculation is the Closed Form method.
-This can be changed on construction, for example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd_dykstra</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">Dykstra</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>will use the Dykstra method to calculate the force distribution.
-Another way is to set the strategy attribute of the ForceDistribution class.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">Dykstra</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Refer to <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.html"><span class="doc">ForceDistributionStrategy</span></a>
-to see which strategies are available.</p>
-<p>Example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
-<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">ForceDistribution</span>
-<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.force_distribution_strategy</span> <span class="kn">import</span> <span class="n">Dykstra</span><span class="p">,</span> <span class="n">ClosedForm</span>
-<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Wrench</span>
-<span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos"> 7</span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<p>Example for the calculation of a force distribution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">ForceDistribution</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">KinematicStrategyStandard</span><span class="p">,</span> \
+<span class="linenos"> 3</span>    <span class="n">KinematicStrategyPulley</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.force_distribution_strategy</span> <span class="kn">import</span> \
+<span class="linenos"> 5</span>    <span class="n">ClosedForm</span><span class="p">,</span> <span class="n">Dykstra</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Wrench</span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span>    <span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
-<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated using Closed Form:&quot;</span><span class="p">)</span>
-<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">()))</span>
-<span class="linenos">12</span>
-<span class="linenos">13</span>    <span class="n">fd</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">Dykstra</span><span class="p">()</span>
-<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated using Dykstra:&quot;</span><span class="p">)</span>
-<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">Pose</span><span class="p">(),</span> <span class="n">Wrench</span><span class="p">()))</span>
-</pre></div>
-</div>
-<p>Output:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Calculated</span> <span class="n">using</span> <span class="n">Closed</span> <span class="n">Form</span><span class="p">:</span>
-<span class="p">[</span><span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span> <span class="o">-</span><span class="mf">8.8817842e-16</span>
-  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span>  <span class="mf">5.5000000e+00</span><span class="p">]</span>
-<span class="n">Calculated</span> <span class="n">using</span> <span class="n">Dykstra</span><span class="p">:</span>
-<span class="p">[</span><span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span> <span class="mf">2.22044605e-16</span>
- <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span> <span class="mf">5.50000000e+00</span><span class="p">]</span>
+<span class="linenos"> 9</span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">pose</span> <span class="o">=</span> <span class="n">Pose</span><span class="p">([</span><span class="mf">1.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.457</span><span class="p">,</span> <span class="mf">1.763</span><span class="p">],</span> <span class="p">[[</span><span class="mf">0.6274449</span><span class="p">,</span> <span class="mf">0.4889770</span><span class="p">,</span> <span class="mf">0.6059822</span><span class="p">],</span>
+<span class="linenos">12</span>                                 <span class="p">[</span><span class="mf">0.1387336</span><span class="p">,</span> <span class="mf">0.6955824</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7049242</span><span class="p">],</span>
+<span class="linenos">13</span>                                 <span class="p">[</span><span class="o">-</span><span class="mf">0.7662023</span><span class="p">,</span> <span class="mf">0.5263711</span><span class="p">,</span> <span class="mf">0.3686022</span><span class="p">]])</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># If not otherwise specified on construction, the default force distribution</span>
+<span class="linenos">16</span><span class="c1"># strategy will be closed form. The default kinematic strategy will be the</span>
+<span class="linenos">17</span><span class="c1"># standard model, i.e. without pulley kinematics.</span>
+<span class="linenos">18</span><span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">force_distribution_strategy</span><span class="o">=</span><span class="n">ClosedForm</span><span class="p">(),</span>
+<span class="linenos">19</span>                    <span class="n">kinematic_strategy</span><span class="o">=</span><span class="n">KinematicStrategyStandard</span><span class="p">())</span>
+<span class="linenos">20</span><span class="c1"># Default wrench is (0, 0, 0, 0, 0, 0)</span>
+<span class="linenos">21</span><span class="n">closed_form_result</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">Wrench</span><span class="p">())</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># Customize the strategies after construction</span>
+<span class="linenos">24</span><span class="n">fd</span><span class="o">.</span><span class="n">force_distribution_strategy</span> <span class="o">=</span> <span class="n">Dykstra</span><span class="p">()</span>
+<span class="linenos">25</span><span class="n">fd</span><span class="o">.</span><span class="n">kinematic_strategy</span> <span class="o">=</span> <span class="n">KinematicStrategyPulley</span><span class="p">()</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">dykstra_pulley_result</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">Wrench</span><span class="p">())</span>
 </pre></div>
 </div>
 </section>

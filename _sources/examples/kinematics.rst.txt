@@ -9,64 +9,146 @@ forward and inverse kinematics are
 
 .. code-block:: python
 
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard, \
+       KinematicStrategyPulley, ElasticityModelStandard, ElasticityModelElastic
+   from cablelib_isw_pybindings.analysis.kinematics import InverseKinematics, \
+       InverseKinematicsElastic, ForwardKinematics
    from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
-   from cablelib_isw_pybindings.analysis import ForwardKinematics, InverseKinematics
    from cablelib_isw_pybindings.types import Pose
 
-The :doc:`InverseKinematics <../generated/cablelib_isw_pybindings.analysis.InverseKinematics>`
-and :doc:`ForwardKinematics <../generated/cablelib_isw_pybindings.analysis.ForwardKinematics>`
-class need to be constructed with a :doc:`CableDrivenParallelRobot <../generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot>`
-object
+Inverse Kinematics
+-------------------
+
+Create an :doc:`InverseKinematics <../generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematics>`
+object with
 
 .. code-block:: python
+
+   inv_kin = InverseKinematics(robot, KinematicStrategyStandard())
+
+The second argument of the constructor can be omitted. It defaults
+to :doc:`KinematicStrategyStandard <../generated/cablelib_isw_pybindings.analysis.KinematicStrategyStandard>`.
+Otherwise :doc:`KinematicStrategyPulley <../generated/cablelib_isw_pybindings.analysis.KinematicStrategyPulley>`
+could be supplied, to apply the pulley kinematics for the calculation of the
+inverse kinematics.
+
+Given an object of the type :doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>`,
+the inverse kinematics can be calculated with
+
+.. code-block:: python
+
+   cable_lengths = inv_kin.calculate(pose)
+
+The kinematic model can be changed after construction, for example
+
+.. code-block:: python
+
+   inv_kin.strategy = KinematicStrategyPulley()
+
+The class :doc:`InverseKinematicsElastic <../generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic>`
+considers the cables to be elastic.
+It is a subclass of InverseKinematics.
+
+Calling the constructor of InverseKinematicElastic will instantiate
+the object to calculate the inverse kinematics where cables are considered
+to be elastic.
+
+.. code-block:: python
+
+   inv_kin = InverseKinematicsElastic(robot)
+
+Input poses for the calculation of the elastic inverse kinematics require
+the pose to be force feasible, otherwise a RuntimeError will be raised.
+
+Example for the inverse kinematics calculation:
+
+.. code-block:: python
+    :linenos:
+
+    from cablelib_isw_pybindings.analysis import KinematicStrategyStandard, \
+        KinematicStrategyPulley, ElasticityModelStandard, ElasticityModelElastic
+    from cablelib_isw_pybindings.analysis.kinematics import InverseKinematics, \
+        InverseKinematicsElastic, ForwardKinematics
+    from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+    from cablelib_isw_pybindings.types import Pose
 
     robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
 
-    invk = InverseKinematics(robot)
-    forwk = ForwardKinematics(robot)
+    # If not otherwise specified the default kinematic strategy will be
+    # the standard model, i.e. without pulley kinematics
+    inv_kin = InverseKinematics(robot, KinematicStrategyStandard())
 
-Both classes have a calculate method. The inverse kinematics function takes
-a :doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>` object as input
-and returns a list of the cable lengths while the opposite is true for the
-forward kinematics (input: cable lengths, output: pose).
+    pose = Pose([0.122, -1.345, 1.054], [[0.9984775, -0.0174285, 0.0523360],
+                                         [0.0304012, 0.9655423, -0.2584643],
+                                         [-0.0460279, 0.2596619,
+                                          0.9646021]])
+    cable_lengths = inv_kin.calculate(pose)
+
+    # The class InverseKinematicsElastic additionally considers the cables
+    # to be elastic. It is a subclass of InverseKinematics.
+    inv_kin = InverseKinematicsElastic(self.robot)
+    # The kinematic strategy can also be changed after construction
+    inv_kin.strategy = KinematicStrategyPulley()
+
+    # However, the elastic cable model require the pose for the input
+    # of the inverse kinematics to be force feasible. Therefore,
+    # the line below will cause a RuntimeError.
+    inv_kin.calculate(pose)
+
+Forward Kinematics
+------------------
+
+The object for the calculation of the forward kinematics
+can be instantiated with
 
 .. code-block:: python
 
-   cable_lengths = invk.calculate(Pose())
-   pose = forwk.calculate(cable_lengths)
+   forw_kin = ForwardKinematics(robot, KinematicStrategyStandard(), ElasticityModelStandard())
 
-Example:
+The forward kinematics can be customized with subclasses of
+:doc:`KinematicStrategy <../generated/cablelib_isw_pybindings.analysis.KinematicStrategy>` and
+:doc:`ElasticityModel <../generated/cablelib_isw_pybindings.analysis.ElasticityModel>`.
+
+The calculate method will return a pose for the given
+cable lengths (a list of float values).
 
 .. code-block:: python
-   :linenos:
 
-   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
-   from cablelib_isw_pybindings.analysis import ForwardKinematics, InverseKinematics
-   from cablelib_isw_pybindings.types import Pose
+   result_pose = forw_kin.calculate(cable_lengths)
 
-   if __name__ == "__main__":
-       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+If the forward kinematics object is applying the elastic cable model,
+then the cable length input needs to be resulting in a pose which is
+force feasible, otherwise a RuntimeError will be raised.
 
-       invk = InverseKinematics(robot)
-       forwk = ForwardKinematics(robot)
+Example for the calculation of the forward kinematics:
 
-       cable_lengths = invk.calculate(Pose())
-       pose = forwk.calculate(cable_lengths)
+.. code-block:: python
+    :linenos:
 
-       print("Inverse Kinematics: " + cable_lengths.__str__())
+    from cablelib_isw_pybindings.analysis import KinematicStrategyStandard, \
+        KinematicStrategyPulley, ElasticityModelStandard, ElasticityModelElastic
+    from cablelib_isw_pybindings.analysis.kinematics import InverseKinematics, \
+        InverseKinematicsElastic, ForwardKinematics
+    from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+    from cablelib_isw_pybindings.types import Pose
 
-       print("Forward Kinematics:")
-       print("    Position: " + pose.position.__str__())
-       print("    Orientation: " + pose.orientation.__str__())
+    robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
 
-Output:
+    cable_lengths = [3.58975983, 3.45509319, 2.05946321,
+                 2.27704586, 3.62984038, 3.49355709,
+                 2.0938059, 2.31293444]
 
-.. code-block::
+    forw_kin = ForwardKinematics(robot, KinematicStrategyStandard(), ElasticityModelStandard())
 
-   Inverse Kinematics: [3.13643109 3.13643109 3.13643109 3.13643109 2.4160298  2.4160298
-    2.4160298  2.4160298 ]
-   Forward Kinematics:
-       Position: [-4.38361766e-09  1.03867960e-08  4.03607971e-09]
-       Orientation: [[ 1.00000000e+00 -1.94910912e-07 -1.22534527e-07]
-    [ 1.94910917e-07  1.00000000e+00  4.54200850e-08]
-    [ 1.22534518e-07 -4.54201089e-08  1.00000000e+00]]
+    result_pose = forw_kin.calculate(cable_lengths)
+
+    # The forward kinematics model can be customized by the properties
+    # strategy and elasticity model. They can either be applied
+    # during or after construction.
+    forw_kin.strategy = KinematicStrategyPulley()
+    forw_kin.elasticity_model = ElasticityModelElastic()
+
+    # The elastic model cannot be applied as the resulting pose is not force
+    # feasible. A RuntimeError will be raised.
+    forw_kin.calculate(cable_lengths)
+

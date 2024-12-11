@@ -7,6 +7,9 @@ API
     :recursive:
 
     cablelib_isw_pybindings.analysis
+    cablelib_isw_pybindings.analysis.kinematics
     cablelib_isw_pybindings.analysis.force_distribution_strategy
+    cablelib_isw_pybindings.analysis.workspace
+    cablelib_isw_pybindings.analysis.workspace.criteria
     cablelib_isw_pybindings.robot
     cablelib_isw_pybindings.types

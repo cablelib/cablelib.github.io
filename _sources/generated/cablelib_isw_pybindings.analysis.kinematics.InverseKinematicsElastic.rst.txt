@@ -1,0 +1,32 @@
+cablelib\_isw\_pybindings.analysis.kinematics.InverseKinematicsElastic
+======================================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.kinematics
+
+.. autoclass:: InverseKinematicsElastic
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~InverseKinematicsElastic.__init__
+      ~InverseKinematicsElastic.calculate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InverseKinematicsElastic.strategy
+   
+   

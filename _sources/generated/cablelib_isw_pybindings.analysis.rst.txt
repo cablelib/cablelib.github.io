@@ -19,10 +19,13 @@
       :toctree: 
       :template: class.rst 
    
+      ElasticityModel
+      ElasticityModelElastic
+      ElasticityModelStandard
       ForceDistribution
-      ForwardKinematics
-      InverseKinematics
-      Workspace
+      KinematicStrategy
+      KinematicStrategyPulley
+      KinematicStrategyStandard
    
    
 

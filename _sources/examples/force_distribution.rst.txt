@@ -4,74 +4,66 @@ Calculating the force distribution
 This example prerequisites a saved xml of the IPAnema1
 as described in :doc:`./creating_robots`.
 
-.. code-block:: python
-
-   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
-
-The Class :doc:`ForceDistribution <../generated/cablelib_isw_pybindings.analysis.ForceDistribution>`
-offers a calculate method for the calculation of the force distribution of a
-CDPR.
-
-First, instantiate the class with
+The necessary components for the force distribution are
 
 .. code-block:: python
 
-   fd = ForceDistribution(robot)
+   from cablelib_isw_pybindings.analysis import ForceDistribution
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard, \
+       KinematicStrategyPulley
+   from cablelib_isw_pybindings.analysis.force_distribution_strategy import \
+       ClosedForm, Dykstra
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+   from cablelib_isw_pybindings.types import Pose, Wrench
 
-For the calculation you need to supply a
-:doc:`Pose <../generated/cablelib_isw_pybindings.types.Pose>` and a
-:doc:`Wrench <../generated/cablelib_isw_pybindings.types.Wrench>` and
-execute
-
-.. code-block:: python
-
-   fd.calculate(Pose(), Wrench())
-
-The default method of calculation is the Closed Form method.
-This can be changed on construction, for example
+Create a force distribution object with
 
 .. code-block:: python
 
-   fd_dykstra = ForceDistribution(robot, Dykstra)
+    fd = ForceDistribution(robot, force_distribution_strategy=ClosedForm(),
+                        kinematic_strategy=KinematicStrategyStandard())
 
-will use the Dykstra method to calculate the force distribution.
-Another way is to set the strategy attribute of the ForceDistribution class.
+The force distribution can be configured with the utilized algorithm
+and whether or not pulleys are considered.
+The default is the closed form force distribution strategy with the
+standard kinematic model.
+
+Calling the calculate method with a pose and a wrench will
+return a force distribution.
 
 .. code-block:: python
 
-   fd.strategy = Dykstra()
+    closed_form_result = fd.calculate(pose, wrench)
 
-Refer to :doc:`ForceDistributionStrategy <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy>`
-to see which strategies are available.
-
-Example:
+Example for the calculation of a force distribution:
 
 .. code-block:: python
    :linenos:
 
-   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
    from cablelib_isw_pybindings.analysis import ForceDistribution
-   from cablelib_isw_pybindings.analysis.force_distribution_strategy import Dykstra, ClosedForm
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard, \
+       KinematicStrategyPulley
+   from cablelib_isw_pybindings.analysis.force_distribution_strategy import \
+       ClosedForm, Dykstra
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
    from cablelib_isw_pybindings.types import Pose, Wrench
 
-   if __name__ == '__main__':
-       robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+   robot = CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
 
-       fd = ForceDistribution(robot)
-       print("Calculated using Closed Form:")
-       print(fd.calculate(Pose(), Wrench()))
+   pose = Pose([1.06, -0.457, 1.763], [[0.6274449, 0.4889770, 0.6059822],
+                                    [0.1387336, 0.6955824, -0.7049242],
+                                    [-0.7662023, 0.5263711, 0.3686022]])
 
-       fd.strategy = Dykstra()
-       print("Calculated using Dykstra:")
-       print(fd.calculate(Pose(), Wrench()))
+   # If not otherwise specified on construction, the default force distribution
+   # strategy will be closed form. The default kinematic strategy will be the
+   # standard model, i.e. without pulley kinematics.
+   fd = ForceDistribution(robot, force_distribution_strategy=ClosedForm(),
+                       kinematic_strategy=KinematicStrategyStandard())
+   # Default wrench is (0, 0, 0, 0, 0, 0)
+   closed_form_result = fd.calculate(pose, Wrench())
 
-Output:
+   # Customize the strategies after construction
+   fd.force_distribution_strategy = Dykstra()
+   fd.kinematic_strategy = KinematicStrategyPulley()
 
-.. code-block:: python
-
-   Calculated using Closed Form:
-   [-8.8817842e-16 -8.8817842e-16 -8.8817842e-16 -8.8817842e-16
-     5.5000000e+00  5.5000000e+00  5.5000000e+00  5.5000000e+00]
-   Calculated using Dykstra:
-   [2.22044605e-16 2.22044605e-16 2.22044605e-16 2.22044605e-16
-    5.50000000e+00 5.50000000e+00 5.50000000e+00 5.50000000e+00]
+   dykstra_pulley_result = fd.calculate(pose, Wrench())

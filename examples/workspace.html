@@ -52,7 +52,11 @@
 <li class="toctree-l2"><a class="reference internal" href="calculating_structure_matrix.html">Calculating the structure matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="force_distribution.html">Calculating the force distribution</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculating the workspace</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculating the workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#workspace-hull">Workspace hull</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#discrete-workspace">Discrete workspace</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -87,62 +91,90 @@
 <h1>Calculating the workspace<a class="headerlink" href="#calculating-the-workspace" title="Link to this heading"></a></h1>
 <p>This example prerequisites a saved xml of the IPAnema1
 as described in <a class="reference internal" href="creating_robots.html"><span class="doc">Creating Robots</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<p>The necessary components for the force distribution are</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">KinematicStrategyStandard</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.workspace</span> <span class="kn">import</span> <span class="n">WorkspaceHull</span><span class="p">,</span> \
+    <span class="n">WorkspaceGridRegular</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.workspace.criteria</span> <span class="kn">import</span> <span class="n">ForceFeasible</span>
+<span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
 </pre></div>
 </div>
-<p>First the <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.Workspace.html"><span class="doc">Workspace</span></a>
-class needs to be instantiated</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+<section id="workspace-hull">
+<h2>Workspace hull<a class="headerlink" href="#workspace-hull" title="Link to this heading"></a></h2>
+<p>First, instantiate an object of a subclass of <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.criteria.Criteria.html"><span class="doc">Criteria</span></a>
+This example uses the <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible.html"><span class="doc">ForceFeasible</span></a> criteria.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">criteria</span> <span class="o">=</span> <span class="n">ForceFeasible</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">KinematicStrategyStandard</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>The workspace in its initial state will be a unit sphere which has
-been approximated from a unit octahedron.
-The depth of the sphere approximation can be changed on construction which
-is set to 3 on default.
-If a sphere approximation depth of 4 is to be desired, the workspace will have
-to be instantiated with</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<p>In the case of the ForceFeasible criteria, the kinematic strategy
+can be configured so that pulley kinematics may be applied.</p>
+<p>Then, create a <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html"><span class="doc">WorkspaceHull</span></a>
+object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">WorkspaceHull</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To calculate the force feasible workspace</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">calculate_force_feasible</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<p>The WorkspaceHull object can be created with a custom sphere approximation
+depth. A depth of 3 is a good approximation of a unit sphere already.</p>
+<p>Calculate the workspace hull with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">criteria</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will have to be called.
-The first parameter is the maximum search range for the force feasible workspace.
-This will depend upon the CDPR to be analyzed.
-The second parameter is the epsilon for the break condition of the line search.
-A value of 1e-10 should be sufficient for the most cases.
-The third and last parameter is a three dimensional vector of the center of the
-workspace.
-In general, the center of the machine frame is a good initial guess.</p>
-<p>After calling the method above, the state of the workspace reflects the
-force feasible workspace.
-This state can be exported to an stl file and viewed with an
-appropriate external program.</p>
+<p>The parameters supplied are the maximum search range of the
+line search algorithm, the epsilon break condition, the
+center of the workspace (usually the center of the base frame / machine frame)
+and the criteria object.</p>
+<p>The workspace can then be exported as an .stl file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">save_stl</span><span class="p">(</span><span class="s2">&quot;workspace.stl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
-<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">Workspace</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos"> 5</span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
-<span class="linenos"> 6</span>    <span class="n">ws</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
-<span class="linenos"> 7</span>    <span class="n">ws</span><span class="o">.</span><span class="n">calculate_force_feasible</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<span class="linenos"> 8</span>    <span class="n">ws</span><span class="o">.</span><span class="n">save_stl</span><span class="p">(</span><span class="s2">&quot;workspace.stl&quot;</span><span class="p">)</span>
-<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Volume: &quot;</span> <span class="o">+</span> <span class="n">ws</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
-<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Surface Area: &quot;</span> <span class="o">+</span> <span class="n">ws</span><span class="o">.</span><span class="n">surface_area</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
-<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Center of Gravity: &quot;</span> <span class="o">+</span> <span class="n">ws</span><span class="o">.</span><span class="n">center_of_gravity</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
+<p>The workspace hull has the properties surface_area, volume and
+center_of_gravity.</p>
+<p>Example for the workspace hull calculation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis</span> <span class="kn">import</span> <span class="n">KinematicStrategyStandard</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.workspace</span> <span class="kn">import</span> <span class="n">WorkspaceHull</span><span class="p">,</span> \
+<span class="linenos"> 3</span>    <span class="n">WorkspaceGridRegular</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.analysis.workspace.criteria</span> <span class="kn">import</span> <span class="n">ForceFeasible</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.robot</span> <span class="kn">import</span> <span class="n">CableDrivenParallelRobot</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">robot</span> <span class="o">=</span> <span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span>
+<span class="linenos"> 8</span>  <span class="n">test_resource_path</span> <span class="o">+</span> <span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># In the case of the ForceFeasible criteria, the kinematic</span>
+<span class="linenos">11</span><span class="c1"># strategy can be customized so that pulley or standard kinematics</span>
+<span class="linenos">12</span><span class="c1"># may be considered.</span>
+<span class="linenos">13</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">ForceFeasible</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">KinematicStrategyStandard</span><span class="p">())</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># The WorkspaceHull object can be created with a custom sphere approximation</span>
+<span class="linenos">16</span><span class="c1"># depth. A depth of 3 is a good approximation of a unit sphere already.</span>
+<span class="linenos">17</span><span class="n">ws</span> <span class="o">=</span> <span class="n">WorkspaceHull</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">ws</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">criteria</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Workspaces can be exported as .stl file</span>
+<span class="linenos">22</span><span class="n">ws</span><span class="o">.</span><span class="n">save_stl</span><span class="p">(</span><span class="n">test_resource_path</span> <span class="o">+</span> <span class="s2">&quot;workspace.stl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Volume</span><span class="p">:</span> <span class="mf">5.731410459246426</span>
-<span class="n">Surface</span> <span class="n">Area</span><span class="p">:</span> <span class="mf">17.78933715584402</span>
-<span class="n">Center</span> <span class="n">of</span> <span class="n">Gravity</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.32412388e-16</span>  <span class="mf">8.31584613e-17</span>  <span class="mf">1.00000000e+00</span><span class="p">]</span>
+</section>
+<section id="discrete-workspace">
+<h2>Discrete workspace<a class="headerlink" href="#discrete-workspace" title="Link to this heading"></a></h2>
+<p>The workspace can also be analyzed as a discrete workspace through
+subclasses of <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html"><span class="doc">WorkspaceGrid</span></a>
+(e.g. <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html"><span class="doc">WorkspaceGridRegular</span></a> or
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html"><span class="doc">WorkspaceGridRandom</span></a>)</p>
+<p>For example, construct a WorkspaceGridRegular object with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">discrete_ws</span> <span class="o">=</span> <span class="n">WorkspaceGridRegular</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>where the first and second parameters are the lower front vertice and upper back vertice of
+the cuboid to be discretized. The last three
+parameters are the step sizes in x, y and z direction.</p>
+<p>Calculate the discrete workspace by calling</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">discrete_ws</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>using a criteria object as described in the previous section.</p>
+</section>
 </section>
 
 

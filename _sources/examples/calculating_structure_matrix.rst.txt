@@ -33,7 +33,7 @@ The structure matrix can now be constructed.
 
 .. code-block:: python
 
-   structureMatrix = StructureMatrix(robot, pose)
+   structure_matrix = StructureMatrix(robot, pose)
 
 Example:
 
@@ -59,3 +59,17 @@ Output:
       0.03826     0.03826    -0.03826    -0.03826           0           0           0           0
       0.03826    -0.03826    -0.03826     0.03826           0           0           0           0
    0.00956501 -0.00956501  0.00956501 -0.00956501   0.0124171  -0.0124171   0.0124171  -0.0124171
+
+Changing the kinematic model
+----------------------------
+
+The kinematic model for the calcuation of the structure matrix
+can be changed during construction. For example
+
+.. code-block:: python
+
+   structure_matrix = StructureMatrix(robot, pose, KinematicStrategyPulley())
+
+will utilize the pulley kinematics, granted that
+:doc:`KinematicStrategyPulley <../generated/cablelib_isw_pybindings.analysis.KinematicStrategyPulley>`
+is imported.

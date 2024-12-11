@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.robot.Platform" href="cablelib_isw_pybindings.robot.Platform.html" />
+    <link rel="next" title="cablelib_isw_pybindings.robot.LegacyRobotConverter" href="cablelib_isw_pybindings.robot.LegacyRobotConverter.html" />
     <link rel="prev" title="cablelib_isw_pybindings.robot.Cable" href="cablelib_isw_pybindings.robot.Cable.html" /> 
 </head>
 
@@ -50,7 +50,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.BaseFrame.html">cablelib_isw_pybindings.robot.BaseFrame</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Cable.html">cablelib_isw_pybindings.robot.Cable</a></li>
@@ -58,6 +61,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><code class="docutils literal notranslate"><span class="pre">CableDrivenParallelRobot</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.LegacyRobotConverter.html">cablelib_isw_pybindings.robot.LegacyRobotConverter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Platform.html">cablelib_isw_pybindings.robot.Platform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Pulley.html">cablelib_isw_pybindings.robot.Pulley</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.robot.Winch.html">cablelib_isw_pybindings.robot.Winch</a></li>
@@ -103,7 +107,7 @@
 <p>Class which models a cable-driven parallel robot (CDPR)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cablelib_isw_pybindings.robot.CableDrivenParallelRobot.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.BaseFrame.html#cablelib_isw_pybindings.robot.BaseFrame" title="cablelib_isw_pybindings.robot.BaseFrame"><span class="pre">cablelib_isw_pybindings.robot.BaseFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">platform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.Platform.html#cablelib_isw_pybindings.robot.Platform" title="cablelib_isw_pybindings.robot.Platform"><span class="pre">cablelib_isw_pybindings.robot.Platform</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">winches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cablelib_isw_pybindings.robot.Winch.html#cablelib_isw_pybindings.robot.Winch" title="cablelib_isw_pybindings.robot.Winch"><span class="pre">cablelib_isw_pybindings.robot.Winch</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cablelib_isw_pybindings.robot.Cable.html#cablelib_isw_pybindings.robot.Cable" title="cablelib_isw_pybindings.robot.Cable"><span class="pre">cablelib_isw_pybindings.robot.Cable</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulleys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cablelib_isw_pybindings.robot.Pulley.html#cablelib_isw_pybindings.robot.Pulley" title="cablelib_isw_pybindings.robot.Pulley"><span class="pre">cablelib_isw_pybindings.robot.Pulley</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.robot.CableDrivenParallelRobot.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><span class="pre">cablelib_isw_pybindings.robot.CableDrivenParallelRobot</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.BaseFrame.html#cablelib_isw_pybindings.robot.BaseFrame" title="cablelib_isw_pybindings.robot.BaseFrame"><span class="pre">cablelib_isw_pybindings.robot.BaseFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">platform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.robot.Platform.html#cablelib_isw_pybindings.robot.Platform" title="cablelib_isw_pybindings.robot.Platform"><span class="pre">cablelib_isw_pybindings.robot.Platform</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">winches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cablelib_isw_pybindings.robot.Winch.html#cablelib_isw_pybindings.robot.Winch" title="cablelib_isw_pybindings.robot.Winch"><span class="pre">cablelib_isw_pybindings.robot.Winch</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cablelib_isw_pybindings.robot.Cable.html#cablelib_isw_pybindings.robot.Cable" title="cablelib_isw_pybindings.robot.Cable"><span class="pre">cablelib_isw_pybindings.robot.Cable</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.robot.CableDrivenParallelRobot.__init__" title="Link to this definition"></a></dt>
 <dd><p>Constructor for a CDPR.</p>
 <p>Every CDPR has to have at least one winch and one cable.</p>
 <dl class="field-list simple">
@@ -114,7 +118,6 @@
 <li><p><strong>platform</strong> (class:<cite>cablelib_isw_pybindings.robot.Platform</cite>)</p></li>
 <li><p><strong>winches</strong> (list[class:<cite>cablelib_isw_pybindings.robot.Winch</cite>]) – Winches in a list</p></li>
 <li><p><strong>cables</strong> (list[class:<cite>cablelib_isw_pybindings.robot.Cable</cite>]) – Cables in a list</p></li>
-<li><p><strong>pulleys</strong> (list[class:<cite>cablelib_isw_pybindings.robot.Pulley</cite>]) – Pulleys in a list. Give empty list for CDPRs without pulleys.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -152,10 +155,7 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">platform</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulleys</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">winches</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">winches</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -197,7 +197,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="cablelib_isw_pybindings.robot.Cable.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.robot.Cable" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.robot.Platform.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.robot.Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.robot.LegacyRobotConverter.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.robot.LegacyRobotConverter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

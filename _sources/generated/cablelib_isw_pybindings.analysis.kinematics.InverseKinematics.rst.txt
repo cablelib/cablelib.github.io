@@ -1,4 +1,4 @@
-cablelib\_isw\_pybindings.analysis.kinematics.InverseKinematics
+﻿cablelib\_isw\_pybindings.analysis.kinematics.InverseKinematics
 ===============================================================
 
 .. currentmodule:: cablelib_isw_pybindings.analysis.kinematics
@@ -18,6 +18,8 @@ cablelib\_isw\_pybindings.analysis.kinematics.InverseKinematics
    
       ~InverseKinematics.__init__
       ~InverseKinematics.calculate
+      ~InverseKinematics.get_cable_vectors
+      ~InverseKinematics.get_cable_vectors_normalized
    
    
 

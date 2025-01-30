@@ -214,3 +214,9 @@ and loaded with
 .. code-block:: python
     
     robot = cablelib_isw.CableDrivenParallelRobot.load_xml("ipa_nema_1.xml")
+
+Legacy CDPRs can be loaded with the class LegacyRobotConverter
+
+.. code-block:: python
+
+    robot = LegacyRobotConverter.load_wcrfx(test_resource_path + "IPAnema.wcrfx")

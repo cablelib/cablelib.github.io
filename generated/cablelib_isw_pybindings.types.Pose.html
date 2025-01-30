@@ -124,6 +124,12 @@ This class is immutable.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.__init__" title="cablelib_isw_pybindings.types.Pose.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self[, position, orientation])</p></td>
 <td><p>Constructor for a pose.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.concatenate" title="cablelib_isw_pybindings.types.Pose.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concatenate</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Overloaded function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix" title="cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_affine_transformation_matrix</span></code></a>(self)</p></td>
+<td><p>Gets the pose represented as an affine transformation matrix.</p></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
@@ -137,6 +143,56 @@ This class is immutable.</p>
 </tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.types.Pose.concatenate">
+<span class="sig-name descname"><span class="pre">concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.types.Pose.concatenate" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>concatenate(self: cablelib_isw_pybindings.types.Pose, affine_transformation: numpy.ndarray[numpy.float64[4, 4]]) -&gt; cablelib_isw_pybindings.types.Pose</p></li>
+</ol>
+<p>Concatenates the pose with a given affine transformation
+matrix.</p>
+<p>This method is especially convenient for chaining affine
+transformations by calling the concatenate method on the returned
+object successively.</p>
+<p>:param affine_transformation A 4x4 affine transformation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The concatenated pose with the given affine transformation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.Types.Pose</span></code></p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>concatenate(self: cablelib_isw_pybindings.types.Pose, arg0: cablelib_isw_pybindings.types.Pose) -&gt; cablelib_isw_pybindings.types.Pose</p></li>
+</ol>
+<p>Concatenates the pose with another pose.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pose</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.Types.Pose</span></code>) – The other pose.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting pose from the concatenation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix">
+<span class="sig-name descname"><span class="pre">get_affine_transformation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix" title="Link to this definition"></a></dt>
+<dd><p>Gets the pose represented as an affine transformation
+matrix.</p>
+<p>Refer to
+<a class="reference external" href="https://en.wikipedia.org/wiki/Affine_transformation#Representation">https://en.wikipedia.org/wiki/Affine_transformation#Representation</a>
+for more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pose represented as an 4x4 affine transformation matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>

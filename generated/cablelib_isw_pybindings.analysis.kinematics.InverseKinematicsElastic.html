@@ -141,6 +141,12 @@ with a standard kinematics strategy.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.calculate" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate</span></code></a>(self, pose)</p></td>
 <td><p>Does the inverse kinematics of the CDPR.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cable_vectors</span></code></a>(self, pose)</p></td>
+<td><p>Gets the cable vectors of the CDPR.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors_normalized" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors_normalized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cable_vectors_normalized</span></code></a>(self, pose)</p></td>
+<td><p>Gets the normalized cable vectors of the CDPR.</p></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
@@ -175,6 +181,37 @@ with an elastic cable model cannot be calculated therefore.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>numpy.ndarray[<em>Any</em>, numpy.dtype[numpy.float64]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors">
+<span class="sig-name descname"><span class="pre">get_cable_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html#cablelib_isw_pybindings.analysis.kinematics.InverseKinematics" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics"><span class="pre">cablelib_isw_pybindings.analysis.kinematics.InverseKinematics</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors" title="Link to this definition"></a></dt>
+<dd><p>Gets the cable vectors of the CDPR.</p>
+<p>If the kinematic strategy is set to pulley, then the
+cable vectors will be normalized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pose</strong> (<a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.types.Pose</span></code></a>) – The pose for which the cable vectors are to be
+returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of all cable vectors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors_normalized">
+<span class="sig-name descname"><span class="pre">get_cable_vectors_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html#cablelib_isw_pybindings.analysis.kinematics.InverseKinematics" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics"><span class="pre">cablelib_isw_pybindings.analysis.kinematics.InverseKinematics</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.get_cable_vectors_normalized" title="Link to this definition"></a></dt>
+<dd><p>Gets the normalized cable vectors of the CDPR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pose</strong> (<a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.types.Pose</span></code></a>) – The pose for which the cable vectors are to be returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of all normalized cable vectors.</p>
 </dd>
 </dl>
 </dd></dl>

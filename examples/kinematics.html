@@ -57,6 +57,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="force_distribution.html">Calculating the force distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poses.html">Poses</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -118,6 +119,12 @@ the inverse kinematics can be calculated with</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cable_lengths</span> <span class="o">=</span> <span class="n">inv_kin</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Not only can the lengths of the cables be returned but also all
+of the cable vectors normalized as well es non-normalized</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cable_vectors</span> <span class="o">=</span> <span class="n">inv_kin</span><span class="o">.</span><span class="n">get_cable_vectors</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+<span class="n">normalized_cable_vectors</span> <span class="o">=</span> <span class="n">inv_kin</span><span class="o">.</span><span class="n">get_cable_vectors_normalized</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>The kinematic model can be changed after construction, for example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inv_kin</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">KinematicStrategyPulley</span><span class="p">()</span>
 </pre></div>
@@ -163,6 +170,11 @@ the pose to be force feasible, otherwise a RuntimeError will be raised.</p>
 <span class="linenos">27</span><span class="c1"># of the inverse kinematics to be force feasible. Therefore,</span>
 <span class="linenos">28</span><span class="c1"># the line below will cause a RuntimeError.</span>
 <span class="linenos">29</span><span class="n">inv_kin</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="c1"># The inverse kinematics can also return the cable vectors normalized</span>
+<span class="linenos">32</span><span class="c1"># as well as unnormalized.</span>
+<span class="linenos">33</span><span class="n">cable_vectors</span> <span class="o">=</span> <span class="n">inv_kin</span><span class="o">.</span><span class="n">get_cable_vectors</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+<span class="linenos">34</span><span class="n">normalized_cable_vectors</span> <span class="o">=</span> <span class="n">inv_kin</span><span class="o">.</span><span class="n">get_cable_vectors_normalized</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -179,6 +191,18 @@ can be instantiated with</p>
 <p>The calculate method will return a pose for the given
 cable lengths (a list of float values).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_pose</span> <span class="o">=</span> <span class="n">forw_kin</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">cable_lengths</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, the calculate method can be supplied with a pose.
+The given pose will then be used instead of the internal estimation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The starting iteration pose of the forwards kinematic can be chosen.</span>
+<span class="n">result_pose</span> <span class="o">=</span> <span class="n">forw_kin</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">cable_lengths</span><span class="p">,</span>
+                <span class="n">Pose</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="p">[</span>
+                        <span class="p">[</span><span class="mf">0.9984775</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0174285</span><span class="p">,</span> <span class="mf">0.0523360</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.0304012</span><span class="p">,</span> <span class="mf">0.9655423</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2584643</span><span class="p">],</span>
+                        <span class="p">[</span><span class="o">-</span><span class="mf">0.0460279</span><span class="p">,</span> <span class="mf">0.2596619</span><span class="p">,</span> <span class="mf">0.9646021</span><span class="p">]</span>
+                    <span class="p">]))</span>
 </pre></div>
 </div>
 <p>If the forward kinematics object is applying the elastic cable model,

@@ -29,6 +29,7 @@ cablelib\_isw\_pybindings.analysis.workspace.WorkspaceHull
    .. autosummary::
    
       ~WorkspaceHull.center_of_gravity
+      ~WorkspaceHull.faces
       ~WorkspaceHull.sphere_approx_depth
       ~WorkspaceHull.surface_area
       ~WorkspaceHull.volume

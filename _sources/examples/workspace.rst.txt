@@ -54,6 +54,13 @@ The workspace can then be exported as an .stl file.
 
    ws.save_stl("workspace.stl")
 
+The triangles of the workspace can also be accessed through
+an internal list of Triangle objects.
+
+.. code-block:: python
+
+   triangle_list = ws.faces
+
 The workspace hull has the properties surface_area, volume and
 center_of_gravity.
 

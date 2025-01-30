@@ -179,8 +179,8 @@ will apply the given kinematic model.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.__init__" title="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Overloaded function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate" title="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate</span></code></a>(self, cable_lengths)</p></td>
-<td><p>Does the forward kinematics.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate" title="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Overloaded function.</p></td>
 </tr>
 </tbody>
 </table>
@@ -197,8 +197,12 @@ will apply the given kinematic model.</p></li>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics" title="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics"><span class="pre">cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cable_lengths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate" title="Link to this definition"></a></dt>
-<dd><p>Does the forward kinematics.</p>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>calculate(self: cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics, cable_lengths: numpy.ndarray[numpy.float64[m, 1]]) -&gt; cablelib_isw_pybindings.types.Pose</p></li>
+</ol>
+<p>Does the forward kinematics.</p>
 <p>Given the lengths of all cables this method calculates a
 pose.</p>
 <p>First a pose is estimated to start the iteration of
@@ -213,9 +217,9 @@ pretensed cables.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>ValueError</strong> – if the dimensions of cable lengths
-and number of cables in the cdpr do not match</p></li>
+and number of cables in the cdpr do not match.</p></li>
 <li><p><strong>NoSolutionError</strong> – if no solution for the given
-cable lengths can be found</p></li>
+cable lengths can be found.</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -225,6 +229,29 @@ cable lengths can be found</p></li>
 <dd class="field-even"><p><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.types.Pose</span></code></a></p>
 </dd>
 </dl>
+<ol class="arabic simple" start="2">
+<li><p>calculate(self: cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics, cable_lengths: numpy.ndarray[numpy.float64[m, 1]], initia_pose: cablelib_isw_pybindings.types.Pose) -&gt; cablelib_isw_pybindings.types.Pose</p></li>
+</ol>
+<p>Does the forward kinematics with an initial pose.</p>
+<p>This method takes a user-supplied initial pose to start
+the iteration of the Levenberg-Marquardt algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cable_lengths The vector of all cable lengths.</p>
+</dd>
+<dt class="field-even">Param<span class="colon">:</span></dt>
+<dd class="field-even"><p>initial_pose The initial pose to start the optimization problem.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – if the dimensions of cable lengths
+and number of cables in the cdpr do not match.</p></li>
+<li><p><strong>NoSolutionError</strong> – if no solution for the given cable lengths
+can be found.</p></li>
+</ul>
+</dd>
+</dl>
+<p>return A corresponding pose for the cable lengths.</p>
 </dd></dl>
 
 </dd></dl>

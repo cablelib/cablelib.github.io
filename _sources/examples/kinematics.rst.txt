@@ -39,6 +39,14 @@ the inverse kinematics can be calculated with
 
    cable_lengths = inv_kin.calculate(pose)
 
+Not only can the lengths of the cables be returned but also all
+of the cable vectors normalized as well es non-normalized
+
+.. code-block:: python
+
+    cable_vectors = inv_kin.get_cable_vectors(pose)
+    normalized_cable_vectors = inv_kin.get_cable_vectors_normalized(pose)
+
 The kinematic model can be changed after construction, for example
 
 .. code-block:: python
@@ -95,6 +103,11 @@ Example for the inverse kinematics calculation:
     # the line below will cause a RuntimeError.
     inv_kin.calculate(pose)
 
+    # The inverse kinematics can also return the cable vectors normalized
+    # as well as unnormalized.
+    cable_vectors = inv_kin.get_cable_vectors(pose)
+    normalized_cable_vectors = inv_kin.get_cable_vectors_normalized(pose)
+
 Forward Kinematics
 ------------------
 
@@ -115,6 +128,20 @@ cable lengths (a list of float values).
 .. code-block:: python
 
    result_pose = forw_kin.calculate(cable_lengths)
+
+Alternatively, the calculate method can be supplied with a pose.
+The given pose will then be used instead of the internal estimation.
+
+.. code-block:: python
+
+    # The starting iteration pose of the forwards kinematic can be chosen.
+    result_pose = forw_kin.calculate(cable_lengths,
+                    Pose([0.1, -1, 1],
+                        [
+                            [0.9984775, -0.0174285, 0.0523360],
+                            [0.0304012, 0.9655423, -0.2584643],
+                            [-0.0460279, 0.2596619, 0.9646021]
+                        ]))
 
 If the forward kinematics object is applying the elastic cable model,
 then the cable length input needs to be resulting in a pose which is

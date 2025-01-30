@@ -1,4 +1,4 @@
-cablelib\_isw\_pybindings.types.Pose
+﻿cablelib\_isw\_pybindings.types.Pose
 ====================================
 
 .. currentmodule:: cablelib_isw_pybindings.types
@@ -17,6 +17,8 @@ cablelib\_isw\_pybindings.types.Pose
    .. autosummary::
    
       ~Pose.__init__
+      ~Pose.concatenate
+      ~Pose.get_affine_transformation_matrix
    
    
 

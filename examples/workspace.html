@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API" href="../api.html" />
+    <link rel="next" title="Poses" href="poses.html" />
     <link rel="prev" title="Calculating the force distribution" href="force_distribution.html" /> 
 </head>
 
@@ -57,6 +57,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#discrete-workspace">Discrete workspace</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="poses.html">Poses</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -127,6 +128,11 @@ and the criteria object.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">save_stl</span><span class="p">(</span><span class="s2">&quot;workspace.stl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The triangles of the workspace can also be accessed through
+an internal list of Triangle objects.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">triangle_list</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">faces</span>
+</pre></div>
+</div>
 <p>The workspace hull has the properties surface_area, volume and
 center_of_gravity.</p>
 <p>Example for the workspace hull calculation:</p>
@@ -182,7 +188,7 @@ parameters are the step sizes in x, y and z direction.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="force_distribution.html" class="btn btn-neutral float-left" title="Calculating the force distribution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="poses.html" class="btn btn-neutral float-right" title="Poses" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

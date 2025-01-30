@@ -1,0 +1,31 @@
+Poses
+======
+
+Poses can be concatenated either through another pose or a 4x4
+affine transformation matrix. Here the pose is translated by one
+unit in the direction of the x-axis.
+
+.. code-block:: python
+
+   pose = Pose()
+   concat_pose = pose.concatenate(Pose([1, 0, 0]))
+
+Now an affine transformation matrix is applied to the default pose.
+
+.. code-block:: python
+
+   affine_transformation_matrix = [
+        [1, 0, 0, 0.5],
+        [0, 1, 0, -0.5],
+        [0, 0, 1, 0.1],
+        [0, 0, 0, 1]
+    ]
+
+    concat_pose_2 = pose.concatenate(affine_transformation_matrix)
+
+Poses can also be represented as a 4x4 matrix
+
+.. code-block:: python
+
+   matrix = concat_pose_2.get_affine_transformation_matrix()
+

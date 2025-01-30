@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cablelib_isw_pybindings.analysis.workspace.Vertice &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+  <title>cablelib_isw_pybindings.analysis.workspace.Triangle &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html" />
-    <link rel="prev" title="cablelib_isw_pybindings.analysis.workspace.Triangle" href="cablelib_isw_pybindings.analysis.workspace.Triangle.html" /> 
+    <link rel="next" title="cablelib_isw_pybindings.analysis.workspace.Vertice" href="cablelib_isw_pybindings.analysis.workspace.Vertice.html" />
+    <link rel="prev" title="cablelib_isw_pybindings.analysis.workspace.LineSearch" href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,11 +54,11 @@
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html">cablelib_isw_pybindings.analysis.workspace.LineSearch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.Triangle.html">cablelib_isw_pybindings.analysis.workspace.Triangle</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.workspace.Vertice</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.Vertice"><code class="docutils literal notranslate"><span class="pre">Vertice</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.workspace.Triangle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.Triangle"><code class="docutils literal notranslate"><span class="pre">Triangle</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.Vertice.html">cablelib_isw_pybindings.analysis.workspace.Vertice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html">cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular</a></li>
@@ -88,9 +88,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
-      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.workspace.Vertice</li>
+      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.workspace.Triangle</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.workspace.Vertice.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.workspace.Triangle.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,56 +98,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cablelib-isw-pybindings-analysis-workspace-vertice">
-<h1>cablelib_isw_pybindings.analysis.workspace.Vertice<a class="headerlink" href="#cablelib-isw-pybindings-analysis-workspace-vertice" title="Link to this heading"></a></h1>
+  <section id="cablelib-isw-pybindings-analysis-workspace-triangle">
+<h1>cablelib_isw_pybindings.analysis.workspace.Triangle<a class="headerlink" href="#cablelib-isw-pybindings-analysis-workspace-triangle" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.workspace.Vertice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.workspace.</span></span><span class="sig-name descname"><span class="pre">Vertice</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.Vertice" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.workspace.Triangle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.workspace.</span></span><span class="sig-name descname"><span class="pre">Triangle</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.Triangle" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<p>Class for vertices in a discrete workspace.</p>
+<p>Class for Triangles which approximate
+the boundary (hull) of the workspace</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.workspace.Vertice.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.Vertice.__init__" title="Link to this definition"></a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.Vertice, position: numpy.ndarray[numpy.float64[3, 1]]) -&gt; None</p></li>
-</ol>
-<p>Constructs a Vertice object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>position</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray[numpy.float64[3,</span> <span class="pre">1]]</span></code>) – The position of the vertice.</p>
-</dd>
-</dl>
-<ol class="arabic simple" start="2">
-<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.Vertice, x: float, y: float, z: float) -&gt; None</p></li>
-</ol>
-<p>Constructs a Vertice object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>float</em>) – x-coordinate</p></li>
-<li><p><strong>y</strong> (<em>float</em>) – y-coordinate</p></li>
-<li><p><strong>z</strong> (<em>float</em>) – z-coordinate</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.workspace.Triangle.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.Triangle.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.Vertice.__init__" title="cablelib_isw_pybindings.analysis.workspace.Vertice.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
-<td><p>Overloaded function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.Triangle.__init__" title="cablelib_isw_pybindings.analysis.workspace.Triangle.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">a</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">position</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">c</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -160,8 +141,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cablelib_isw_pybindings.analysis.workspace.Triangle.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.workspace.Triangle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.analysis.workspace.LineSearch.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.workspace.LineSearch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cablelib_isw_pybindings.analysis.workspace.Vertice.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.workspace.Vertice" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

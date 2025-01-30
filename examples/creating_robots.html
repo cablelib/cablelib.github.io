@@ -56,6 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="force_distribution.html">Calculating the force distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poses.html">Poses</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -278,6 +279,10 @@ can be saved by calling</p>
 </div>
 <p>and loaded with</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">cablelib_isw</span><span class="o">.</span><span class="n">CableDrivenParallelRobot</span><span class="o">.</span><span class="n">load_xml</span><span class="p">(</span><span class="s2">&quot;ipa_nema_1.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Legacy CDPRs can be loaded with the class LegacyRobotConverter</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">LegacyRobotConverter</span><span class="o">.</span><span class="n">load_wcrfx</span><span class="p">(</span><span class="n">test_resource_path</span> <span class="o">+</span> <span class="s2">&quot;IPAnema.wcrfx&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

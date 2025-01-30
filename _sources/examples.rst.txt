@@ -9,3 +9,4 @@ These examples will help you get started with cablelib_isw.
     examples/kinematics
     examples/force_distribution
     examples/workspace
+    examples/poses

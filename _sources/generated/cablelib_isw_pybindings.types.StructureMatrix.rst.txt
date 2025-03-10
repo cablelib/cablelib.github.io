@@ -1,4 +1,4 @@
-cablelib\_isw\_pybindings.types.StructureMatrix
+﻿cablelib\_isw\_pybindings.types.StructureMatrix
 ===============================================
 
 .. currentmodule:: cablelib_isw_pybindings.types
@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.types.StructureMatrix
    .. autosummary::
    
       ~StructureMatrix.__init__
+      ~StructureMatrix.data
    
    
 

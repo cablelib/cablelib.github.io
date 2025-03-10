@@ -1,0 +1,6 @@
+cablelib\_isw\_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError
+=============================================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.kinematics
+
+.. autoexception:: TooManyFunctionEvaluationsError

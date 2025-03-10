@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+  <title>cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2c0281ef" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html" />
-    <link rel="prev" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" /> 
+    <link rel="next" title="cablelib_isw_pybindings.analysis.workspace" href="cablelib_isw_pybindings.analysis.workspace.html" />
+    <link rel="prev" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,13 +53,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm"><code class="docutils literal notranslate"><span class="pre">ClosedForm</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html">cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html">cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.html">cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm"><code class="docutils literal notranslate"><span class="pre">ImprovedClosedForm</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
@@ -86,9 +86,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
-      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm</li>
+      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -96,21 +96,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cablelib-isw-pybindings-analysis-force-distribution-strategy-closedform">
-<h1>cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm<a class="headerlink" href="#cablelib-isw-pybindings-analysis-force-distribution-strategy-closedform" title="Link to this heading"></a></h1>
+  <section id="cablelib-isw-pybindings-analysis-force-distribution-strategy-improvedclosedform">
+<h1>cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm<a class="headerlink" href="#cablelib-isw-pybindings-analysis-force-distribution-strategy-improvedclosedform" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.force_distribution_strategy.</span></span><span class="sig-name descname"><span class="pre">ClosedForm</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.force_distribution_strategy.</span></span><span class="sig-name descname"><span class="pre">ImprovedClosedForm</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForceDistributionStrategy</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm"><span class="pre">cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.__init__" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm"><span class="pre">cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.__init__" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.__init__" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -123,8 +123,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cablelib_isw_pybindings.analysis.workspace.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.workspace" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

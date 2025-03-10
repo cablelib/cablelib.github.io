@@ -1,0 +1,11 @@
+.wy-menu.wy-menu-vertical {
+    overflow-x: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.wy-nav-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}

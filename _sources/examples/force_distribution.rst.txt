@@ -25,6 +25,7 @@ Create a force distribution object with
 
 The force distribution can be configured with the utilized algorithm
 and whether or not pulleys are considered.
+Available force distribution algorithms can be found :doc:`here <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy>`.
 The default is the closed form force distribution strategy with the
 standard kinematic model.
 

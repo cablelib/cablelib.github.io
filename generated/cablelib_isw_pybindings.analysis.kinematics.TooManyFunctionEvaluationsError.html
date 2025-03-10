@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cablelib_isw_pybindings.types &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+  <title>cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2c0281ef" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.types.Pose" href="cablelib_isw_pybindings.types.Pose.html" />
-    <link rel="prev" title="cablelib_isw_pybindings.robot.Winch" href="cablelib_isw_pybindings.robot.Winch.html" /> 
+    <link rel="next" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" />
+    <link rel="prev" title="cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError" href="cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,17 +51,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.html">cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html">cablelib_isw_pybindings.analysis.kinematics.InverseKinematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.html">cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError.html">cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError"><code class="docutils literal notranslate"><span class="pre">TooManyFunctionEvaluationsError</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html">cablelib_isw_pybindings.analysis.force_distribution_strategy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.html">cablelib_isw_pybindings.analysis.workspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.html">cablelib_isw_pybindings.analysis.workspace.criteria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.robot.html">cablelib_isw_pybindings.robot</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cablelib_isw_pybindings.types</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html">cablelib_isw_pybindings.types.Pose</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.StructureMatrix.html">cablelib_isw_pybindings.types.StructureMatrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.Wrench.html">cablelib_isw_pybindings.types.Wrench</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.types.html">cablelib_isw_pybindings.types</a></li>
 </ul>
 </li>
 </ul>
@@ -81,9 +86,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API</a></li>
-      <li class="breadcrumb-item active">cablelib_isw_pybindings.types</li>
+          <li class="breadcrumb-item"><a href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
+      <li class="breadcrumb-item active">cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/cablelib_isw_pybindings.types.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,31 +97,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-cablelib_isw_pybindings.types">
-<span id="cablelib-isw-pybindings-types"></span><h1>cablelib_isw_pybindings.types<a class="headerlink" href="#module-cablelib_isw_pybindings.types" title="Link to this heading"></a></h1>
-<p>This module provides types for the analyisis of CDPRs.</p>
-<p class="rubric">Classes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pose</span></code></a></p></td>
-<td><p>Datatype class for a pose.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="cablelib_isw_pybindings.types.StructureMatrix.html#cablelib_isw_pybindings.types.StructureMatrix" title="cablelib_isw_pybindings.types.StructureMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructureMatrix</span></code></a></p></td>
-<td><p>Class for a structure Matrix of a CDPR.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="cablelib_isw_pybindings.types.Wrench.html#cablelib_isw_pybindings.types.Wrench" title="cablelib_isw_pybindings.types.Wrench"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Wrench</span></code></a></p></td>
-<td><p>Class for a wrench in the context of robotics.</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="cablelib-isw-pybindings-analysis-kinematics-toomanyfunctionevaluationserror">
+<h1>cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError<a class="headerlink" href="#cablelib-isw-pybindings-analysis-kinematics-toomanyfunctionevaluationserror" title="Link to this heading"></a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw_pybindings.analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">TooManyFunctionEvaluationsError</span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.kinematics.TooManyFunctionEvaluationsError" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cablelib_isw_pybindings.robot.Winch.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.robot.Winch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.types.Pose.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.types.Pose" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.analysis.kinematics.ImproperInputParametersError" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cablelib_isw_pybindings.analysis.force_distribution_strategy.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.analysis.force_distribution_strategy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

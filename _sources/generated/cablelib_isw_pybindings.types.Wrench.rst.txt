@@ -1,4 +1,4 @@
-﻿cablelib\_isw\_pybindings.types.Wrench
+cablelib\_isw\_pybindings.types.Wrench
 ======================================
 
 .. currentmodule:: cablelib_isw_pybindings.types

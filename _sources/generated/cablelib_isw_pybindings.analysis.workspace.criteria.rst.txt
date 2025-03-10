@@ -21,6 +21,7 @@
    
       Criteria
       ForceFeasible
+      WrenchFeasible
    
    
 

@@ -1,4 +1,4 @@
-﻿cablelib\_isw\_pybindings.types.Pose
+cablelib\_isw\_pybindings.types.Pose
 ====================================
 
 .. currentmodule:: cablelib_isw_pybindings.types

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stiffness Matrices &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer’s Guide" href="../developers_guide.html" />
+    <link rel="prev" title="Wrench access" href="wrenches.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cablelib_isw_pybindings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="creating_robots.html">Creating Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calculating_structure_matrix.html">Calculating the structure matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="force_distribution.html">Calculating the force distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poses.html">Poses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrenches.html">Wrench access</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Stiffness Matrices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constructing-the-stiffnessmatrix-object">Constructing the StiffnessMatrix object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculating-stiffness-matrices">Calculating Stiffness Matrices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers_guide.html">Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cablelib_isw_pybindings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Stiffness Matrices</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/stiffness_matrix.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stiffness-matrices">
+<span id="id1"></span><h1>Stiffness Matrices<a class="headerlink" href="#stiffness-matrices" title="Link to this heading"></a></h1>
+<p>The stiffness of a Cable-Driven Parallel Robot is influenced
+by the elastic stiffness of the cables and the geometric stiffness.
+These stiffness matrices can be calculated using the
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.StiffnessMatrix.html"><span class="doc">StiffnessMatrix</span></a>
+class.</p>
+<section id="constructing-the-stiffnessmatrix-object">
+<h2>Constructing the StiffnessMatrix object<a class="headerlink" href="#constructing-the-stiffnessmatrix-object" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">StiffnessMatrix</span></code> object is constructed using the
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html"><span class="doc">StiffnessMatrixBuilder</span></a>
+class. This builder class offers a safe and intuitive solution to create a
+valid <code class="docutils literal notranslate"><span class="pre">StiffnessMatrix</span></code> object. The following example assumes that
+<code class="docutils literal notranslate"><span class="pre">cdpr</span></code> is a CableDrivenParallelRobot object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">StiffnessMatrix</span><span class="p">,</span> <span class="n">StiffnessMatrixBuilder</span>
+
+<span class="n">sm_builder</span> <span class="o">=</span> <span class="n">StiffnessMatrixBuilder</span><span class="p">(</span><span class="n">cdpr</span><span class="p">)</span>
+
+<span class="c1"># Build the standard configuration: Standard kinematic model (no pulley),</span>
+<span class="c1"># closed form force distribution and standard (non-elastic) inverse kinematic model.</span>
+<span class="n">sm_default</span> <span class="o">=</span> <span class="n">sm_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="n">sm_builder</span><span class="o">.</span><span class="n">use_pulley_kinematics</span><span class="p">()</span>
+<span class="n">sm_builder</span><span class="o">.</span><span class="n">use_elastic_inverse_kinematics</span><span class="p">()</span>
+<span class="n">sm_builder</span><span class="o">.</span><span class="n">set_force_distribution_strategy</span><span class="p">(</span><span class="n">Dykstra</span><span class="p">())</span>
+
+<span class="c1"># Build a StructureMatrix object which uses the pulley kinematic model, elastic inverse kinematics and</span>
+<span class="c1"># the Dykstra algorithm for force distribution calculation</span>
+
+<span class="n">sm_custom</span> <span class="o">=</span> <span class="n">sm_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="calculating-stiffness-matrices">
+<h2>Calculating Stiffness Matrices<a class="headerlink" href="#calculating-stiffness-matrices" title="Link to this heading"></a></h2>
+<p>Assuming that <code class="docutils literal notranslate"><span class="pre">sm</span></code> is a <code class="docutils literal notranslate"><span class="pre">StiffnessMatrix</span></code> object and <code class="docutils literal notranslate"><span class="pre">pose</span></code>
+a <code class="docutils literal notranslate"><span class="pre">Pose</span></code> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cablelib_isw_pybindings.types</span> <span class="kn">import</span> <span class="n">StiffnessMatrix</span>
+
+ <span class="c1"># Calculate the linear elastic stiffness matrix</span>
+ <span class="n">lin_elastic_stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate_linear_elastic</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+
+ <span class="c1"># Calculate the geometrical stiffness matrix</span>
+ <span class="n">geometrical_stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate_geometrical</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+
+ <span class="c1"># Calculate the total stiffness matrix (linear elastic + geometrical)</span>
+ <span class="n">total_stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wrenches.html" class="btn btn-neutral float-left" title="Wrench access" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../developers_guide.html" class="btn btn-neutral float-right" title="Developer’s Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Patrick Huynh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

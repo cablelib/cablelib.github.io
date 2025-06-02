@@ -1,0 +1,20 @@
+.. _wrench-access:
+
+Wrench access
+=============
+
+Wrench elements can be accessed with square brackets or the entire
+wrench vector can be returned as a list:
+
+.. code-block:: python
+   
+   wrench = Wrench([1, 2, 3, 4, 5, 6])
+   
+   wrench[0] # == 1
+   wrench[1] # == 2
+   wrench[2] # == 3
+   wrench[3] # == 4
+   wrench[4] # == 5
+   wrench[5] # == 6
+
+   wrench.data() # == [1, 2, 3, 4, 5, 6]

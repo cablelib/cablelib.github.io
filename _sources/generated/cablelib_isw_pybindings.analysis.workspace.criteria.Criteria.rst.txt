@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.workspace.criteria.Criteria
    .. autosummary::
    
       ~Criteria.__init__
+      ~Criteria.evaluate
    
    
 

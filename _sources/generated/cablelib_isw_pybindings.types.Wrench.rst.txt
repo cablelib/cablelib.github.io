@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.types.Wrench
    .. autosummary::
    
       ~Wrench.__init__
+      ~Wrench.data
    
    
 

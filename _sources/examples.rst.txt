@@ -10,3 +10,5 @@ These examples will help you get started with cablelib_isw.
     examples/force_distribution
     examples/workspace
     examples/poses
+    examples/wrenches
+    examples/stiffness_matrix

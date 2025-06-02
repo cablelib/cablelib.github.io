@@ -1,0 +1,12 @@
+Developer's Guide
+==================
+
+cablelib_isw is specifically designed to be easily extensible.
+This guide intents to elaborate the interfaces that can be extended and how to
+proceed in doing so.
+
+.. toctree::
+   :maxdepth: 1
+
+   developers_guide/force_distribution
+   developers_guide/workspace_criteria

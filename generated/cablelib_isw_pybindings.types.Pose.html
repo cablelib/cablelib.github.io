@@ -7,7 +7,6 @@
   <title>cablelib_isw_pybindings.types.Pose &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2c0281ef" />
 
   
   <!--[if lt IE 9]>
@@ -22,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cablelib_isw_pybindings.types.StructureMatrix" href="cablelib_isw_pybindings.types.StructureMatrix.html" />
+    <link rel="next" title="cablelib_isw_pybindings.types.StiffnessMatrix" href="cablelib_isw_pybindings.types.StiffnessMatrix.html" />
     <link rel="prev" title="cablelib_isw_pybindings.types" href="cablelib_isw_pybindings.types.html" /> 
 </head>
 
@@ -48,7 +47,9 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers_guide.html">Developer’s Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
@@ -61,6 +62,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose"><code class="docutils literal notranslate"><span class="pre">Pose</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.StiffnessMatrix.html">cablelib_isw_pybindings.types.StiffnessMatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html">cablelib_isw_pybindings.types.StiffnessMatrixBuilder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.StructureMatrix.html">cablelib_isw_pybindings.types.StructureMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cablelib_isw_pybindings.types.Wrench.html">cablelib_isw_pybindings.types.Wrench</a></li>
 </ul>
@@ -128,8 +131,14 @@ This class is immutable.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.concatenate" title="cablelib_isw_pybindings.types.Pose.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concatenate</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Overloaded function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix" title="cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_affine_transformation_matrix</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.from_parameterization" title="cablelib_isw_pybindings.types.Pose.from_parameterization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_parameterization</span></code></a>(arg0)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix" title="cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_affine_transformation_matrix</span></code></a>(self)</p></td>
 <td><p>Gets the pose represented as an affine transformation matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose.parameterize" title="cablelib_isw_pybindings.types.Pose.parameterize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameterize</span></code></a>(self)</p></td>
+<td><p>Parameterizes the pose as a 6-dimensional vector.</p></td>
 </tr>
 </tbody>
 </table>
@@ -180,6 +189,31 @@ object successively.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.types.Pose.from_parameterization">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_parameterization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></span><a class="headerlink" href="#cablelib_isw_pybindings.types.Pose.from_parameterization" title="Link to this definition"></a></dt>
+<dd><p>“””
+Constructs a pose from a given parameterization.</p>
+<p>The top 3 elements of the parameterization are the position of the pose,
+and the bottom 3 elements are the parameterized rotation matrix in ZYX order.</p>
+<p>A parameterization has the form: [x, y, z, a, b, c]^T</p>
+<p>The rotation matrix is calculated as:</p>
+<blockquote>
+<div><p>Rz(c) * Ry(b) * Rx(a)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameterization</strong> (<em>numpy.ndarray</em>) – A six-dimensional vector representing the parameterized pose.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The pose resulting from the parameterization.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">cablelib_isw_pybindings.Types.Pose</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix">
 <span class="sig-name descname"><span class="pre">get_affine_transformation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.types.Pose.get_affine_transformation_matrix" title="Link to this definition"></a></dt>
 <dd><p>Gets the pose represented as an affine transformation
@@ -194,6 +228,28 @@ for more details.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.types.Pose.parameterize">
+<span class="sig-name descname"><span class="pre">parameterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.types.Pose.parameterize" title="Link to this definition"></a></dt>
+<dd><p>Parameterizes the pose as a 6-dimensional vector.</p>
+<p>The top 3 elements represent the position of the pose,
+and the bottom 3 elements represent the rotation as Euler angles
+in ZYX order (yaw, pitch, roll).</p>
+<p>A parameterization has the form: [x, y, z, a, b, c]^T</p>
+<p>The rotation matrix is calculated as:</p>
+<blockquote>
+<div><p>Rz(c) * Ry(b) * Rx(a)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The 6-dimensional parameterized pose vector.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -203,7 +259,7 @@ for more details.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="cablelib_isw_pybindings.types.html" class="btn btn-neutral float-left" title="cablelib_isw_pybindings.types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cablelib_isw_pybindings.types.StructureMatrix.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.types.StructureMatrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cablelib_isw_pybindings.types.StiffnessMatrix.html" class="btn btn-neutral float-right" title="cablelib_isw_pybindings.types.StiffnessMatrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

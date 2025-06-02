@@ -1,0 +1,58 @@
+.. _stiffness-matrices:
+
+Stiffness Matrices
+===================
+
+
+The stiffness of a Cable-Driven Parallel Robot is influenced
+by the elastic stiffness of the cables and the geometric stiffness.
+These stiffness matrices can be calculated using the
+:doc:`StiffnessMatrix <../generated/cablelib_isw_pybindings.types.StiffnessMatrix>`
+class.
+
+Constructing the StiffnessMatrix object
+---------------------------------------
+
+The ``StiffnessMatrix`` object is constructed using the
+:doc:`StiffnessMatrixBuilder <../generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder>`
+class. This builder class offers a safe and intuitive solution to create a
+valid ``StiffnessMatrix`` object. The following example assumes that
+``cdpr`` is a CableDrivenParallelRobot object.
+
+.. code-block:: python
+
+   from cablelib_isw_pybindings.types import StiffnessMatrix, StiffnessMatrixBuilder
+
+   sm_builder = StiffnessMatrixBuilder(cdpr)
+
+   # Build the standard configuration: Standard kinematic model (no pulley),
+   # closed form force distribution and standard (non-elastic) inverse kinematic model.
+   sm_default = sm_builder.build()
+
+   sm_builder.use_pulley_kinematics()
+   sm_builder.use_elastic_inverse_kinematics()
+   sm_builder.set_force_distribution_strategy(Dykstra())
+
+   # Build a StructureMatrix object which uses the pulley kinematic model, elastic inverse kinematics and
+   # the Dykstra algorithm for force distribution calculation
+
+   sm_custom = sm_builder.build()
+
+Calculating Stiffness Matrices
+------------------------------
+
+Assuming that ``sm`` is a ``StiffnessMatrix`` object and ``pose``
+a ``Pose`` object:
+
+.. code-block:: python
+
+   from cablelib_isw_pybindings.types import StiffnessMatrix
+
+    # Calculate the linear elastic stiffness matrix
+    lin_elastic_stiffness_matrix = sm.calculate_linear_elastic(pose)
+
+    # Calculate the geometrical stiffness matrix
+    geometrical_stiffness_matrix = sm.calculate_geometrical(pose)
+
+    # Calculate the total stiffness matrix (linear elastic + geometrical)
+    total_stiffness_matrix = sm.calculate(pose)

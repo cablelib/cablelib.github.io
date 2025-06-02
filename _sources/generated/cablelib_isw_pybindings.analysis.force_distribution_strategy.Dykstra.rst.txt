@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.force\_distribution\_strategy.Dykstra
    .. autosummary::
    
       ~Dykstra.__init__
+      ~Dykstra.calculate
    
    
 

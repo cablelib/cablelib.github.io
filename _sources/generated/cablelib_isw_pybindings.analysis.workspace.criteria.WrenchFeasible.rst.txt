@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.workspace.criteria.WrenchFeasible
    .. autosummary::
    
       ~WrenchFeasible.__init__
+      ~WrenchFeasible.evaluate
    
    
 

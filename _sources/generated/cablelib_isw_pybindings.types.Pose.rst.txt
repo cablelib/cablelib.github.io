@@ -18,7 +18,9 @@ cablelib\_isw\_pybindings.types.Pose
    
       ~Pose.__init__
       ~Pose.concatenate
+      ~Pose.from_parameterization
       ~Pose.get_affine_transformation_matrix
+      ~Pose.parameterize
    
    
 

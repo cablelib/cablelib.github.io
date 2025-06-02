@@ -20,6 +20,8 @@
       :template: class.rst 
    
       Pose
+      StiffnessMatrix
+      StiffnessMatrixBuilder
       StructureMatrix
       Wrench
    

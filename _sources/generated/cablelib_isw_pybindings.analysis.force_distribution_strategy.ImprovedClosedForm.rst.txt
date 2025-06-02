@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.force\_distribution\_strategy.ImprovedClosedF
    .. autosummary::
    
       ~ImprovedClosedForm.__init__
+      ~ImprovedClosedForm.calculate
    
    
 

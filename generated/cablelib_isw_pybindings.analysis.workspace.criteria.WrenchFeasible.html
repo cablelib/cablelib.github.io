@@ -7,7 +7,6 @@
   <title>cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2c0281ef" />
 
   
   <!--[if lt IE 9]>
@@ -48,7 +47,9 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers_guide.html">Developer’s Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.html">cablelib_isw_pybindings.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cablelib_isw_pybindings.analysis.kinematics.html">cablelib_isw_pybindings.analysis.kinematics</a></li>
@@ -106,7 +107,7 @@
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.__init__" title="Link to this definition"></a></dt>
 <dd><p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrench_set: set[cablelib_isw_pybindings.types.Wrench], force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002292719E430&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x0000022926FB63F0&gt;) -&gt; None</p></li>
+<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrench_set: set[cablelib_isw_pybindings.types.Wrench], force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002C6940ECA70&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x000002C6940ECA30&gt;) -&gt; None</p></li>
 </ol>
 <p>Constructs a WrenchFeasible object.</p>
 <dl class="field-list simple">
@@ -122,7 +123,7 @@ Defaults to the standard kinematic strategy.</p></li>
 </dd>
 </dl>
 <ol class="arabic simple" start="2">
-<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrench: cablelib_isw_pybindings.types.Wrench, force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002292719E730&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x000002292719E6F0&gt;) -&gt; None</p></li>
+<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrench: cablelib_isw_pybindings.types.Wrench, force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002C6940ECD30&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x000002C6940ECCF0&gt;) -&gt; None</p></li>
 </ol>
 <p>Constructs a WrenchFeasible object.</p>
 <p>This constructor constructs the WrenchFeasible object with only
@@ -140,7 +141,7 @@ Defaults to the standard kinematic strategy.</p></li>
 </dd>
 </dl>
 <ol class="arabic simple" start="3">
-<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrenches: list[cablelib_isw_pybindings.types.Wrench], force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002292719E930&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x000002292719E8F0&gt;) -&gt; None</p></li>
+<li><p>__init__(self: cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible, cdpr: cablelib_isw_pybindings.robot.CableDrivenParallelRobot, wrenches: list[cablelib_isw_pybindings.types.Wrench], force_distribution_strategy: cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy = &lt;cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm object at 0x000002C6940ECFB0&gt;, kinematic_strategy: cablelib_isw_pybindings.analysis.KinematicStrategy = &lt;cablelib_isw_pybindings.analysis.KinematicStrategyStandard object at 0x000002C6940ECF70&gt;) -&gt; None</p></li>
 </ol>
 <p>Constructs a WrenchFeasible object.</p>
 <dl class="field-list simple">
@@ -163,8 +164,16 @@ Defaults to the standard kinematic strategy.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.__init__" title="cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Overloaded function.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.evaluate" title="cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(self, arg0)</p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.analysis.workspace.criteria.Criteria.html#cablelib_isw_pybindings.analysis.workspace.criteria.Criteria" title="cablelib_isw_pybindings.analysis.workspace.criteria.Criteria"><span class="pre">cablelib_isw_pybindings.analysis.workspace.criteria.Criteria</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><span class="pre">cablelib_isw_pybindings.types.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.evaluate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>

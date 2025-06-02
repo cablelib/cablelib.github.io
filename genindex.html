@@ -6,7 +6,6 @@
   <title>Index &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2c0281ef" />
 
   
   <!--[if lt IE 9]>
@@ -45,7 +44,9 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers_guide.html">Developer’s Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 
@@ -90,6 +91,7 @@
  | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -162,6 +164,10 @@
 </li>
         <li><a href="generated/cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose.__init__">(cablelib_isw_pybindings.types.Pose method)</a>
 </li>
+        <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html#cablelib_isw_pybindings.types.StiffnessMatrix.__init__">(cablelib_isw_pybindings.types.StiffnessMatrix method)</a>
+</li>
+        <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.__init__">(cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
+</li>
         <li><a href="generated/cablelib_isw_pybindings.types.StructureMatrix.html#cablelib_isw_pybindings.types.StructureMatrix.__init__">(cablelib_isw_pybindings.types.StructureMatrix method)</a>
 </li>
         <li><a href="generated/cablelib_isw_pybindings.types.Wrench.html#cablelib_isw_pybindings.types.Wrench.__init__">(cablelib_isw_pybindings.types.Wrench method)</a>
@@ -174,6 +180,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.robot.BaseFrame.html#cablelib_isw_pybindings.robot.BaseFrame">BaseFrame (class in cablelib_isw_pybindings.robot)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.build">build() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -227,8 +237,6 @@
         <li><a href="generated/cablelib_isw_pybindings.robot.html#module-cablelib_isw_pybindings.robot">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     cablelib_isw_pybindings.types
 
@@ -236,9 +244,17 @@
         <li><a href="generated/cablelib_isw_pybindings.types.html#module-cablelib_isw_pybindings.types">module</a>
 </li>
       </ul></li>
-      <li><a href="generated/cablelib_isw_pybindings.analysis.ForceDistribution.html#cablelib_isw_pybindings.analysis.ForceDistribution.calculate">calculate() (cablelib_isw_pybindings.analysis.ForceDistribution method)</a>
+      <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.calculate">calculate() (cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm method)</a>
 
       <ul>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.calculate">(cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra method)</a>
+</li>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.calculate">(cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy method)</a>
+</li>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.calculate">(cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm method)</a>
+</li>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.ForceDistribution.html#cablelib_isw_pybindings.analysis.ForceDistribution.calculate">(cablelib_isw_pybindings.analysis.ForceDistribution method)</a>
+</li>
         <li><a href="generated/cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.html#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.calculate">(cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics method)</a>
 </li>
         <li><a href="generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html#cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.calculate">(cablelib_isw_pybindings.analysis.kinematics.InverseKinematics method)</a>
@@ -253,8 +269,16 @@
 </li>
         <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.calculate">(cablelib_isw_pybindings.analysis.workspace.WorkspaceHull method)</a>
 </li>
+        <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html#cablelib_isw_pybindings.types.StiffnessMatrix.calculate">(cablelib_isw_pybindings.types.StiffnessMatrix method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html#cablelib_isw_pybindings.types.StiffnessMatrix.calculate_geometrical">calculate_geometrical() (cablelib_isw_pybindings.types.StiffnessMatrix method)</a>
+</li>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.LineSearch.html#cablelib_isw_pybindings.analysis.workspace.LineSearch.calculate_lambda">calculate_lambda() (cablelib_isw_pybindings.analysis.workspace.LineSearch method)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html#cablelib_isw_pybindings.types.StiffnessMatrix.calculate_linear_elastic">calculate_linear_elastic() (cablelib_isw_pybindings.types.StiffnessMatrix method)</a>
 </li>
       <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm">ClosedForm (class in cablelib_isw_pybindings.analysis.force_distribution_strategy)</a>
 </li>
@@ -269,7 +293,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.types.StructureMatrix.html#cablelib_isw_pybindings.types.StructureMatrix.data">data() (cablelib_isw_pybindings.types.StructureMatrix method)</a>
+
+      <ul>
+        <li><a href="generated/cablelib_isw_pybindings.types.Wrench.html#cablelib_isw_pybindings.types.Wrench.data">(cablelib_isw_pybindings.types.Wrench method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html#cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra">Dykstra (class in cablelib_isw_pybindings.analysis.force_distribution_strategy)</a>
@@ -286,6 +314,14 @@
 </li>
       <li><a href="generated/cablelib_isw_pybindings.analysis.ElasticityModelStandard.html#cablelib_isw_pybindings.analysis.ElasticityModelStandard">ElasticityModelStandard (class in cablelib_isw_pybindings.analysis)</a>
 </li>
+      <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.criteria.Criteria.html#cablelib_isw_pybindings.analysis.workspace.criteria.Criteria.evaluate">evaluate() (cablelib_isw_pybindings.analysis.workspace.criteria.Criteria method)</a>
+
+      <ul>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible.html#cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible.evaluate">(cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible method)</a>
+</li>
+        <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.html#cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible.evaluate">(cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible method)</a>
+</li>
+      </ul></li>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.export_all_vertices">export_all_vertices() (cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid method)</a>
 
       <ul>
@@ -302,6 +338,8 @@
         <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.export_all_vertices_csv">(cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.export_invalid_vertices">export_invalid_vertices() (cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid method)</a>
 
       <ul>
@@ -310,8 +348,6 @@
         <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.export_invalid_vertices">(cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.export_invalid_vertices_csv">export_invalid_vertices_csv() (cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid method)</a>
 
       <ul>
@@ -351,6 +387,8 @@
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible.html#cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible">ForceFeasible (class in cablelib_isw_pybindings.analysis.workspace.criteria)</a>
 </li>
       <li><a href="generated/cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.html#cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics">ForwardKinematics (class in cablelib_isw_pybindings.analysis.kinematics)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose.from_parameterization">from_parameterization() (cablelib_isw_pybindings.types.Pose static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -453,6 +491,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose.parameterize">parameterize() (cablelib_isw_pybindings.types.Pose method)</a>
+</li>
       <li><a href="generated/cablelib_isw_pybindings.robot.Platform.html#cablelib_isw_pybindings.robot.Platform">Platform (class in cablelib_isw_pybindings.robot)</a>
 </li>
   </ul></td>
@@ -469,9 +509,15 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html#cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.save_stl">save_stl() (cablelib_isw_pybindings.analysis.workspace.WorkspaceHull method)</a>
 </li>
+      <li><a href="generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot.save_xml">save_xml() (cablelib_isw_pybindings.robot.CableDrivenParallelRobot method)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.set_force_distribution_strategy">set_force_distribution_strategy() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot.save_xml">save_xml() (cablelib_isw_pybindings.robot.CableDrivenParallelRobot method)</a>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html#cablelib_isw_pybindings.types.StiffnessMatrix">StiffnessMatrix (class in cablelib_isw_pybindings.types)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder">StiffnessMatrixBuilder (class in cablelib_isw_pybindings.types)</a>
 </li>
       <li><a href="generated/cablelib_isw_pybindings.types.StructureMatrix.html#cablelib_isw_pybindings.types.StructureMatrix">StructureMatrix (class in cablelib_isw_pybindings.types)</a>
 </li>
@@ -486,6 +532,22 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/cablelib_isw_pybindings.analysis.workspace.Triangle.html#cablelib_isw_pybindings.analysis.workspace.Triangle">Triangle (class in cablelib_isw_pybindings.analysis.workspace)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.use_elastic_inverse_kinematics">use_elastic_inverse_kinematics() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.use_pulley_kinematics">use_pulley_kinematics() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.use_regular_inverse_kinematics">use_regular_inverse_kinematics() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
+</li>
+      <li><a href="generated/cablelib_isw_pybindings.types.StiffnessMatrixBuilder.html#cablelib_isw_pybindings.types.StiffnessMatrixBuilder.use_standard_kinematics">use_standard_kinematics() (cablelib_isw_pybindings.types.StiffnessMatrixBuilder method)</a>
 </li>
   </ul></td>
 </tr></table>

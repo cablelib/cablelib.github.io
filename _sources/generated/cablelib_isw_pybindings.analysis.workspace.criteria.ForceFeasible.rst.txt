@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.workspace.criteria.ForceFeasible
    .. autosummary::
    
       ~ForceFeasible.__init__
+      ~ForceFeasible.evaluate
    
    
 

@@ -17,6 +17,7 @@ cablelib\_isw\_pybindings.analysis.force\_distribution\_strategy.ForceDistributi
    .. autosummary::
    
       ~ForceDistributionStrategy.__init__
+      ~ForceDistributionStrategy.calculate
    
    
 

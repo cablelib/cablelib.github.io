@@ -1,0 +1,9 @@
+Changelog
+=========
+
+v1.4.0
+-------
+
+* Added StiffnessMatrix and StiffnessMatrixBuilder: :ref:`Example <stiffness-matrices>`
+* :ref:`Parameterized Poses <parameterized-poses>`
+* :ref:`wrench-access`

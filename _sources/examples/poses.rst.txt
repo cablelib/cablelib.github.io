@@ -29,3 +29,18 @@ Poses can also be represented as a 4x4 matrix
 
    matrix = concat_pose_2.get_affine_transformation_matrix()
 
+.. _parameterized-poses:
+
+Parameterized Poses
+-------------------
+
+Pose objects can be constructed with a parameterization
+and parsed into a parameterization. A parameterized pose
+is of the form :math:`[x \: y \: z \: a \: b \: c]^T` where the rotation
+is calculated with :math:`R_z(c) \cdot R_y(b) \cdot R_x(a)`. Example:
+
+.. code-block:: python
+
+    pose = Pose.from_parameterization([0.34, -0.83, 1.12, 1.2, -3.12, -0.2])
+
+    pose.parameterize()

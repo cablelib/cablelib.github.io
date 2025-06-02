@@ -9,7 +9,9 @@ cablelib_isw_pybindings documentation
    :maxdepth: 1
 
    usage
+   changelog
    examples
+   developers_guide
    api
 
 Indices and tables

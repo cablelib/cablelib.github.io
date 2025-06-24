@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.5.0
+------
+
+* Added custom projection points for force distributions: :ref:`custom-projection-points`
+
 v1.4.0
 -------
 

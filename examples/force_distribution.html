@@ -7,6 +7,7 @@
   <title>Calculating the force distribution &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2c0281ef" />
 
   
   <!--[if lt IE 9]>
@@ -52,7 +53,14 @@
 <li class="toctree-l2"><a class="reference internal" href="creating_robots.html">Creating Robots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calculating_structure_matrix.html">Calculating the structure matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kinematics.html">Inverse and Forward Kinematics</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculating the force distribution</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculating the force distribution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-projection-points">Custom projection points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#closedform">ClosedForm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#improvedclosedform">ImprovedClosedForm</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="workspace.html">Calculating the workspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="poses.html">Poses</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrenches.html">Wrench access</a></li>
@@ -147,6 +155,42 @@ return a force distribution.</p>
 <span class="linenos">27</span><span class="n">dykstra_pulley_result</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">Wrench</span><span class="p">())</span>
 </pre></div>
 </div>
+<section id="custom-projection-points">
+<span id="id1"></span><h2>Custom projection points<a class="headerlink" href="#custom-projection-points" title="Link to this heading"></a></h2>
+<p>Various algorithms such as <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html"><span class="doc">ClosedForm</span></a>,
+<a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.html"><span class="doc">ImprovedClosedForm</span></a>
+or <a class="reference internal" href="../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html"><span class="doc">Dykstra</span></a>
+can be customized by setting their projection point. Especially in the case
+of the Dykstra algorithm, this can speed up the convergence. Each constructor
+of a ForceDistributionStrategy allows customized parameters when available.</p>
+<section id="closedform">
+<h3>ClosedForm<a class="headerlink" href="#closedform" title="Link to this heading"></a></h3>
+<p>This code will use the user-supplied <code class="docutils literal notranslate"><span class="pre">f_ref</span></code> as projection point for the
+closed form method to create a <code class="docutils literal notranslate"><span class="pre">ForceDistribution</span></code> object, assuming that
+a <code class="docutils literal notranslate"><span class="pre">CableDrivenParallelRobot</span></code> object named <code class="docutils literal notranslate"><span class="pre">robot</span></code> exists.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">])</span>
+<span class="n">closed_form_strategy</span> <span class="o">=</span> <span class="n">ClosedForm</span><span class="p">(</span><span class="n">f_ref</span><span class="p">)</span>
+
+<span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">closed_form_strategy</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="improvedclosedform">
+<h3>ImprovedClosedForm<a class="headerlink" href="#improvedclosedform" title="Link to this heading"></a></h3>
+<p>As the improved closed form method is a recursive algorithm, it requires
+a function <code class="docutils literal notranslate"><span class="pre">f_ref</span> <span class="pre">-&gt;</span> <span class="pre">f(f_min,</span> <span class="pre">f_max)</span></code> to calculate <code class="docutils literal notranslate"><span class="pre">f_ref</span></code> in each recursion step. Notable care needs
+to be taken in the dimension of <code class="docutils literal notranslate"><span class="pre">f_ref</span></code> which needs to of be the same dimension
+as <code class="docutils literal notranslate"><span class="pre">f_min</span></code> or <code class="docutils literal notranslate"><span class="pre">f_max</span></code>. This following example defines the function <code class="docutils literal notranslate"><span class="pre">f(f_min,</span> <span class="pre">f_max)</span> <span class="pre">=</span> <span class="pre">(f_min</span> <span class="pre">+</span> <span class="pre">f_max)</span> <span class="pre">/</span> <span class="pre">2</span></code>
+to be used in the improved closed form.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_f_ref</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">:</span> <span class="p">(</span><span class="n">f_min</span> <span class="o">+</span> <span class="n">f_max</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">improved_closed_form_strategy</span> <span class="o">=</span> <span class="n">ImprovedClosedForm</span><span class="p">(</span><span class="n">calculate_f_ref</span><span class="p">)</span>
+
+<span class="n">fd</span> <span class="o">=</span> <span class="n">ForceDistribution</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">improved_closed_form_strategy</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 

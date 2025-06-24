@@ -68,3 +68,46 @@ Example for the calculation of a force distribution:
    fd.kinematic_strategy = KinematicStrategyPulley()
 
    dykstra_pulley_result = fd.calculate(pose, Wrench())
+
+.. _custom-projection-points:
+
+Custom projection points
+------------------------
+
+Various algorithms such as :doc:`ClosedForm <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm>`,
+:doc:`ImprovedClosedForm <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm>`
+or :doc:`Dykstra <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra>`
+can be customized by setting their projection point. Especially in the case
+of the Dykstra algorithm, this can speed up the convergence. Each constructor
+of a ForceDistributionStrategy allows customized parameters when available.
+
+ClosedForm
+##########
+
+This code will use the user-supplied ``f_ref`` as projection point for the
+closed form method to create a ``ForceDistribution`` object, assuming that
+a ``CableDrivenParallelRobot`` object named ``robot`` exists.
+
+.. code-block:: python
+
+   f_ref = np.array([5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5])
+   closed_form_strategy = ClosedForm(f_ref)
+
+   fd = ForceDistribution(robot, closed_form_strategy)
+
+ImprovedClosedForm
+###################
+
+As the improved closed form method is a recursive algorithm, it requires
+a function ``f_ref -> f(f_min, f_max)`` to calculate ``f_ref`` in each recursion step. Notable care needs
+to be taken in the dimension of ``f_ref`` which needs to of be the same dimension
+as ``f_min`` or ``f_max``. This following example defines the function ``f(f_min, f_max) = (f_min + f_max) / 2``
+to be used in the improved closed form.
+
+.. code-block:: python
+
+   calculate_f_ref = lambda f_min, f_max: (f_min + f_max) / 2
+
+   improved_closed_form_strategy = ImprovedClosedForm(calculate_f_ref)
+
+   fd = ForceDistribution(robot, improved_closed_form_strategy)

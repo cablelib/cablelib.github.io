@@ -60,6 +60,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Stiffness Matrices</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#constructing-the-stiffnessmatrix-object">Constructing the StiffnessMatrix object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calculating-stiffness-matrices">Calculating Stiffness Matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculating-the-stiffness-matrix-with-a-custom-force-distribution">Calculating the stiffness matrix with a custom force distribution</a></li>
 </ul>
 </li>
 </ul>
@@ -140,6 +141,20 @@ a <code class="docutils literal notranslate"><span class="pre">Pose</span></code
 
  <span class="c1"># Calculate the total stiffness matrix (linear elastic + geometrical)</span>
  <span class="n">total_stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculating-the-stiffness-matrix-with-a-custom-force-distribution">
+<span id="stiffness-matrix-custom-force"></span><h2>Calculating the stiffness matrix with a custom force distribution<a class="headerlink" href="#calculating-the-stiffness-matrix-with-a-custom-force-distribution" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">StiffnessMatrix</span></code>’s <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">calculate_geometrical</span></code>
+methods utilize the internal force distribution calculation.
+This internal calculation can be skipped, if either of these methods
+are given an external force distribution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculates the geometrical stiffness matrix with cable_forces, an m-dimensional</span>
+<span class="c1"># vector.</span>
+<span class="n">geometrical_stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate_geometrical</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">cable_forces</span><span class="p">)</span>
+<span class="c1"># The same can be applied for the calculate method.</span>
+<span class="n">stiffness_matrix</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">cable_forces</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

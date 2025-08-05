@@ -56,3 +56,21 @@ a ``Pose`` object:
 
     # Calculate the total stiffness matrix (linear elastic + geometrical)
     total_stiffness_matrix = sm.calculate(pose)
+
+.. _stiffness-matrix-custom-force:
+
+Calculating the stiffness matrix with a custom force distribution
+-----------------------------------------------------------------
+
+The ``StiffnessMatrix``'s ``calculate`` and ``calculate_geometrical``
+methods utilize the internal force distribution calculation.
+This internal calculation can be skipped, if either of these methods
+are given an external force distribution.
+
+.. code-block:: python
+
+    # Calculates the geometrical stiffness matrix with cable_forces, an m-dimensional
+    # vector.
+    geometrical_stiffness_matrix = sm.calculate_geometrical(pose, cable_forces)
+    # The same can be applied for the calculate method.
+    stiffness_matrix = sm.calculate(pose, cable_forces)

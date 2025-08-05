@@ -1,4 +1,4 @@
-cablelib\_isw\_pybindings.robot.Pulley
+﻿cablelib\_isw\_pybindings.robot.Pulley
 ======================================
 
 .. currentmodule:: cablelib_isw_pybindings.robot
@@ -27,6 +27,7 @@ cablelib\_isw\_pybindings.robot.Pulley
    .. autosummary::
    
       ~Pulley.orientation
+      ~Pulley.radial_offset
       ~Pulley.radius
    
    

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v1.6.0
+------
+
+* Added stiffness matrix calculation with a custom (extern) force
+  distribution: :ref:`stiffness-matrix-custom-force`
+
 v1.5.0
 ------
 

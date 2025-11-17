@@ -1,0 +1,46 @@
+Poses
+======
+
+Poses can be concatenated either through another pose or a 4x4
+affine transformation matrix. Here the pose is translated by one
+unit in the direction of the x-axis.
+
+.. code-block:: python
+
+   pose = Pose()
+   concat_pose = pose.concatenate(Pose([1, 0, 0]))
+
+Now an affine transformation matrix is applied to the default pose.
+
+.. code-block:: python
+
+   affine_transformation_matrix = [
+        [1, 0, 0, 0.5],
+        [0, 1, 0, -0.5],
+        [0, 0, 1, 0.1],
+        [0, 0, 0, 1]
+    ]
+
+    concat_pose_2 = pose.concatenate(affine_transformation_matrix)
+
+Poses can also be represented as a 4x4 matrix
+
+.. code-block:: python
+
+   matrix = concat_pose_2.get_affine_transformation_matrix()
+
+.. _parameterized-poses:
+
+Parameterized Poses
+-------------------
+
+Pose objects can be constructed with a parameterization
+and parsed into a parameterization. A parameterized pose
+is of the form :math:`[x \: y \: z \: a \: b \: c]^T` where the rotation
+is calculated with :math:`R_z(c) \cdot R_y(b) \cdot R_x(a)`. Example:
+
+.. code-block:: python
+
+    pose = Pose.from_parameterization([0.34, -0.83, 1.12, 1.2, -3.12, -0.2])
+
+    pose.parameterize()

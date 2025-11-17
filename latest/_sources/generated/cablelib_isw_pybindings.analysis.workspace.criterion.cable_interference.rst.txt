@@ -1,0 +1,23 @@
+cable\_interference
+===================
+
+.. automodule:: cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+   
+      CableInterference
+      CableModel
+      Cylinder
+      Line
+   

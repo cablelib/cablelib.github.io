@@ -1,0 +1,24 @@
+﻿ForceFeasible
+=============
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.criterion
+
+.. autoclass:: ForceFeasible
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ForceFeasible.__init__
+      ~ForceFeasible.evaluate
+   
+   
+
+   
+   
+   

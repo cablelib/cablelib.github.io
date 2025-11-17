@@ -1,0 +1,23 @@
+﻿ElasticityModelStandard
+=======================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.elasticity
+
+.. autoclass:: ElasticityModelStandard
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ElasticityModelStandard.__init__
+   
+   
+
+   
+   
+   

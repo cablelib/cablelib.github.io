@@ -1,0 +1,40 @@
+cablelib\_isw\_pybindings.analysis.workspace.WorkspaceGridRandom
+================================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace
+
+.. autoclass:: WorkspaceGridRandom
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~WorkspaceGridRandom.__init__
+      ~WorkspaceGridRandom.calculate
+      ~WorkspaceGridRandom.export_all_vertices
+      ~WorkspaceGridRandom.export_all_vertices_csv
+      ~WorkspaceGridRandom.export_invalid_vertices
+      ~WorkspaceGridRandom.export_invalid_vertices_csv
+      ~WorkspaceGridRandom.export_valid_vertices
+      ~WorkspaceGridRandom.export_valid_vertices_csv
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~WorkspaceGridRandom.get_invalid_vertices
+      ~WorkspaceGridRandom.get_valid_vertices
+      ~WorkspaceGridRandom.vertices
+   
+   

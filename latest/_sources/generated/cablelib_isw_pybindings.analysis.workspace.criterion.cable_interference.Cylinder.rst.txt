@@ -1,0 +1,29 @@
+﻿Cylinder
+========
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference
+
+.. autoclass:: Cylinder
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Cylinder.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Cylinder.parameters
+   
+   

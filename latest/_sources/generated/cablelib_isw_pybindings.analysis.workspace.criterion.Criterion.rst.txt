@@ -1,0 +1,24 @@
+﻿Criterion
+=========
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.criterion
+
+.. autoclass:: Criterion
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Criterion.__init__
+      ~Criterion.evaluate
+   
+   
+
+   
+   
+   

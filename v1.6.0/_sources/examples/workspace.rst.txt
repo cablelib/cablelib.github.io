@@ -1,0 +1,120 @@
+Calculating the workspace
+=========================
+
+This example prerequisites a saved xml of the IPAnema1
+as described in :doc:`./creating_robots`.
+
+The necessary components for the force distribution are
+
+.. code-block:: python
+
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard
+   from cablelib_isw_pybindings.analysis.workspace import WorkspaceHull, \
+       WorkspaceGridRegular
+   from cablelib_isw_pybindings.analysis.workspace.criteria import ForceFeasible
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+
+Workspace hull
+--------------
+
+First, instantiate an object of a subclass of :doc:`Criteria <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.Criteria>`
+This example uses the :doc:`ForceFeasible <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.ForceFeasible>` criteria.
+
+.. code-block:: python
+
+   criteria = ForceFeasible(robot, KinematicStrategyStandard())
+
+In the case of the ForceFeasible criteria, the kinematic strategy
+can be configured so that pulley kinematics may be applied.
+
+Then, create a :doc:`WorkspaceHull <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull>`
+object.
+
+.. code-block:: python
+
+   ws = WorkspaceHull(3)
+
+The WorkspaceHull object can be created with a custom sphere approximation
+depth. A depth of 3 is a good approximation of a unit sphere already.
+
+Calculate the workspace hull with
+
+.. code-block:: python
+
+   ws.calculate(2, 1e-10, [0, 0, 1], criteria)
+
+The parameters supplied are the maximum search range of the
+line search algorithm, the epsilon break condition, the
+center of the workspace (usually the center of the base frame / machine frame)
+and the criteria object.
+
+The workspace can then be exported as an .stl file.
+
+.. code-block:: python
+
+   ws.save_stl("workspace.stl")
+
+The triangles of the workspace can also be accessed through
+an internal list of Triangle objects.
+
+.. code-block:: python
+
+   triangle_list = ws.faces
+
+The workspace hull has the properties surface_area, volume and
+center_of_gravity.
+
+Example for the workspace hull calculation:
+
+.. code-block:: python
+   :linenos:
+
+   from cablelib_isw_pybindings.analysis import KinematicStrategyStandard
+   from cablelib_isw_pybindings.analysis.workspace import WorkspaceHull, \
+       WorkspaceGridRegular
+   from cablelib_isw_pybindings.analysis.workspace.criteria import ForceFeasible
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot
+
+   robot = CableDrivenParallelRobot.load_xml(
+     test_resource_path + "ipa_nema_1.xml")
+
+   # In the case of the ForceFeasible criteria, the kinematic
+   # strategy can be customized so that pulley or standard kinematics
+   # may be considered.
+   criteria = ForceFeasible(robot, KinematicStrategyStandard())
+
+   # The WorkspaceHull object can be created with a custom sphere approximation
+   # depth. A depth of 3 is a good approximation of a unit sphere already.
+   ws = WorkspaceHull(3)
+
+   ws.calculate(2, 1e-10, [0, 0, 1], criteria)
+
+   # Workspaces can be exported as .stl file
+   ws.save_stl(test_resource_path + "workspace.stl")
+
+Discrete workspace
+------------------
+
+The workspace can also be analyzed as a discrete workspace through
+subclasses of :doc:`WorkspaceGrid <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid>`
+(e.g. :doc:`WorkspaceGridRegular <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular>` or
+:doc:`WorkspaceGridRandom <../generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom>`)
+
+For example, construct a WorkspaceGridRegular object with
+
+.. code-block:: python
+
+   discrete_ws = WorkspaceGridRegular([-0.5, -0.5, 0],
+                                       [0.5, 0.5, 1], 1, 1, 1)
+
+where the first and second parameters are the lower front vertice and upper back vertice of
+the cuboid to be discretized. The last three
+parameters are the step sizes in x, y and z direction.
+
+Calculate the discrete workspace by calling
+
+.. code-block:: python
+
+   discrete_ws.calculate(criteria)
+
+using a criteria object as described in the previous section.

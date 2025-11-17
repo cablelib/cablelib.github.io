@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cablelib_isw.CableDrivenParallelRobot &mdash; cablelib_isw_pybindings 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cablelib_isw.Platform" href="cablelib_isw.Platform.html" />
+    <link rel="prev" title="cablelib_isw.Cable" href="cablelib_isw.Cable.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cablelib_isw_pybindings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cablelib_isw.html">cablelib_isw</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw.BaseFrame.html">cablelib_isw.BaseFrame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw.Cable.html">cablelib_isw.Cable</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cablelib_isw.CableDrivenParallelRobot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot"><code class="docutils literal notranslate"><span class="pre">CableDrivenParallelRobot</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw.Platform.html">cablelib_isw.Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw.Pulley.html">cablelib_isw.Pulley</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablelib_isw.Winch.html">cablelib_isw.Winch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cablelib_isw_pybindings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="cablelib_isw.html">cablelib_isw</a></li>
+      <li class="breadcrumb-item active">cablelib_isw.CableDrivenParallelRobot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/cablelib_isw.CableDrivenParallelRobot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cablelib-isw-cabledrivenparallelrobot">
+<h1>cablelib_isw.CableDrivenParallelRobot<a class="headerlink" href="#cablelib-isw-cabledrivenparallelrobot" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cablelib_isw.CableDrivenParallelRobot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cablelib_isw.</span></span><span class="sig-name descname"><span class="pre">CableDrivenParallelRobot</span></span><a class="headerlink" href="#cablelib_isw.CableDrivenParallelRobot" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Class which models a cable-driven parallel robot (CDPR)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw.CableDrivenParallelRobot.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">self:</span> <span class="pre">cablelib_isw.CableDrivenParallelRobot,</span> <span class="pre">name:</span> <span class="pre">str,</span> <span class="pre">base_frame:</span> <span class="pre">cablelib::BaseFrame,</span> <span class="pre">platform:</span> <span class="pre">cablelib::Platform,</span> <span class="pre">winches:</span> <span class="pre">list[cablelib::Winch],</span> <span class="pre">cables:</span> <span class="pre">list[cablelib::Cable],</span> <span class="pre">pulleys:</span> <span class="pre">list[cablelib::Pulley]</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw.CableDrivenParallelRobot.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructor for a CDPR.</p>
+<p>Every CDPR has to have at least one winch and one cable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>base_frame</strong> (class:<cite>cablelib_isw.BaseFrame</cite>) – </p></li>
+<li><p><strong>platform</strong> (class:<cite>cablelib_isw.Platform</cite>) – </p></li>
+<li><p><strong>winches</strong> (list[class:<cite>cablelib_isw.Winch</cite>]) – Winches in a list</p></li>
+<li><p><strong>cables</strong> (list[class:<cite>cablelib_isw.Cable</cite>]) – Cables in a list</p></li>
+<li><p><strong>pulleys</strong> (list[class:<cite>cablelib_isw.Pulley</cite>]) – Pulleys in a list. Give empty list for CDPRs without pulleys.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – when the cdpr does not have at least one winch or at least one cable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot.__init__" title="cablelib_isw.CableDrivenParallelRobot.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, name, base_frame, platform, ...)</p></td>
+<td><p>Constructor for a CDPR.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot.load_xml" title="cablelib_isw.CableDrivenParallelRobot.load_xml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_xml</span></code></a>(filename)</p></td>
+<td><p>Loads the CDPR from a file using xml format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot.save_xml" title="cablelib_isw.CableDrivenParallelRobot.save_xml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_xml</span></code></a>(self, filename)</p></td>
+<td><p>Saves the CDPR into a file using xml format.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">base_frame</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cables</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">platform</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulleys</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">winches</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw.CableDrivenParallelRobot.load_xml">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot" title="cablelib_isw.CableDrivenParallelRobot"><span class="pre">cablelib_isw.CableDrivenParallelRobot</span></a></span></span><a class="headerlink" href="#cablelib_isw.CableDrivenParallelRobot.load_xml" title="Link to this definition"></a></dt>
+<dd><p>Loads the CDPR from a file using xml format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the file to load</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded CDPR from the given xml file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>class:<cite>cablelib_isw.CableDrivenParallelRobot</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cablelib_isw.CableDrivenParallelRobot.save_xml">
+<span class="sig-name descname"><span class="pre">save_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cablelib_isw.CableDrivenParallelRobot" title="cablelib_isw.CableDrivenParallelRobot"><span class="pre">cablelib_isw.CableDrivenParallelRobot</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cablelib_isw.CableDrivenParallelRobot.save_xml" title="Link to this definition"></a></dt>
+<dd><p>Saves the CDPR into a file using xml format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the file to save</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cablelib_isw.Cable.html" class="btn btn-neutral float-left" title="cablelib_isw.Cable" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cablelib_isw.Platform.html" class="btn btn-neutral float-right" title="cablelib_isw.Platform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Patrick Huynh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

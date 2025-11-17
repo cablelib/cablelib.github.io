@@ -1,0 +1,53 @@
+Getting Started
+===============
+
+This page describes the first steps with ``cablelib_isw_pybindings``
+which consist of creating a CDPR and making basic calculations.
+
+Creating a CDPR
+---------------
+
+This example shows how to instantiate a :class:`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`.
+To illustrate the process, the geometry of the Fraunhofer IPA's CDPR *IPAnema*
+is used.
+
+.. testcode::
+
+   import numpy as np
+   from cablelib_isw_pybindings.robot import CableDrivenParallelRobot, Pulley, \
+       BaseFrame, Platform, Cable
+
+   base_frame_points = np.array([
+       [-2, 1.5, 2],
+       [2, 1.5, 2],
+       [2, -1.5, 2],
+       [-2, -1.5, 2],
+       [-2, 1.5, 0],
+       [2, 1.5, 0],
+       [2, -1.5, 0],
+       [-2, -1.5, 0],
+   ])
+
+   pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+
+   base_frame = BaseFrame(base_frame_points, pulleys)
+
+   platform_points = np.array([
+       [-0.06, 0.06, 0],
+       [0.06, 0.06, 0],
+       [0.06, -0.06, 0],
+       [-0.06, -0.06, 0]
+   ])
+
+   platform = Platform(platform_points)
+
+   cables = [Cable(i % 4, i) for i in range(8)]
+
+   cdpr_builder = CableDrivenParallelRobot.Builder()
+
+   cdpr_builder.name = "IPAnema1"
+   cdpr_builder.base_frame = base_frame
+   cdpr_builder.platform = platform
+   cdpr_builder.cables = cables
+
+   cdpr = cdpr_builder.build()

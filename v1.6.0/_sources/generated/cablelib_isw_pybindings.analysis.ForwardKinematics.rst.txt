@@ -1,0 +1,26 @@
+cablelib\_isw\_pybindings.analysis.ForwardKinematics
+====================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis
+
+.. autoclass:: ForwardKinematics
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ForwardKinematics.__init__
+      ~ForwardKinematics.calculate
+   
+   
+
+   
+   
+   

@@ -1,0 +1,19 @@
+exceptions
+==========
+
+.. automodule:: cablelib_isw_pybindings.exceptions
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      NoSolutionError
+      UnderActuatedError
+   

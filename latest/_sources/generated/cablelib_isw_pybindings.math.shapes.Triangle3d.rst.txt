@@ -1,0 +1,31 @@
+﻿Triangle3d
+==========
+
+.. currentmodule:: cablelib_isw_pybindings.math.shapes
+
+.. autoclass:: Triangle3d
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Triangle3d.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Triangle3d.a
+      ~Triangle3d.b
+      ~Triangle3d.c
+   
+   

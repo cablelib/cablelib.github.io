@@ -1,0 +1,26 @@
+cablelib\_isw\_pybindings.analysis.workspace.LineSearch
+=======================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace
+
+.. autoclass:: LineSearch
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LineSearch.__init__
+      ~LineSearch.calculate_lambda
+   
+   
+
+   
+   
+   

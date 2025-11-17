@@ -1,0 +1,24 @@
+﻿WrenchFeasible
+==============
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.criterion
+
+.. autoclass:: WrenchFeasible
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~WrenchFeasible.__init__
+      ~WrenchFeasible.evaluate
+   
+   
+
+   
+   
+   

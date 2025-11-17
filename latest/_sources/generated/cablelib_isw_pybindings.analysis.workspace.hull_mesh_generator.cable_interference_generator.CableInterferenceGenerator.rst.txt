@@ -1,0 +1,23 @@
+﻿CableInterferenceGenerator
+==========================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator
+
+.. autoclass:: CableInterferenceGenerator
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CableInterferenceGenerator.__init__
+   
+   
+
+   
+   
+   

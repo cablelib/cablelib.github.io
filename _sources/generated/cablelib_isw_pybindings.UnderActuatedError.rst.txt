@@ -1,6 +1,0 @@
-cablelib\_isw\_pybindings.UnderActuatedError
-============================================
-
-.. currentmodule:: cablelib_isw_pybindings
-
-.. autoexception:: UnderActuatedError

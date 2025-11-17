@@ -1,0 +1,31 @@
+﻿StructureMatrixCalculator
+=========================
+
+.. currentmodule:: cablelib_isw_pybindings.types
+
+.. autoclass:: StructureMatrixCalculator
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StructureMatrixCalculator.__init__
+      ~StructureMatrixCalculator.calculate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StructureMatrixCalculator.cdpr
+      ~StructureMatrixCalculator.strategy
+   
+   

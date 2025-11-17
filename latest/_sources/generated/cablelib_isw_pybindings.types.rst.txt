@@ -1,0 +1,23 @@
+types
+=====
+
+.. automodule:: cablelib_isw_pybindings.types
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+   
+      Pose
+      StiffnessMatrix
+      StructureMatrixCalculator
+      Wrench
+   

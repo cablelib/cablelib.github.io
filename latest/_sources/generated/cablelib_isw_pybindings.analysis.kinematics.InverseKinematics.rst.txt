@@ -1,0 +1,33 @@
+﻿InverseKinematics
+=================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.kinematics
+
+.. autoclass:: InverseKinematics
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~InverseKinematics.__init__
+      ~InverseKinematics.calculate
+      ~InverseKinematics.get_cable_vectors
+      ~InverseKinematics.get_cable_vectors_normalized
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InverseKinematics.cdpr
+      ~InverseKinematics.strategy
+   
+   

@@ -1,0 +1,30 @@
+criterion
+=========
+
+.. automodule:: cablelib_isw_pybindings.analysis.workspace.criterion
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+   
+      Criterion
+      ForceFeasible
+      WrenchFeasible
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+   :template: module.rst
+
+   cable_interference

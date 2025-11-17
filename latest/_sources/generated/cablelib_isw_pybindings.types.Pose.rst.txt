@@ -1,0 +1,34 @@
+﻿Pose
+====
+
+.. currentmodule:: cablelib_isw_pybindings.types
+
+.. autoclass:: Pose
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Pose.__init__
+      ~Pose.as_affine_transformation_matrix
+      ~Pose.concatenate
+      ~Pose.parameterize
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Pose.from_parameterization
+      ~Pose.orientation
+      ~Pose.position
+   
+   

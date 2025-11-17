@@ -1,0 +1,25 @@
+cablelib\_isw\_pybindings.analysis.ElasticityModelElastic
+=========================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis
+
+.. autoclass:: ElasticityModelElastic
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ElasticityModelElastic.__init__
+   
+   
+
+   
+   
+   

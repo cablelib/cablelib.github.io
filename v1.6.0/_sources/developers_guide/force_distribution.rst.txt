@@ -1,0 +1,72 @@
+Custom Force Distribution algorithms
+====================================
+
+Force Distribution algorithms can be implemented in python and integrated into
+the existing structure.
+The strategy design pattern is used.
+For example, the :doc:`WrenchFeasible <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.WrenchFeasible>`
+Criteria class can be constructed with a concrete class which implements
+the :doc:`ForceDistributionStrategy <../generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy>`
+interface.
+A class implemented in python which inherits from ForceDistributionStrategy
+can be supplied during the construction of a WrenchFeasible object so that
+the custom force distribution algorithm is executed.
+
+Creating a custom ForceDistributionStrategy
+-------------------------------------------
+
+.. code-block:: python
+
+   class CustomForceDistributionStrategy(ForceDistributionStrategy):
+       def __init__(self):
+           ForceDistributionStrategy.__init__(self)
+
+       def calculate(self, structure_matrix: StructureMatrix,
+                     min_force: np.ndarray, max_force: np.ndarray,
+                     wrench: Wrench) -> np.ndarray:
+       """
+       Implement your custom algorithm here and return the
+       force distribution which is an m-dimensional vector with
+       the force for each cable, whereas m is the number of cables.
+       """
+
+.. note::
+   Don't forget the constructor because an error will be raised
+   otherwise.
+
+.. note::
+   Note the function signature of the calculate method which must be identical.
+
+.. _custom-force-distribution-strategy-lifetime:
+
+Caution
+^^^^^^^^
+
+Be aware of the lifetime of your CustomForceDistributionStrategy. For example:
+
+.. code-block:: python
+
+   fd = ForceDistribution(robot, force_distribution_strategy=CustomForceDistributionStrategy())
+
+   # create an arbitrary pose and wrench
+   pose = Pose([0, 0, 0])
+   wrench = Wrench()
+
+   fd.calculate(pose, wrench) # <- will throw here
+
+will throw because the CustomForceDistributionStrategy object is destroyed as there is no
+pointer in python's side of the code which owns the object. Whereas
+
+.. code-block:: python
+
+   fd_strategy = CustomForceDistributionStrategy()
+
+   fd = ForceDistribution(robot, force_distribution_strategy=fd_strategy)
+
+   pose = Pose([0, 0, 0])
+   wrench = Wrench()
+
+   fd.calculate(pose, wrench)
+
+will not throw because the CustomForceDistributionStrategy object is being kept alive
+by fd_strategy.

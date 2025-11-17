@@ -1,0 +1,31 @@
+cablelib\_isw\_pybindings.types.StiffnessMatrixBuilder
+======================================================
+
+.. currentmodule:: cablelib_isw_pybindings.types
+
+.. autoclass:: StiffnessMatrixBuilder
+   :members:
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StiffnessMatrixBuilder.__init__
+      ~StiffnessMatrixBuilder.build
+      ~StiffnessMatrixBuilder.set_force_distribution_strategy
+      ~StiffnessMatrixBuilder.use_elastic_inverse_kinematics
+      ~StiffnessMatrixBuilder.use_pulley_kinematics
+      ~StiffnessMatrixBuilder.use_regular_inverse_kinematics
+      ~StiffnessMatrixBuilder.use_standard_kinematics
+   
+   
+
+   
+   
+   

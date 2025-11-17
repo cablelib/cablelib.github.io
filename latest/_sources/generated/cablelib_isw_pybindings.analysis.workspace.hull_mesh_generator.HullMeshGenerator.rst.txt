@@ -1,0 +1,23 @@
+﻿HullMeshGenerator
+=================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator
+
+.. autoclass:: HullMeshGenerator
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HullMeshGenerator.__init__
+   
+   
+
+   
+   
+   

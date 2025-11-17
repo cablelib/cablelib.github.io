@@ -1,0 +1,6 @@
+cablelib\_isw\_pybindings.analysis.kinematics.ImproperInputParametersError
+==========================================================================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.kinematics
+
+.. autoexception:: ImproperInputParametersError

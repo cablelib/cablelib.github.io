@@ -1,0 +1,31 @@
+﻿Wrench
+======
+
+.. currentmodule:: cablelib_isw_pybindings.types
+
+.. autoclass:: Wrench
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Wrench.__init__
+      ~Wrench.as_vector
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Wrench.as_zero_wrench
+      ~Wrench.from_force_at_point
+   
+   

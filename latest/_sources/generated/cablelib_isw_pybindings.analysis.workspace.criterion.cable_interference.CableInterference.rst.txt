@@ -1,0 +1,30 @@
+﻿CableInterference
+=================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference
+
+.. autoclass:: CableInterference
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CableInterference.__init__
+      ~CableInterference.evaluate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CableInterference.parameters
+   
+   

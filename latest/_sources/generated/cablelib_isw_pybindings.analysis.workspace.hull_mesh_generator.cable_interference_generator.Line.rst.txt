@@ -1,0 +1,29 @@
+﻿Line
+====
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator
+
+.. autoclass:: Line
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Line.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Line.config
+   
+   

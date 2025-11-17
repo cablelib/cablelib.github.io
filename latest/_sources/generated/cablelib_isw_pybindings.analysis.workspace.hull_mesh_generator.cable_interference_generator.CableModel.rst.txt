@@ -1,0 +1,23 @@
+﻿CableModel
+==========
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator
+
+.. autoclass:: CableModel
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CableModel.__init__
+   
+   
+
+   
+   
+   

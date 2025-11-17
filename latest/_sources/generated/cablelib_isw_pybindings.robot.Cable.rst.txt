@@ -1,0 +1,34 @@
+﻿Cable
+=====
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: Cable
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Cable.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Cable.base_frame_attachment_index
+      ~Cable.base_frame_attachment_point
+      ~Cable.parameters
+      ~Cable.platform_attachment_index
+      ~Cable.platform_attachment_point
+      ~Cable.pulleys
+   
+   

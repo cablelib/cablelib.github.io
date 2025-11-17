@@ -1,0 +1,54 @@
+Custom workspace criteria
+=========================
+
+The :doc:`Criteria <../generated/cablelib_isw_pybindings.analysis.workspace.criteria.Criteria>`
+interface can be inherited to create a new workspace criteria.
+
+Creating a custom Criteria
+--------------------------
+
+.. code-block:: python
+
+   class CustomCriteria(Criteria):
+       def __init__(self):
+           Criteria.__init__(self)
+
+       def evaluate(self, pose: Pose) -> bool:
+       """
+       Implement the evaluate function here and return a
+       bool, if the pose belongs to the workspace or not.
+       """
+
+.. note::
+   Don't forget the constructor because an error will be raised otherwise.
+
+.. note::
+   Note the function signature of the calculate method which must be identical.
+
+.. note::
+   Be aware of the lifetime of your CustomCriteria. See the example for
+   :ref:`CustomForceDistributionStrategy <custom-force-distribution-strategy-lifetime>`.
+
+Combining criteria
+------------------
+
+Different criteria can be combined by creating a custom criteria which
+merges two or more criteria.
+A WrenchFeasible criteria and a ForceFeasible criteria will be combined
+in this example.
+
+.. code-block:: python
+
+   class MergedCriteria(Criteria):
+       def __init__(self, cdpr, wrench):
+           Criteria.__init__(self)
+
+           self.cdpr = cdpr
+           self.force_feasible_criteria = ForceFeasible(self.cdpr)
+           self.wrench_feasible_criteria = WrenchFeasible(self.cdpr, wrench)
+
+       def evaluate(self, pose: Pose) -> bool:
+           return self.force_feasible_criteria.evaluate(pose)
+               and self.wrench_feasible_criteria(pose)
+
+This merged criteria can now be used as any other criteria.

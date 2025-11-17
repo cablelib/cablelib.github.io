@@ -1,0 +1,23 @@
+cable\_interference\_generator
+==============================
+
+.. automodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+   
+      CableInterferenceGenerator
+      CableModel
+      Cylinder
+      Line
+   

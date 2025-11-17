@@ -1,0 +1,24 @@
+﻿ClosedForm
+==========
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.force_distribution_strategy
+
+.. autoclass:: ClosedForm
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ClosedForm.__init__
+      ~ClosedForm.calculate
+   
+   
+
+   
+   
+   

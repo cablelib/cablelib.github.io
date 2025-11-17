@@ -1,0 +1,23 @@
+﻿LineSearch
+==========
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator
+
+.. autoclass:: LineSearch
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LineSearch.__init__
+   
+   
+
+   
+   
+   

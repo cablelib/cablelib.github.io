@@ -1,0 +1,23 @@
+﻿KinematicStrategyPulley
+=======================
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.kinematic_strategy
+
+.. autoclass:: KinematicStrategyPulley
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~KinematicStrategyPulley.__init__
+   
+   
+
+   
+   
+   

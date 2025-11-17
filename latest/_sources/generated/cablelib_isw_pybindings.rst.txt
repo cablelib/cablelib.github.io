@@ -1,0 +1,24 @@
+﻿cablelib\_isw\_pybindings
+=========================
+
+.. automodule:: cablelib_isw_pybindings
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+   :template: module.rst
+
+   analysis
+   exceptions
+   math
+   robot
+   types

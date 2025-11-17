@@ -1,0 +1,33 @@
+analysis
+========
+
+.. automodule:: cablelib_isw_pybindings.analysis
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+   
+      ForceDistribution
+      PoseEstimator
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+   :template: module.rst
+
+   elasticity
+   force_distribution_strategy
+   kinematic_strategy
+   kinematics
+   workspace

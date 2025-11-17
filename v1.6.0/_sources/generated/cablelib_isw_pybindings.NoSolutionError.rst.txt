@@ -1,0 +1,6 @@
+cablelib\_isw\_pybindings.NoSolutionError
+=========================================
+
+.. currentmodule:: cablelib_isw_pybindings
+
+.. autoexception:: NoSolutionError

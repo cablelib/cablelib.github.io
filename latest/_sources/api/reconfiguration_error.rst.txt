@@ -1,0 +1,14 @@
+ReconfigurationError
+====================
+
+.. py:exception:: cablelib_isw_pybindings.robot.ReconfigurationError
+
+   Raised when a requested reconfiguration violates the configured axis
+   constraints of a
+   :py:class:`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot`.
+
+   This is a domain error rather than a shape error:
+
+   - use :py:exc:`ValueError` for malformed inputs such as a wrong axis count
+   - use ``ReconfigurationError`` for a well-formed request that exceeds
+     :py:class:`~cablelib_isw_pybindings.robot.ScalarLimits`

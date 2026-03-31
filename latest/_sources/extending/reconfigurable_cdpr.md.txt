@@ -1,0 +1,180 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Work With A Reconfigurable CDPR
+
+The standard
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` is
+immutable. If your robot changes geometry along one or more scalar axes, use
+{py:class}`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot`
+as a thin wrapper around one immutable home snapshot.
+
+The wrapper keeps two pieces of state:
+
+- a home robot snapshot that never changes
+- a current robot snapshot that is derived from the current axis positions
+
+Each reconfiguration axis is defined by three inputs:
+
+- one home anchor point
+- one axis direction vector
+- one {py:class}`~cablelib_isw_pybindings.robot.ScalarLimits` interval
+
+For axis `i`, the updated base anchor is computed as:
+
+```text
+anchor_i = home_anchor_i + axis_direction_i * axis_position_i
+```
+
+If an axis direction is the zero vector, that axis is disabled. Disabled axes
+keep their home anchor point even if a nonzero position is requested.
+
+## Build A Home Robot
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+    ReconfigurableCableDrivenParallelRobot,
+    ReconfigurationError,
+    ScalarLimits,
+)
+
+
+def build_home_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+home_robot = build_home_robot()
+home_anchors = np.asarray(home_robot.base_frame.attachment_points)
+```
+
+## Wrap It As A Reconfigurable Robot
+
+In this example, only the first two base anchors move. All other axes are
+disabled by giving them a zero direction vector.
+
+```{code-cell}
+axis_directions = np.zeros_like(home_anchors)
+axis_directions[0] = np.array([1.0, 0.0, 0.0])
+axis_directions[1] = np.array([-1.0, 0.0, 0.0])
+
+limits = []
+for axis_index in range(len(home_anchors)):
+    if axis_index < 2:
+        limits.append(ScalarLimits(-0.4, 0.4))
+    else:
+        limits.append(ScalarLimits(0.0, 0.0))
+
+reconfigurable_robot = ReconfigurableCableDrivenParallelRobot(
+    home_robot,
+    home_anchors,
+    axis_directions,
+    limits,
+)
+
+print("initial axis positions:", reconfigurable_robot.axis_positions())
+print("initial first base anchors:")
+print(np.round(np.asarray(reconfigurable_robot.current_robot().base_frame.attachment_points)[:2], 4))
+```
+
+## Apply A Reconfiguration
+
+Use
+{py:meth}`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot.set_axis_positions`
+to update all axes at once, or
+{py:meth}`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot.set_axis_position`
+to update one axis.
+
+```{code-cell}
+reconfigurable_robot.set_axis_positions([0.2, 0.2, 5.0, -3.0, 99.0, 0.0, 0.0, 0.0])
+
+current_robot = reconfigurable_robot.current_robot()
+current_anchors = np.asarray(current_robot.base_frame.attachment_points)
+
+print("updated axis positions:", reconfigurable_robot.axis_positions())
+print("updated first base anchors:")
+print(np.round(current_anchors[:2], 4))
+```
+
+The disabled axes in that example ignore their requested positions. Only the
+first two anchors move.
+
+The result of
+{py:meth}`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot.current_robot`
+is an ordinary
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`, so you can
+pass it directly into analysis classes such as
+{py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics` or
+{py:class}`~cablelib_isw_pybindings.analysis.ForceDistribution`.
+
+## Transactional Updates And Reset
+
+If an update violates the configured limits, the wrapper raises
+{py:exc}`cablelib_isw_pybindings.robot.ReconfigurationError` and keeps the
+previous state unchanged.
+
+```{code-cell}
+try:
+    reconfigurable_robot.set_axis_position(0, 2.0)
+except ReconfigurationError as exc:
+    print(type(exc).__name__)
+    print(str(exc))
+
+print("axis positions after failed update:", reconfigurable_robot.axis_positions())
+
+reconfigurable_robot.reset_to_home()
+print("axis positions after reset:", reconfigurable_robot.axis_positions())
+print("home first base anchors:")
+print(np.round(np.asarray(reconfigurable_robot.current_robot().base_frame.attachment_points)[:2], 4))
+```
+
+## Practical Notes
+
+- Use one axis per base anchor when each anchor moves independently.
+- Keep `home_anchors` aligned with the base-frame attachment-point order of the
+  home robot.
+- Use zero direction vectors for anchors that should stay fixed.
+- Use
+  {py:meth}`~cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot.reset_to_home`
+  to restore the original geometry and zero all stored axis positions.

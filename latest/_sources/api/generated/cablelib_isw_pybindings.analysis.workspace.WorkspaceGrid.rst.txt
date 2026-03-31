@@ -1,0 +1,35 @@
+WorkspaceGrid
+=============
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace
+
+.. autoclass:: WorkspaceGrid
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~WorkspaceGrid.__init__
+      ~WorkspaceGrid.calculate
+      ~WorkspaceGrid.export_all_vertices_csv
+      ~WorkspaceGrid.export_invalid_vertices_csv
+      ~WorkspaceGrid.export_valid_vertices_csv
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~WorkspaceGrid.invalid_vertices
+      ~WorkspaceGrid.valid_vertices
+      ~WorkspaceGrid.vertices
+   
+   

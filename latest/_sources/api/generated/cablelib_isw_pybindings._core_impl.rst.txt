@@ -1,0 +1,12 @@
+﻿\_core\_impl
+============
+
+.. automodule:: cablelib_isw_pybindings._core_impl
+   :no-members:
+   :no-inherited-members:
+   :no-special-members:
+   :no-private-members:
+   :no-undoc-members:
+   :no-imported-members:
+
+   

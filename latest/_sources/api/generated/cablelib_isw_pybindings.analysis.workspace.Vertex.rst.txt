@@ -1,0 +1,32 @@
+Vertex
+======
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace
+
+.. autoclass:: Vertex
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Vertex.__init__
+      ~Vertex.with_rotation_matrix
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Vertex.is_valid
+      ~Vertex.position
+      ~Vertex.rotation_matrix
+   
+   

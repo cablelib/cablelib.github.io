@@ -1,0 +1,34 @@
+WorkspaceHull
+=============
+
+.. currentmodule:: cablelib_isw_pybindings.analysis.workspace
+
+.. autoclass:: WorkspaceHull
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~WorkspaceHull.__init__
+      ~WorkspaceHull.calculate
+      ~WorkspaceHull.save_stl
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~WorkspaceHull.center_of_gravity
+      ~WorkspaceHull.faces
+      ~WorkspaceHull.surface_area
+      ~WorkspaceHull.volume
+   
+   

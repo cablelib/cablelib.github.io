@@ -1,0 +1,132 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Compute A Force Distribution
+
+This tutorial shows how to compute cable tensions for a given platform pose and
+external load.
+
+The example is intentionally didactic:
+
+- first compute the distribution with the default closed-form strategy
+- then switch to
+  {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra`
+- compare the resulting force vectors and their feasibility
+
+## Build The Example Robot
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.analysis import ForceDistribution
+from cablelib_isw_pybindings.analysis.force_distribution_strategy import (
+    ClosedForm,
+    Dykstra,
+)
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+from cablelib_isw_pybindings.types import Pose, Wrench
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+target_pose = Pose(np.array([0.0, 0.0, 1.0]), np.eye(3))
+applied_wrench = Wrench.from_force_at_point(
+    np.array([0.0, 0.0, -20.0]),
+    np.zeros(3),
+)
+
+print("target pose:", target_pose.position)
+print("applied wrench:", np.round(applied_wrench.as_vector(), 4))
+```
+
+## Use The Default Closed-Form Strategy
+
+```{code-cell}
+default_force_distribution = ForceDistribution(robot)
+closed_form_forces = default_force_distribution.calculate(
+    target_pose,
+    applied_wrench,
+)
+
+print("default strategy:", type(default_force_distribution.force_distribution_strategy).__name__)
+print("forces:", np.round(closed_form_forces, 4))
+print("feasible:", default_force_distribution.is_feasible(closed_form_forces))
+```
+
+## Switch To Dykstra
+
+```{code-cell}
+dykstra_force_distribution = ForceDistribution(robot, Dykstra())
+dykstra_forces = dykstra_force_distribution.calculate(
+    target_pose,
+    applied_wrench,
+)
+
+print("strategy:", type(dykstra_force_distribution.force_distribution_strategy).__name__)
+print("forces:", np.round(dykstra_forces, 4))
+print("feasible:", dykstra_force_distribution.is_feasible(dykstra_forces))
+```
+
+## Why This Comparison Matters
+
+For this pose and load, the closed-form solution produces cable forces outside
+the allowed cable-force limits, so
+{py:meth}`~cablelib_isw_pybindings.analysis.ForceDistribution.is_feasible`
+returns `False`.
+
+{py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra`
+solves the same force-distribution problem differently and returns a feasible
+result for the same robot, pose, and wrench.
+
+## Notes
+
+- {py:class}`~cablelib_isw_pybindings.analysis.ForceDistribution` defaults to
+  {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm`.
+- {py:obj}`~cablelib_isw_pybindings.types.Wrench.from_force_at_point` is
+  convenient when the load is known as a force acting at a specific point.
+- {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm`
+  is also available if you want another built-in strategy to compare.

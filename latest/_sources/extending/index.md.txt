@@ -1,0 +1,12 @@
+# Extending
+
+This section focuses on practical ways to adapt existing robot definitions
+and customize analysis behavior from Python.
+
+```{toctree}
+:maxdepth: 1
+
+adapt_existing_robot_definitions
+reconfigurable_cdpr
+configure_analysis_strategies
+```

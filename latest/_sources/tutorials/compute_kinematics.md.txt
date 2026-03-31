@@ -1,0 +1,121 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Compute Kinematics For A CDPR
+
+This tutorial continues after the builder example and shows a complete
+kinematics round-trip:
+
+- start from a robot model
+- choose a platform {py:class}`~cablelib_isw_pybindings.types.Pose`
+- compute cable lengths with
+  {py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics`
+- reconstruct the pose with
+  {py:class}`~cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics`
+
+## Build The Example Robot
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.analysis.kinematics import (
+    ForwardKinematics,
+    InverseKinematics,
+)
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+from cablelib_isw_pybindings.types import Pose
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+target_pose = Pose(np.array([0.0, 0.0, 1.0]), np.eye(3))
+
+print("robot name:", robot.name)
+print("target pose position:", target_pose.position)
+```
+
+## Compute Inverse And Forward Kinematics
+
+```{code-cell}
+inverse_kinematics = InverseKinematics(robot)
+cable_lengths = inverse_kinematics.calculate(target_pose)
+
+forward_kinematics = ForwardKinematics(robot)
+recovered_pose = forward_kinematics.calculate(cable_lengths)
+
+position_error = np.max(np.abs(recovered_pose.position - target_pose.position))
+orientation_error = np.max(np.abs(recovered_pose.orientation - target_pose.orientation))
+
+print("cable lengths:", np.round(cable_lengths, 4))
+print("recovered position:", np.round(recovered_pose.position, 6))
+print("recovered orientation:")
+print(np.round(recovered_pose.orientation, 6))
+print("maximum position error:", float(position_error))
+print("maximum orientation error:", float(orientation_error))
+```
+
+## What Happened?
+
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics`
+  mapped the target {py:class}`~cablelib_isw_pybindings.types.Pose` to one
+  cable-length value per cable.
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics`
+  used those cable lengths to recover a pose that is consistent with the robot
+  geometry.
+- For this symmetric example, the reconstructed pose matches the original pose
+  up to numerical precision.
+
+## Notes
+
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics`
+  uses the standard kinematic model by default.
+- If pulley geometry should affect the result, pass
+  {py:class}`~cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyPulley`
+  explicitly.
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics`
+  can also be configured with an elasticity model when the workflow should
+  account for elastic cables.

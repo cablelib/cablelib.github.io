@@ -1,0 +1,166 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Configure Analysis Strategies
+
+In the current Python workflow, the most practical way to extend analysis
+behavior is to compose the provided strategy and model objects with the same
+analysis classes.
+
+This page shows that idea in two places:
+
+- changing the kinematic model
+- changing the force-distribution algorithm
+
+## Build One Robot And Reuse It
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.analysis import ForceDistribution
+from cablelib_isw_pybindings.analysis.force_distribution_strategy import (
+    ClosedForm,
+    Dykstra,
+)
+from cablelib_isw_pybindings.analysis.kinematic_strategy import (
+    KinematicStrategyPulley,
+    KinematicStrategyStandard,
+)
+from cablelib_isw_pybindings.analysis.kinematics import InverseKinematics
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+from cablelib_isw_pybindings.types import Pose, Wrench
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+target_pose = Pose(np.array([0.0, 0.0, 1.0]), np.eye(3))
+applied_wrench = Wrench.from_force_at_point(
+    np.array([0.0, 0.0, -20.0]),
+    np.zeros(3),
+)
+```
+
+## Change The Kinematic Strategy
+
+{py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics`
+accepts a kinematic strategy object such as
+{py:class}`~cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyStandard`
+or
+{py:class}`~cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyPulley`.
+This lets you choose whether pulley geometry should influence the result.
+
+```{code-cell}
+standard_lengths = InverseKinematics(
+    robot,
+    KinematicStrategyStandard(),
+).calculate(target_pose)
+
+pulley_lengths = InverseKinematics(
+    robot,
+    KinematicStrategyPulley(),
+).calculate(target_pose)
+
+print("standard model:", np.round(standard_lengths, 4))
+print("pulley model:  ", np.round(pulley_lengths, 4))
+```
+
+The robot definition is the same in both cases. Only the analysis model has
+changed.
+
+## Change The Force-Distribution Strategy
+
+{py:class}`~cablelib_isw_pybindings.analysis.ForceDistribution` works the same
+way. You keep the robot, the pose, and the wrench fixed, but swap the
+algorithm object, for example
+{py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm`
+or
+{py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra`.
+
+```{code-cell}
+closed_form_distribution = ForceDistribution(robot, ClosedForm())
+closed_form_forces = closed_form_distribution.calculate(
+    target_pose,
+    applied_wrench,
+)
+
+dykstra_distribution = ForceDistribution(robot, Dykstra())
+dykstra_forces = dykstra_distribution.calculate(
+    target_pose,
+    applied_wrench,
+)
+
+print("ClosedForm forces:", np.round(closed_form_forces, 4))
+print("ClosedForm feasible:", closed_form_distribution.is_feasible(closed_form_forces))
+print()
+print("Dykstra forces:", np.round(dykstra_forces, 4))
+print("Dykstra feasible:", dykstra_distribution.is_feasible(dykstra_forces))
+```
+
+This example is useful because it shows why strategy objects matter. The same
+physical situation can lead to different numerical outcomes depending on which
+algorithm is used.
+
+## Other Places Where The Same Pattern Appears
+
+The same composition pattern appears elsewhere in the API:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics`
+  can be configured with a kinematic strategy and an
+  elasticity model such as
+  {py:class}`~cablelib_isw_pybindings.analysis.elasticity.ElasticityModelStandard`
+  or
+  {py:class}`~cablelib_isw_pybindings.analysis.elasticity.ElasticityModelElastic`.
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible`
+  takes a force-distribution strategy and a kinematic strategy.
+- Workspace analysis changes behavior by selecting a different criterion such as
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.ForceFeasible`,
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible`,
+  or
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableInterference`.
+
+The general rule is simple: keep the robot fixed, and swap small analysis
+objects to change how the calculation is carried out.

@@ -1,0 +1,29 @@
+Platform
+========
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: Platform
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Platform.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Platform.attachment_points
+   
+   

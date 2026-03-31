@@ -1,0 +1,155 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Analyze The Workspace
+
+This tutorial shows two common workspace workflows:
+
+- a discrete workspace grid
+- a workspace hull generated with line search
+
+Both examples use the same robot and the same criterion, which makes the
+difference between the two representations easier to see.
+
+## Build The Example Robot
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.analysis.workspace import (
+    WorkspaceGridRegular,
+    WorkspaceHull,
+)
+from cablelib_isw_pybindings.analysis.workspace.criterion import ForceFeasible
+from cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator import (
+    LineSearch,
+)
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+criterion = ForceFeasible(robot)
+```
+
+## Sample The Workspace On A Regular Grid
+
+{py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular` is
+useful when you want a finite set of sampled poses and separate lists of valid
+and invalid vertices.
+
+```{code-cell}
+workspace_grid = WorkspaceGridRegular(
+    np.array([-0.2, -0.2, 0.8]),
+    np.array([ 0.2,  0.2, 1.2]),
+    0.2,
+    0.2,
+    0.2,
+)
+workspace_grid.calculate(criterion)
+
+valid_ratio = len(workspace_grid.valid_vertices) / len(workspace_grid.vertices)
+
+print("total vertices:", len(workspace_grid.vertices))
+print("valid vertices:", len(workspace_grid.valid_vertices))
+print("invalid vertices:", len(workspace_grid.invalid_vertices))
+print("valid ratio:", round(valid_ratio, 3))
+```
+
+After the calculation, the grid can also be exported with:
+
+- {py:meth}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.export_all_vertices_csv`
+- {py:meth}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.export_valid_vertices_csv`
+- {py:meth}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.export_invalid_vertices_csv`
+
+## Approximate The Workspace Boundary As A Hull
+
+{py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceHull` stores a
+triangulated boundary instead of a sampled point cloud. To compute it, you
+provide a hull mesh generator such as
+{py:class}`~cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.LineSearch`
+configured with
+{py:class}`LineSearch.Config <cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.LineSearch.Config>`.
+
+```{code-cell}
+line_search_config = LineSearch.Config(
+    center=np.array([0.0, 0.0, 1.0]),
+    sphere_approx_depth=1,
+    max_search_range=2.0,
+)
+line_search = LineSearch(criterion, line_search_config)
+
+workspace_hull = WorkspaceHull()
+workspace_hull.calculate(line_search)
+
+print("number of faces:", len(workspace_hull.faces))
+print("surface area:", round(workspace_hull.surface_area, 4))
+print("volume:", round(workspace_hull.volume, 4))
+print("center of gravity:", np.round(workspace_hull.center_of_gravity, 4))
+```
+
+The hull can be exported as an STL file with
+{py:meth}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.save_stl`.
+
+## What To Use When
+
+- Use
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular`,
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom`,
+  or
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridCustom`
+  when you want a discrete set of sampled poses.
+- Use {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceHull`
+  when you want a boundary representation together with geometric quantities
+  such as volume and surface area.
+- Swap the criterion object to change what "belongs to the workspace" means.
+  For example,
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible`
+  and
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableInterference`
+  can be used instead of
+  {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.ForceFeasible`.

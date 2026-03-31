@@ -1,0 +1,126 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# The CDPR Model
+
+{py:mod}`cablelib_isw_pybindings` represents a cable-driven parallel robot as a small
+set of domain objects that mirror the physical system:
+
+- {py:class}`~cablelib_isw_pybindings.robot.BaseFrame` stores the base
+  attachment points and the pulleys mounted there.
+- {py:class}`~cablelib_isw_pybindings.robot.Platform` stores the attachment
+  points on the moving platform.
+- {py:class}`~cablelib_isw_pybindings.robot.Cable` connects one platform
+  attachment point to one base-frame attachment
+  point.
+- {py:class}`~cablelib_isw_pybindings.robot.Pulley` stores the pulley
+  orientation and radius used by pulley-aware kinematics.
+- {py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` combines
+  these parts into one immutable robot model.
+
+The most important idea is that the robot itself is immutable after it has been
+built. You assemble it with
+{py:class}`CableDrivenParallelRobot.Builder <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder>`,
+call
+{py:meth}`Builder.build <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.build>`,
+and then pass the resulting robot object into analysis classes.
+
+## Attachment Indices Define Cable Routing
+
+A {py:class}`~cablelib_isw_pybindings.robot.Cable` does not store coordinates
+directly. Instead, it stores two indices:
+
+- `platform_attachment_index`
+- `base_frame_attachment_index`
+
+This means that the geometry of a cable is defined indirectly through the
+platform and base frame.
+
+For example, `Cable(2, 6)` means:
+
+- use platform attachment point `2`
+- use base-frame attachment point `6`
+
+This indirection is important because the same platform and base-frame objects
+can be reused when you build robot variants.
+
+## Immutable Robot Snapshots
+
+The builder is the right tool when you create a robot from scratch or want to
+edit several parts at once. Once you have built a
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`, you can
+treat it as a stable snapshot of one concrete design.
+
+That snapshot can then be adapted in two common ways:
+
+- create a new builder and call
+  {py:meth}`Builder.apply_existing <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.apply_existing>`
+- derive a modified robot directly with methods such as
+  {py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.with_base_frame`
+  or
+  {py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.with_base_anchor_points`
+
+This split keeps the analysis objects simple because they always work on a
+finished, immutable robot model.
+
+## Poses And Wrenches
+
+Analyses operate on two other important data types:
+
+- {py:class}`~cablelib_isw_pybindings.types.Pose` describes where the platform
+  is and how it is oriented.
+- {py:class}`~cablelib_isw_pybindings.types.Wrench` describes an external
+  force-torque load applied to the platform.
+
+{py:class}`~cablelib_isw_pybindings.types.Pose` stores:
+
+- a 3D position vector
+- a 3x3 rotation matrix
+
+{py:class}`~cablelib_isw_pybindings.types.Wrench` stores:
+
+- a 3D force
+- a 3D torque
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.types import Pose, Wrench
+
+pose = Pose(np.array([0.1, -0.2, 1.3]), np.eye(3))
+parameterization = pose.parameterize()
+
+wrench = Wrench.from_force_at_point(
+    np.array([0.0, 0.0, -10.0]),
+    np.array([0.1, 0.0, 0.0]),
+)
+
+print("pose parameterization:", np.round(parameterization, 4))
+print("wrench vector:", np.round(wrench.as_vector(), 4))
+```
+
+The {py:meth}`~cablelib_isw_pybindings.types.Pose.parameterize` helper is often
+useful when you want a compact 6-dimensional representation. The
+{py:obj}`~cablelib_isw_pybindings.types.Wrench.from_force_at_point` helper is
+useful when you know a force and the point where it acts, but do not want to
+compute the resulting torque by hand.
+
+## Mental Model
+
+When working with the library, it helps to think in the following order:
+
+1. Define the robot geometry with
+   {py:class}`~cablelib_isw_pybindings.robot.BaseFrame`,
+   {py:class}`~cablelib_isw_pybindings.robot.Platform`, and
+   {py:class}`~cablelib_isw_pybindings.robot.Cable`.
+2. Build an immutable
+   {py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`.
+3. Define a {py:class}`~cablelib_isw_pybindings.types.Pose` and, if needed, a
+   {py:class}`~cablelib_isw_pybindings.types.Wrench`.
+4. Run analyses on that robot snapshot.
+
+This separation between model definition and analysis is the main organizing
+idea behind the package.

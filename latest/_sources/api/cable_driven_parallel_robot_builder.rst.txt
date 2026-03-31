@@ -1,0 +1,7 @@
+CableDrivenParallelRobot.Builder
+================================
+
+.. autoclass:: cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder
+   :members:
+   :undoc-members:
+   :show-inheritance:

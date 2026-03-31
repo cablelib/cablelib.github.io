@@ -1,0 +1,157 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Adapt Existing Robot Definitions
+
+After the first robot has been created, you often do not want to rebuild every
+part from scratch. The Python bindings provide a few practical ways to derive
+new robot variants from an existing
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`.
+
+## Start From An Existing Robot
+
+The example below reuses the same geometry as the introductory builder tutorial
+and then derives wider variants from it.
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+print("original robot:", robot.name)
+print("original first anchor:", robot.base_frame.attachment_points[0])
+```
+
+## Derive A New Immutable Snapshot
+
+If only the base anchors should change,
+{py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.with_base_anchor_points`
+is the most direct option.
+
+```{code-cell}
+wider_points = np.asarray(robot.base_frame.attachment_points).copy()
+wider_points[:, 0] *= 1.1
+
+widened_robot = robot.with_base_anchor_points(wider_points)
+
+print("original first anchor:", robot.base_frame.attachment_points[0])
+print("widened first anchor:", widened_robot.base_frame.attachment_points[0])
+```
+
+This returns a new immutable robot snapshot. The original object is unchanged.
+
+## Rebuild Through The Builder
+
+When more than one property should be updated, it is usually clearer to copy
+the existing configuration into a builder, change the necessary parts, and call
+{py:meth}`Builder.build <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.build>`
+again.
+
+```{code-cell}
+builder = CableDrivenParallelRobot.Builder()
+builder.apply_existing(robot)
+builder.name = "IPAnema1_wide"
+builder.base_frame = BaseFrame(
+    wider_points,
+    robot.base_frame.pulleys,
+)
+
+modified_robot = builder.build()
+
+print("original robot:", robot.name)
+print("modified robot:", modified_robot.name)
+print("original first anchor:", robot.base_frame.attachment_points[0])
+print("modified first anchor:", modified_robot.base_frame.attachment_points[0])
+```
+
+Use this pattern whenever several fields belong together conceptually, for
+example geometry, metadata, and cable layout.
+
+## Save And Load Robot Definitions
+
+Robot definitions can also be serialized to XML and loaded again later with
+{py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.save_xml`
+and
+{py:obj}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.load_xml`.
+
+```{code-cell}
+import os
+import tempfile
+
+with tempfile.NamedTemporaryFile(suffix=".xml", delete=False) as handle:
+    xml_path = handle.name
+
+robot.save_xml(xml_path)
+loaded_robot = CableDrivenParallelRobot.load_xml(xml_path)
+os.unlink(xml_path)
+
+print("loaded robot:", loaded_robot.name)
+print("number of cables:", len(loaded_robot.cables))
+print("first anchor:", loaded_robot.base_frame.attachment_points[0])
+```
+
+## When To Use Which Approach
+
+- Use
+  {py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.with_base_anchor_points`
+  or
+  {py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.with_base_frame`
+  when one immutable variant should be derived directly from another.
+- Use
+  {py:meth}`Builder.apply_existing <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.apply_existing>`
+  when several changes should be grouped into one rebuild step.
+- Use
+  {py:meth}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.save_xml`
+  and
+  {py:obj}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot.load_xml`
+  when robot definitions should be persisted or exchanged.
+- Use
+  {py:meth}`Builder.load_wcrfx_config <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.load_wcrfx_config>`
+  if you already have a `.wcrfx` configuration file from an existing workflow.

@@ -1,0 +1,168 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Analysis Workflow
+
+Once a
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` has been
+created, the library offers several analysis classes that answer different
+questions about the same robot model.
+
+## Which Class Solves Which Problem?
+
+| Question | Class | Typical input | Typical output |
+| --- | --- | --- | --- |
+| What cable lengths belong to a pose? | {py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics` | robot, {py:class}`~cablelib_isw_pybindings.types.Pose` | cable lengths |
+| Which pose belongs to cable lengths? | {py:class}`~cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics` | robot, cable lengths | {py:class}`~cablelib_isw_pybindings.types.Pose` |
+| Which cable forces balance a load? | {py:class}`~cablelib_isw_pybindings.analysis.ForceDistribution` | robot, {py:class}`~cablelib_isw_pybindings.types.Pose`, {py:class}`~cablelib_isw_pybindings.types.Wrench` | cable-force vector |
+| Which sampled poses satisfy a criterion? | {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular` / {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom` / {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridCustom` | criterion over many poses | valid and invalid vertices |
+| What is the boundary of a workspace? | {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceHull` | hull mesh generator | faces, volume, surface area |
+
+This means the same robot model can be reused across many analyses without
+having to rebuild it.
+
+## Strategies And Models
+
+Several analyses accept strategy or model objects that change how the
+calculation is performed.
+
+### Kinematic Strategy
+
+The kinematic strategy decides how cable geometry is interpreted:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyStandard`
+  uses the standard geometric model.
+- {py:class}`~cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyPulley`
+  takes pulley geometry into account.
+
+That choice can change the result even when the robot geometry itself stays the
+same.
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.analysis.kinematic_strategy import (
+    KinematicStrategyPulley,
+    KinematicStrategyStandard,
+)
+from cablelib_isw_pybindings.analysis.kinematics import InverseKinematics
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+from cablelib_isw_pybindings.types import Pose
+
+
+def build_example_robot() -> CableDrivenParallelRobot:
+    base_frame_points = np.asarray([
+        [-2.0,  1.5, 2.0],
+        [ 2.0,  1.5, 2.0],
+        [ 2.0, -1.5, 2.0],
+        [-2.0, -1.5, 2.0],
+        [-2.0,  1.5, 0.0],
+        [ 2.0,  1.5, 0.0],
+        [ 2.0, -1.5, 0.0],
+        [-2.0, -1.5, 0.0],
+    ])
+    pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+    base_frame = BaseFrame(base_frame_points, pulleys)
+
+    platform_points = np.asarray([
+        [-0.06,  0.06, 0.0],
+        [ 0.06,  0.06, 0.0],
+        [ 0.06, -0.06, 0.0],
+        [-0.06, -0.06, 0.0],
+    ])
+    platform = Platform(platform_points)
+
+    builder = CableDrivenParallelRobot.Builder()
+    builder.name = "IPAnema1"
+    builder.base_frame = base_frame
+    builder.platform = platform
+
+    for base_frame_attachment_index in range(8):
+        platform_attachment_index = base_frame_attachment_index % 4
+        builder.add_cable(
+            Cable(platform_attachment_index, base_frame_attachment_index)
+        )
+
+    return builder.build()
+
+
+robot = build_example_robot()
+pose = Pose(np.array([0.0, 0.0, 1.0]), np.eye(3))
+
+standard_lengths = InverseKinematics(
+    robot,
+    KinematicStrategyStandard(),
+).calculate(pose)
+
+pulley_lengths = InverseKinematics(
+    robot,
+    KinematicStrategyPulley(),
+).calculate(pose)
+
+print("standard model:", np.round(standard_lengths, 4))
+print("pulley model:  ", np.round(pulley_lengths, 4))
+```
+
+### Force Distribution Strategy
+
+Force distributions are also strategy-based:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm`
+- {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm`
+- {py:class}`~cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra`
+
+These strategies solve the same physical question but can behave differently
+with respect to feasibility and numerical robustness.
+
+### Elasticity Model
+
+Forward kinematics can also be configured with an elasticity model:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.elasticity.ElasticityModelStandard`
+- {py:class}`~cablelib_isw_pybindings.analysis.elasticity.ElasticityModelElastic`
+
+Use this when your workflow should account for cable elasticity explicitly.
+
+## Workspace Criteria And Representations
+
+Workspace analysis separates two concerns:
+
+- a **criterion** decides whether a pose belongs to the workspace
+- a **representation** decides how that workspace is stored or approximated
+
+Common criteria are:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.ForceFeasible`
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible`
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableInterference`
+
+Common representations are:
+
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular`
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom`
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceGridCustom`
+- {py:class}`~cablelib_isw_pybindings.analysis.workspace.WorkspaceHull`
+
+This separation is useful because the same criterion can be reused with
+different workspace representations depending on whether you need a sampled grid
+or a geometric hull.
+
+## A Practical View
+
+For most users, the workflow looks like this:
+
+1. Build a robot once.
+2. Choose the analysis class for the question you want to answer.
+3. Choose strategy or model objects only when the defaults are not sufficient.
+4. Keep the same robot snapshot while you compare multiple analyses.
+
+That makes experiments easier to structure and easier to reproduce.

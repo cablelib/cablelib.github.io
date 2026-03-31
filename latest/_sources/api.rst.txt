@@ -1,9 +1,0 @@
-API Reference
--------------
-
-.. autosummary::
-   :toctree: generated
-   :recursive:
-   :template: module.rst
-
-   cablelib_isw_pybindings

@@ -1,0 +1,104 @@
+# Cablelib
+
+Cablelib is a Python library for modeling cable-driven parallel robots 
+and analyzing them with respect to kinematics, force distribution, 
+and workspace-related criteria.
+
+It is aimed at students and researchers working on CDPRs who want to 
+define robot models and evaluate them in a programmable workflow 
+from Python. The project is still evolving, and the API is currently 
+being updated alongside the library itself.
+
+## What Cablelib is for
+
+Cablelib is designed for the analysis of cable-driven parallel 
+robots from a Python interface. In its current form, it allows for:
+
+- forward and inverse kinematics
+- force distribution analysis
+- workspace analysis under different criteria
+
+The library is intended to support the modeling of a CDPR as a 
+structured software object and to provide analysis workflows on top of that model.
+
+## Minimal example
+
+A typical workflow begins by defining a CDPR model and then
+running an analysis on it. For many users, the first meaningful step 
+is to instantiate a
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` and
+compute
+{py:class}`~cablelib_isw_pybindings.analysis.kinematics.InverseKinematics`
+for a given {py:class}`~cablelib_isw_pybindings.types.Pose`.
+
+```python
+import cablelib_isw_pybindings as cablelib
+
+# 1. Define the robot geometry and configuration
+#    - base frame anchor points
+#    - platform anchor points
+#    - cable definitions
+#    - optional pulley-related modeling data
+#    - further robot-specific parameters
+
+robot = ...  # instantiate CDPR model
+
+# 2. Define the platform pose to be analyzed
+pose = ...
+
+# 3. Compute inverse kinematics
+inverse_kinematics_result = ...
+
+# 4. Inspect the result
+print(inverse_kinematics_result)
+````
+
+See the tutorials for a complete first example with the actual API.
+
+## What you can do with Cablelib
+
+With Cablelib, you can build and analyze CDPR models in Python workflows such as:
+
+* defining a cable-driven parallel robot from its geometric and structural data
+* computing forward and inverse kinematics
+* evaluating force distributions
+* analyzing workspace properties under different criteria
+* using the library as a basis for further CDPR research code and experiments
+
+## Project status
+
+Cablelib is not yet a mature software package. The library is under 
+active development, and the documentation is currently being updated to 
+reflect the latest API and capabilities.
+
+Because of this, the documentation should be understood as evolving 
+technical documentation for an active research-oriented project.
+
+## Start here
+
+If you are new to Cablelib, the recommended path is:
+
+1. Go to the installation guide and set up the Python package.
+2. Follow the first tutorial to instantiate a CDPR model.
+3. Continue with the tutorials on kinematics, force distribution, and workspace analysis.
+4. Use the API reference for detailed class and function documentation.
+
+## Contents
+
+```{toctree}
+:maxdepth: 1
+
+installation
+tutorials/index
+concepts/index
+extending/index
+api/index
+changelog
+```
+
+## Why Cablelib
+
+Cablelib provides a structured way to work with CDPR models in Python instead 
+of building one-off analysis scripts from scratch. 
+The goal is to make modeling and analysis workflows more explicit, 
+reusable, and easier to extend for student projects and research code.

@@ -1,0 +1,24 @@
+﻿PoseEstimator
+=============
+
+.. currentmodule:: cablelib_isw_pybindings._core_impl.analysis
+
+.. autoclass:: PoseEstimator
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PoseEstimator.__init__
+      ~PoseEstimator.estimate
+   
+   
+
+   
+   
+   

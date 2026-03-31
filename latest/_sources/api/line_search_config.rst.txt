@@ -1,0 +1,8 @@
+LineSearch.Config
+=================
+
+.. autoclass:: cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.LineSearch.Config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :no-index:

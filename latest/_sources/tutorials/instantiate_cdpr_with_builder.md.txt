@@ -1,0 +1,139 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+---
+
+# Instantiate a CableDrivenParallelRobot with the Builder
+
+This example shows how to construct a
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` step by
+step with
+{py:class}`CableDrivenParallelRobot.Builder <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder>`.
+
+The builder is useful when you want to assemble the robot definition incrementally:
+
+- create the base frame
+- define the platform
+- add cables one by one
+- build the immutable robot object
+
+## Example
+
+```{code-cell}
+import numpy as np
+
+from cablelib_isw_pybindings.robot import (
+    BaseFrame,
+    Cable,
+    CableDrivenParallelRobot,
+    Platform,
+    Pulley,
+)
+
+# Base frame attachment points in world coordinates.
+base_frame_points = np.asarray([
+    [-2.0,  1.5, 2.0],
+    [ 2.0,  1.5, 2.0],
+    [ 2.0, -1.5, 2.0],
+    [-2.0, -1.5, 2.0],
+    [-2.0,  1.5, 0.0],
+    [ 2.0,  1.5, 0.0],
+    [ 2.0, -1.5, 0.0],
+    [-2.0, -1.5, 0.0],
+])
+
+# One pulley per base frame attachment point.
+pulleys = [Pulley(np.eye(3), 0.05) for _ in range(8)]
+
+base_frame = BaseFrame(base_frame_points, pulleys)
+
+# Platform attachment points in platform coordinates.
+platform_points = np.asarray([
+    [-0.06,  0.06, 0.0],
+    [ 0.06,  0.06, 0.0],
+    [ 0.06, -0.06, 0.0],
+    [-0.06, -0.06, 0.0],
+])
+
+platform = Platform(platform_points)
+
+# Assemble the robot with the builder.
+builder = CableDrivenParallelRobot.Builder()
+builder.name = "IPAnema1"
+builder.base_frame = base_frame
+builder.platform = platform
+
+# Each cable connects one platform attachment point to one base frame
+# attachment point. Here, eight cables are distributed over four platform
+# points and eight base points.
+for base_frame_attachment_index in range(8):
+    platform_attachment_index = base_frame_attachment_index % 4
+    builder.add_cable(
+        Cable(platform_attachment_index, base_frame_attachment_index)
+    )
+
+robot = builder.build()
+
+print("robot name: " + robot.name)
+print("number of cables: " + str(len(robot.cables)))
+```
+
+## Notes
+
+- {py:class}`~cablelib_isw_pybindings.robot.BaseFrame` expects the same number
+  of attachment points and pulleys.
+- {py:class}`~cablelib_isw_pybindings.robot.Cable` with
+  `Cable(platform_attachment_index, base_frame_attachment_index)` connects one
+  platform point to one base frame point.
+- {py:meth}`Builder.build <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.build>`
+  raises an error if required parts such as the base frame, platform, or cables
+  are missing.
+- The resulting
+  {py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot` is
+  immutable. To modify an existing robot, create a new builder and call
+  {py:meth}`Builder.apply_existing <cablelib_isw_pybindings.robot.CableDrivenParallelRobot.Builder.apply_existing>`.
+
+## Modify an existing robot
+
+If you already have a
+{py:class}`~cablelib_isw_pybindings.robot.CableDrivenParallelRobot`, you can
+copy its current configuration into a builder, update the parts you want to
+change, and build a new robot instance.
+
+```{code-cell}
+# Start from an existing robot, for example the one created above.
+existing_robot = robot
+
+updated_base_frame_points = np.asarray([
+    [-2.2,  1.5, 2.0],
+    [ 2.2,  1.5, 2.0],
+    [ 2.2, -1.5, 2.0],
+    [-2.2, -1.5, 2.0],
+    [-2.2,  1.5, 0.0],
+    [ 2.2,  1.5, 0.0],
+    [ 2.2, -1.5, 0.0],
+    [-2.2, -1.5, 0.0],
+])
+
+updated_base_frame = BaseFrame(
+    updated_base_frame_points,
+    existing_robot.base_frame.pulleys,
+)
+
+builder = CableDrivenParallelRobot.Builder()
+builder.apply_existing(existing_robot)
+builder.name = "IPAnema1_wider"
+builder.base_frame = updated_base_frame
+
+modified_robot = builder.build()
+
+print("existing robot name: " + existing_robot.name)
+print("modified robot name: " + modified_robot.name)
+print("existing robot 0th base frame attachment point: " + str(existing_robot.base_frame.attachment_points[0]))
+print("modified robot 0th base frame attachment point: " + str(modified_robot.base_frame.attachment_points[0]))
+```
+
+This pattern is useful when the new robot should keep most of the original
+configuration, such as the platform and cable definitions, while changing only
+selected geometry or metadata.

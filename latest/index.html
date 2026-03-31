@@ -3,12 +3,13 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Usage" href="usage.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Installation" href="installation.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>cablelib_isw_pybindings 2.0.0</title>
+        <title>cablelib_isw_pybindings 2.2.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +164,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">cablelib_isw_pybindings 2.0.0</div></a>
+      <a href="#"><div class="brand">cablelib_isw_pybindings 2.2.0</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -174,7 +175,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -184,140 +185,149 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
-  <span class="sidebar-brand-text">cablelib_isw_pybindings 2.0.0</span>
+  <span class="sidebar-brand-text">cablelib_isw_pybindings 2.2.0</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
-
 <!-- Version selector -->
-<div class="sidebar-version-selector" style="padding: 0.5rem 1.25rem 0.75rem;">
-  <label for="version-select" style="font-size: 0.85rem; opacity: 0.8;">Version</label><br>
-  <select id="version-select" style="width: 100%; margin-top: 0.25rem;"
-          onchange="if (this.value) window.location.href=this.value;">
-    <option value="../latest/index.html">latest (2.0.0)</option>
+<div class="version-selector" style="margin-top: 0.75rem;">
+  <label for="version-select" style="font-size: 0.85rem; opacity: 0.8; display:block; margin-bottom:0.25rem;">
+    Version
+  </label>
+  <select id="version-select"
+          onchange="if (this.value) window.location.href=this.value;"
+          style="width: 100%; padding: 0.4rem;">
+    <option value="../latest/index.html" selected>latest</option>
     <option value="../v1.6.0/index.html">v1.6.0</option>
-    <!-- add more versions here -->
   </select>
 </div>
 <!-- /Version selector -->
-
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><input aria-label="Toggle navigation of Tutorials" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/instantiate_cdpr_with_builder.html">Instantiate a CableDrivenParallelRobot with the Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/compute_kinematics.html">Compute Kinematics For A CDPR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/compute_force_distribution.html">Compute A Force Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/analyze_workspace.html">Analyze The Workspace</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="concepts/index.html">Concepts</a><input aria-label="Toggle navigation of Concepts" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cdpr_model.html">The CDPR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/analysis_workflow.html">Analysis Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="extending/index.html">Extending</a><input aria-label="Toggle navigation of Extending" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending/adapt_existing_robot_definitions.html">Adapt Existing Robot Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/reconfigurable_cdpr.html">Work With A Reconfigurable CDPR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/configure_analysis_strategies.html">Configure Analysis Strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.html">cablelib_isw_pybindings</a><input aria-label="Toggle navigation of cablelib_isw_pybindings" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.html">analysis</a><input aria-label="Toggle navigation of analysis" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.ForceDistribution.html">ForceDistribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.PoseEstimator.html">PoseEstimator</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.elasticity.html">elasticity</a><input aria-label="Toggle navigation of elasticity" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModel.html">ElasticityModel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModelElastic.html">ElasticityModelElastic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModelStandard.html">ElasticityModelStandard</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.html">force_distribution_strategy</a><input aria-label="Toggle navigation of force_distribution_strategy" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html">ClosedForm</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html">Dykstra</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html">ForceDistributionStrategy</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.html">ImprovedClosedForm</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematic_strategy.html">kinematic_strategy</a><input aria-label="Toggle navigation of kinematic_strategy" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategy.html">KinematicStrategy</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyPulley.html">KinematicStrategyPulley</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyStandard.html">KinematicStrategyStandard</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematics.html">kinematics</a><input aria-label="Toggle navigation of kinematics" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.html">ForwardKinematics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html">InverseKinematics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.html">InverseKinematicsElastic</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.html">workspace</a><input aria-label="Toggle navigation of workspace" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.Vertex.html">Vertex</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html">WorkspaceGrid</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridCustom.html">WorkspaceGridCustom</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html">WorkspaceGridRandom</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html">WorkspaceGridRegular</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html">WorkspaceHull</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.html">criterion</a><input aria-label="Toggle navigation of criterion" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.Criterion.html">Criterion</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.ForceFeasible.html">ForceFeasible</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible.html">WrenchFeasible</a></li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.html">cable_interference</a><input aria-label="Toggle navigation of cable_interference" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableInterference.html">CableInterference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableModel.html">CableModel</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.Cylinder.html">Cylinder</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.Line.html">Line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.html">hull_mesh_generator</a><input aria-label="Toggle navigation of hull_mesh_generator" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.HullMeshGenerator.html">HullMeshGenerator</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.LineSearch.html">LineSearch</a></li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.html">cable_interference_generator</a><input aria-label="Toggle navigation of cable_interference_generator" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.CableInterferenceGenerator.html">CableInterferenceGenerator</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.CableModel.html">CableModel</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.Cylinder.html">Cylinder</a></li>
+<li class="toctree-l7"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.Line.html">Line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.exceptions.html">exceptions</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.math.html">math</a><input aria-label="Toggle navigation of math" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.math.shapes.html">shapes</a><input aria-label="Toggle navigation of shapes" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.math.shapes.Triangle3d.html">Triangle3d</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.html">robot</a><input aria-label="Toggle navigation of robot" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.BaseFrame.html">BaseFrame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.Cable.html">Cable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html">CableDrivenParallelRobot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.Platform.html">Platform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.Pulley.html">Pulley</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.ReconfigurableCableDrivenParallelRobot.html">ReconfigurableCableDrivenParallelRobot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.ScalarLimits.html">ScalarLimits</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.html">types</a><input aria-label="Toggle navigation of types" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.Pose.html">Pose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.StiffnessMatrix.html">StiffnessMatrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.StructureMatrixCalculator.html">StructureMatrixCalculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.Wrench.html">Wrench</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html#nested-types">Nested Types</a><input aria-label="Toggle navigation of Nested Types" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/cable_driven_parallel_robot_builder.html">CableDrivenParallelRobot.Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/line_search_config.html">LineSearch.Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/reconfiguration_error.html">ReconfigurationError</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/getting_started.html">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/creating_robots.html">Creating Robots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/calculating_structure_matrix.html">Calculating the structure matrix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/kinematics.html">Inverse and Forward Kinematics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/force_distribution.html">Calculating the force distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/workspace.html">Calculating the workspace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/poses.html">Poses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/wrenches.html">Wrench access</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/stiffness_matrix.html">Stiffness Matrices</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="developers_guide.html">Developer’s Guide</a><input aria-label="Toggle navigation of Developer’s Guide" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="developers_guide/force_distribution.html">Custom Force Distribution algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developers_guide/workspace_criteria.html">Custom workspace criteria</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.html">cablelib_isw_pybindings</a><input aria-label="Toggle navigation of cablelib_isw_pybindings" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.html">analysis</a><input aria-label="Toggle navigation of analysis" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.ForceDistribution.html">ForceDistribution</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.PoseEstimator.html">PoseEstimator</a></li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.elasticity.html">elasticity</a><input aria-label="Toggle navigation of elasticity" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModel.html">ElasticityModel</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModelElastic.html">ElasticityModelElastic</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.elasticity.ElasticityModelStandard.html">ElasticityModelStandard</a></li>
-</ul>
-</li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.html">force_distribution_strategy</a><input aria-label="Toggle navigation of force_distribution_strategy" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ClosedForm.html">ClosedForm</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.Dykstra.html">Dykstra</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ForceDistributionStrategy.html">ForceDistributionStrategy</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.force_distribution_strategy.ImprovedClosedForm.html">ImprovedClosedForm</a></li>
-</ul>
-</li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematic_strategy.html">kinematic_strategy</a><input aria-label="Toggle navigation of kinematic_strategy" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategy.html">KinematicStrategy</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyPulley.html">KinematicStrategyPulley</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematic_strategy.KinematicStrategyStandard.html">KinematicStrategyStandard</a></li>
-</ul>
-</li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematics.html">kinematics</a><input aria-label="Toggle navigation of kinematics" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematics.ForwardKinematics.html">ForwardKinematics</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html">InverseKinematics</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematicsElastic.html">InverseKinematicsElastic</a></li>
-</ul>
-</li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.html">workspace</a><input aria-label="Toggle navigation of workspace" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.Vertex.html">Vertex</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGrid.html">WorkspaceGrid</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRandom.html">WorkspaceGridRandom</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceGridRegular.html">WorkspaceGridRegular</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.WorkspaceHull.html">WorkspaceHull</a></li>
-<li class="toctree-l5 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.html">criterion</a><input aria-label="Toggle navigation of criterion" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l6"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.Criterion.html">Criterion</a></li>
-<li class="toctree-l6"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.ForceFeasible.html">ForceFeasible</a></li>
-<li class="toctree-l6"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.WrenchFeasible.html">WrenchFeasible</a></li>
-<li class="toctree-l6 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.html">cable_interference</a><input aria-label="Toggle navigation of cable_interference" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableInterference.html">CableInterference</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.CableModel.html">CableModel</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.Cylinder.html">Cylinder</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.criterion.cable_interference.Line.html">Line</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l5 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.html">hull_mesh_generator</a><input aria-label="Toggle navigation of hull_mesh_generator" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l6"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.HullMeshGenerator.html">HullMeshGenerator</a></li>
-<li class="toctree-l6"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.LineSearch.html">LineSearch</a></li>
-<li class="toctree-l6 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.html">cable_interference_generator</a><input aria-label="Toggle navigation of cable_interference_generator" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.CableInterferenceGenerator.html">CableInterferenceGenerator</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.CableModel.html">CableModel</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.Cylinder.html">Cylinder</a></li>
-<li class="toctree-l7"><a class="reference internal" href="generated/cablelib_isw_pybindings.analysis.workspace.hull_mesh_generator.cable_interference_generator.Line.html">Line</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="generated/cablelib_isw_pybindings.exceptions.html">exceptions</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.math.html">math</a><input aria-label="Toggle navigation of math" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.math.shapes.html">shapes</a><input aria-label="Toggle navigation of shapes" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="generated/cablelib_isw_pybindings.math.shapes.Triangle3d.html">Triangle3d</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.html">robot</a><input aria-label="Toggle navigation of robot" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.BaseFrame.html">BaseFrame</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.Cable.html">Cable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html">CableDrivenParallelRobot</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.Platform.html">Platform</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.robot.Pulley.html">Pulley</a></li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="generated/cablelib_isw_pybindings.types.html">types</a><input aria-label="Toggle navigation of types" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.types.Pose.html">Pose</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.types.StiffnessMatrix.html">StiffnessMatrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.types.StructureMatrixCalculator.html">StructureMatrixCalculator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/cablelib_isw_pybindings.types.Wrench.html">Wrench</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -338,7 +348,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/index.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -351,47 +361,114 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="cablelib-isw-pybindings-documentation">
-<h1>cablelib_isw_pybindings documentation<a class="headerlink" href="#cablelib-isw-pybindings-documentation" title="Link to this heading">¶</a></h1>
-<p><strong>cablelib_isw_pybindings</strong> is a Python module for
-Cable-Driven Parallel Robots (CDPRs).
-This module offers methods to model and analyze CDPRs.</p>
-<p>The algorithms are implemented in C++ to ensure an efficient
-execution and bound with <a class="reference external" href="https://github.com/wjakob/nanobind">nanobind</a>
-to make them callable with Python code for ease of use.</p>
-<p>This project focuses on an extendable object-oriented structure
-which follows SOLID principles to manage the ever-growing complexity
-in analysis tasks.</p>
-<p>Features of <strong>cablelib_isw_pybindings</strong> include:</p>
+          <section id="cablelib">
+<h1>Cablelib<a class="headerlink" href="#cablelib" title="Link to this heading">¶</a></h1>
+<p>Cablelib is a Python library for modeling cable-driven parallel robots
+and analyzing them with respect to kinematics, force distribution,
+and workspace-related criteria.</p>
+<p>It is aimed at students and researchers working on CDPRs who want to
+define robot models and evaluate them in a programmable workflow
+from Python. The project is still evolving, and the API is currently
+being updated alongside the library itself.</p>
+<section id="what-cablelib-is-for">
+<h2>What Cablelib is for<a class="headerlink" href="#what-cablelib-is-for" title="Link to this heading">¶</a></h2>
+<p>Cablelib is designed for the analysis of cable-driven parallel
+robots from a Python interface. In its current form, it allows for:</p>
 <ul class="simple">
-<li><p>Modelling of CDPRs, exportable in .xml format</p></li>
-<li><p>Force distribution calculation with various algorithms</p></li>
-<li><p>Workspace calculation with custom workspace criteria either as
-hull or discrete grid</p></li>
-<li><p>System matrices, i.e. the CDPR’s structure matrix or stiffness matrix</p></li>
-<li><p>Inverse and Forward Kinematics</p></li>
+<li><p>forward and inverse kinematics</p></li>
+<li><p>force distribution analysis</p></li>
+<li><p>workspace analysis under different criteria</p></li>
 </ul>
+<p>The library is intended to support the modeling of a CDPR as a
+structured software object and to provide analysis workflows on top of that model.</p>
+</section>
+<section id="minimal-example">
+<h2>Minimal example<a class="headerlink" href="#minimal-example" title="Link to this heading">¶</a></h2>
+<p>A typical workflow begins by defining a CDPR model and then
+running an analysis on it. For many users, the first meaningful step
+is to instantiate a
+<a class="reference internal" href="api/generated/cablelib_isw_pybindings.robot.CableDrivenParallelRobot.html#cablelib_isw_pybindings.robot.CableDrivenParallelRobot" title="cablelib_isw_pybindings.robot.CableDrivenParallelRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">CableDrivenParallelRobot</span></code></a> and
+compute
+<a class="reference internal" href="api/generated/cablelib_isw_pybindings.analysis.kinematics.InverseKinematics.html#cablelib_isw_pybindings.analysis.kinematics.InverseKinematics" title="cablelib_isw_pybindings.analysis.kinematics.InverseKinematics"><code class="xref py py-class docutils literal notranslate"><span class="pre">InverseKinematics</span></code></a>
+for a given <a class="reference internal" href="api/generated/cablelib_isw_pybindings.types.Pose.html#cablelib_isw_pybindings.types.Pose" title="cablelib_isw_pybindings.types.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cablelib_isw_pybindings</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cablelib</span>
+
+<span class="c1"># 1. Define the robot geometry and configuration</span>
+<span class="c1">#    - base frame anchor points</span>
+<span class="c1">#    - platform anchor points</span>
+<span class="c1">#    - cable definitions</span>
+<span class="c1">#    - optional pulley-related modeling data</span>
+<span class="c1">#    - further robot-specific parameters</span>
+
+<span class="n">robot</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># instantiate CDPR model</span>
+
+<span class="c1"># 2. Define the platform pose to be analyzed</span>
+<span class="n">pose</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># 3. Compute inverse kinematics</span>
+<span class="n">inverse_kinematics_result</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># 4. Inspect the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inverse_kinematics_result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See the tutorials for a complete first example with the actual API.</p>
+</section>
+<section id="what-you-can-do-with-cablelib">
+<h2>What you can do with Cablelib<a class="headerlink" href="#what-you-can-do-with-cablelib" title="Link to this heading">¶</a></h2>
+<p>With Cablelib, you can build and analyze CDPR models in Python workflows such as:</p>
+<ul class="simple">
+<li><p>defining a cable-driven parallel robot from its geometric and structural data</p></li>
+<li><p>computing forward and inverse kinematics</p></li>
+<li><p>evaluating force distributions</p></li>
+<li><p>analyzing workspace properties under different criteria</p></li>
+<li><p>using the library as a basis for further CDPR research code and experiments</p></li>
+</ul>
+</section>
+<section id="project-status">
+<h2>Project status<a class="headerlink" href="#project-status" title="Link to this heading">¶</a></h2>
+<p>Cablelib is not yet a mature software package. The library is under
+active development, and the documentation is currently being updated to
+reflect the latest API and capabilities.</p>
+<p>Because of this, the documentation should be understood as evolving
+technical documentation for an active research-oriented project.</p>
+</section>
+<section id="start-here">
+<h2>Start here<a class="headerlink" href="#start-here" title="Link to this heading">¶</a></h2>
+<p>If you are new to Cablelib, the recommended path is:</p>
+<ol class="arabic simple">
+<li><p>Go to the installation guide and set up the Python package.</p></li>
+<li><p>Follow the first tutorial to instantiate a CDPR model.</p></li>
+<li><p>Continue with the tutorials on kinematics, force distribution, and workspace analysis.</p></li>
+<li><p>Use the API reference for detailed class and function documentation.</p></li>
+</ol>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/index.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending/index.html">Extending</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#nested-types">Nested Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developers_guide.html">Developer’s Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
 </div>
 </section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-</ul>
+<section id="why-cablelib">
+<h2>Why Cablelib<a class="headerlink" href="#why-cablelib" title="Link to this heading">¶</a></h2>
+<p>Cablelib provides a structured way to work with CDPR models in Python instead
+of building one-off analysis scripts from scratch.
+The goal is to make modeling and analysis workflows more explicit,
+reusable, and easier to extend for student projects and research code.</p>
+</section>
 </section>
 
         </article>
@@ -399,12 +476,12 @@ hull or discrete grid</p></li>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="usage.html">
+          <a class="next-page" href="installation.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Usage</div>
+                <div class="title">Installation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -413,7 +490,7 @@ hull or discrete grid</p></li>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Patrick Huynh
+                Copyright &#169; 2026, Patrick Huynh
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -427,13 +504,38 @@ hull or discrete grid</p></li>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Cablelib</a><ul>
+<li><a class="reference internal" href="#what-cablelib-is-for">What Cablelib is for</a></li>
+<li><a class="reference internal" href="#minimal-example">Minimal example</a></li>
+<li><a class="reference internal" href="#what-you-can-do-with-cablelib">What you can do with Cablelib</a></li>
+<li><a class="reference internal" href="#project-status">Project status</a></li>
+<li><a class="reference internal" href="#start-here">Start here</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#why-cablelib">Why Cablelib</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=79f5c508"></script>
+</div><script src="_static/documentation_options.js?v=b06a6580"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

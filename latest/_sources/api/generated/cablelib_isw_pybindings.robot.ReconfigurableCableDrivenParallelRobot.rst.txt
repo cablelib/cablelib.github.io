@@ -1,0 +1,28 @@
+ReconfigurableCableDrivenParallelRobot
+======================================
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: ReconfigurableCableDrivenParallelRobot
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ReconfigurableCableDrivenParallelRobot.__init__
+      ~ReconfigurableCableDrivenParallelRobot.axis_positions
+      ~ReconfigurableCableDrivenParallelRobot.current_robot
+      ~ReconfigurableCableDrivenParallelRobot.reset_to_home
+      ~ReconfigurableCableDrivenParallelRobot.set_axis_position
+      ~ReconfigurableCableDrivenParallelRobot.set_axis_positions
+   
+   
+
+   
+   
+   

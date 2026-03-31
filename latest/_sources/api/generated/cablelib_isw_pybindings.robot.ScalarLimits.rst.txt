@@ -1,0 +1,31 @@
+ScalarLimits
+============
+
+.. currentmodule:: cablelib_isw_pybindings.robot
+
+.. autoclass:: ScalarLimits
+   :show-inheritance:  
+   :inherited-members: 
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ScalarLimits.__init__
+      ~ScalarLimits.contains
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ScalarLimits.max
+      ~ScalarLimits.min
+   
+   
